@@ -5,10 +5,22 @@
 #ifndef MENUITEM_H
 #define MENUITEM_H
 
+#include <string>
+
+
 
 
 class MenuItem {
+    std::string description;
+    float price;
+    int stock;
 
+public:
+    MenuItem(std::string description, float price, int stock);
+    std::string getDescription();
+    float getPrice();
+    int getStock();
+    void reduceStock();
 };
 
 
