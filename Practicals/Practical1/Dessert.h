@@ -7,7 +7,7 @@
 
 #include "Course.h"
 
-class Dessert : Course{
+class Dessert : public Course{
 public:
     Dessert(int maxNumberOfItems);
     void recommendBeverage() override;

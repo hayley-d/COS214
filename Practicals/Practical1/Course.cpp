@@ -4,30 +4,33 @@
 
 #include "Course.h"
 
-Course::Course(std::string description, int maxNumberOfItems) : description(description), maxNumberOfItems(maxNumberOfItems){}
+Course::Course(std::string description, int maxNumberOfItems) : description(description),
+                                                                maxNumberOfItems(maxNumberOfItems) {
+    this->menuItems.reserve(maxNumberOfItems);
+}
 
 bool Course::addMenuItem(std::string description, float price, int stock) {
+    if (menuItems.size() < maxNumberOfItems) {
+        bool found = false;
 
-    bool found = false;
+        for (const auto &item: menuItems) {
+            if (item->getDescription() == description) {
+                found = true;
+                break;
+            }
+        }
 
-    for(const auto& item : menuItems) {
-        if(item->getDescription() == description) {
-            found = true;
-            break;
+        if (!found) {
+            menuItems.push_back(new MenuItem(description, price, stock));
+            return true;
         }
     }
-
-    if(!found) {
-        menuItems.push_back(new MenuItem(description,price,stock));
-        return true;
-    }
-
     return false;
 }
 
 void Course::printMenuItems() {
     char index = 'a';
-    for(const auto& item : menuItems) {
+    for (const auto &item: menuItems) {
         std::cout << '\t' << index << "." << '\t' << item->getDescription() << std::endl;
         ++index;
     }
@@ -35,14 +38,15 @@ void Course::printMenuItems() {
 
 void Course::printInventory() {
     char index = 'a';
-    for(const auto& item : menuItems) {
-        std::cout << '\t' << index << "." << '\t' << item->getDescription() << '\t' << item->getPrice() << '\t' << item->getStock() << std::endl;
+    for (const auto &item: menuItems) {
+        std::cout << '\t' << index << "." << '\t' << item->getDescription() << '\t' << item->getPrice() << '\t' << item
+                ->getStock() << std::endl;
         ++index;
     }
 }
 
 MenuItem *Course::getMenuItem(int index) {
-    if(index >= 0 || index < menuItems.size()) {
+    if (index >= 0 || index < menuItems.size()) {
         return menuItems[index];
     }
     return nullptr;
@@ -53,7 +57,7 @@ std::string Course::getDescription() {
 }
 
 Course::~Course() {
-    for(auto& item : menuItems) {
+    for (auto &item: menuItems) {
         delete item;
     }
 

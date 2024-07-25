@@ -26,7 +26,7 @@ public:
     void printInventory();
     MenuItem* getMenuItem(int index);
     virtual void recommendBeverage() = 0;
-    ~Course();
+    virtual ~Course();
 };
 
 

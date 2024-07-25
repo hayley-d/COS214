@@ -19,7 +19,7 @@ public:
     Menu();
     bool addCourse(Course* course);
     bool addMenuItem(std::string courseDescription, std::string description, float price, int stock);
-    void printMenu();
+    void printMenu() const;
     void inventory();
     float orderItem(std::string courseDescription, char item);
     bool isCourseEmpty();
