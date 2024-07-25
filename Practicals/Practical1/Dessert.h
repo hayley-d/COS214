@@ -5,10 +5,12 @@
 #ifndef DESSERT_H
 #define DESSERT_H
 
+#include "Course.h"
 
-
-class Dessert {
-
+class Dessert : Course{
+public:
+    Dessert(int maxNumberOfItems);
+    void recommendBeverage() override;
 };
 
 
