@@ -5,10 +5,12 @@
 #ifndef MAINCOURSE_H
 #define MAINCOURSE_H
 
+#include "Course.h"
 
-
-class MainCourse {
-
+class MainCourse : Course {
+public:
+    MainCourse(int maxNumberOfItems);
+    void recommendBeverage() override;
 };
 
 
