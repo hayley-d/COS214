@@ -41,7 +41,7 @@ float Menu::orderItem(std::string courseDescription, char item) {
   auto courseIterator = courses.find(courseDescription);
 
   if(courseIterator != courses.end()) {
-    MenuItem* menuItem = courseIterator->second->getMenuItem(item);
+    MenuItem* menuItem = courseIterator->second->getMenuItem(item - 'a');
     if(menuItem->getStock() == 0) {
       return 0;
     }
