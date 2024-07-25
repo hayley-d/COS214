@@ -5,10 +5,12 @@
 #ifndef STARTER_H
 #define STARTER_H
 
+#include "Course.h"
 
-
-class Starter {
-
+class Starter : Course {
+public:
+    Starter(int maxNumberOfItems);
+    void recommendBeverage() override;
 };
 
 
