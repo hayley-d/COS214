@@ -27,10 +27,35 @@ bool Course::addMenuItem(std::string description, float price, int stock) {
 
 void Course::printMenuItems() {
     char index = 'a';
-
     for(const auto& item : menuItems) {
         std::cout << '\t' << index << "." << '\t' << item->getDescription() << std::endl;
-        index++;
+        ++index;
     }
 }
 
+void Course::printInventory() {
+    char index = 'a';
+    for(const auto& item : menuItems) {
+        std::cout << '\t' << index << "." << '\t' << item->getDescription() << '\t' << item->getPrice() << '\t' << item->getStock() << std::endl;
+        ++index;
+    }
+}
+
+MenuItem *Course::getMenuItem(int index) {
+    if(index >= 0 || index < menuItems.size()) {
+        return menuItems[index];
+    }
+    return nullptr;
+}
+
+std::string Course::getDescription() {
+    return description;
+}
+
+Course::~Course() {
+    for(auto& item : menuItems) {
+        delete item;
+    }
+
+    menuItems.clear();
+}
