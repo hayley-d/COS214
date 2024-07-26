@@ -4,7 +4,13 @@
 
 #include "MenuItem.h"
 
-MenuItem::MenuItem(std::string description, float price, int stock): description(description), price(price), stock(stock){}
+MenuItem::MenuItem(std::string description, float price, int stock): description(description), price(price) {
+    if(stock >= 0) {
+        this->stock = stock;
+    }else {
+        this->stock = 0;
+    }
+}
 
 std::string MenuItem::getDescription() {
     return description;

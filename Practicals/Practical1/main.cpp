@@ -137,10 +137,60 @@ int main() {
 
     std::cout << "Passed " << passed << "/11 Tests \n" << std::endl;
 
+    /*starter->printMenuItems();
+    starter->printInventory();
+
+    main->printMenuItems();
+    main->printInventory();
+
+    dessert->printMenuItems();
+    dessert->printInventory();*/
+
+    passed = 0;
+    std::cout << "Starting getMenuItem Test\n" << std::endl;
+
+    if(starter->getMenuItem(-1) == nullptr && starter->getMenuItem(0)->getDescription() == "Snails" && starter->getMenuItem(1)->getDescription() == "Cheese Balls" && starter->getMenuItem(2)->getDescription() == "Bread" && starter->getMenuItem(3) == nullptr) {
+        ++passed;
+    }
+
+    if(main->getMenuItem(-1) == nullptr && main->getMenuItem(0)->getDescription() == "Pizza" && main->getMenuItem(1)->getDescription() == "Steak" && main->getMenuItem(2)->getDescription() == "Salad" && main->getMenuItem(3) == nullptr) {
+        ++passed;
+    }
+
+    if(dessert->getMenuItem(-1) == nullptr && dessert->getMenuItem(0)->getDescription() == "Ice Cream" && dessert->getMenuItem(1)->getDescription() == "Cake" && dessert->getMenuItem(2)->getDescription() == "Pudding" && dessert->getMenuItem(3) == nullptr) {
+        ++passed;
+    }
+
+    std::cout << "Passed " << passed << "/3 Tests \n" << std::endl;
 
     delete starter;
     delete main;
     delete dessert;
+
+    passed = 0;
+
+    MenuItem item("item1",12,-1);
+    if(item.getStock() == 0) ++passed;
+    if(item.getDescription() == "item1") ++passed;
+    if(item.getPrice() == 12) ++passed;
+
+    std::cout << "Passed " << passed << "/3 Tests\n" << std::endl;
+
+    MenuItem item2("item2",12,3);
+    passed = 0;
+    if(item2.getStock() == 3) ++passed;
+    item2.reduceStock();
+    if(item2.getStock() == 2) ++passed;
+    item2.reduceStock();
+    if(item2.getStock() == 1) ++passed;
+    item2.reduceStock();
+    if(item2.getStock() == 0) ++passed;
+    item2.reduceStock();
+    if(item2.getStock() == 0) ++passed;
+
+    std::cout << "Passed " << passed << "/5 Tests\n" << std::endl;
+
+    
 
     return 0;
 }
