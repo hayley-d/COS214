@@ -7,15 +7,20 @@
 Menu::Menu() = default;
 
 bool Menu::addCourse(Course *course) {
-  const std::string& description = course->getDescription();
-  if(courses.find(description) != courses.end()) {
-    return false;
+  if(course != nullptr)
+  {
+    const std::string& description = course->getDescription();
+    if(courses.find(description) != courses.end()) {
+      return false;
+    }
+    courses[description] = course;
+    return true;
   }
-  courses[description] = course;
-  return true;
+  return false;
 }
 
 bool Menu::addMenuItem(std::string courseDescription, std::string description, float price, int stock) {
+  if(stock < 0) stock = 0;
   auto courseIterator = courses.find(courseDescription);
   if( courseIterator != courses.end()) {
     return courseIterator->second->addMenuItem(description,price,stock);
@@ -42,15 +47,18 @@ float Menu::orderItem(std::string courseDescription, char item) {
 
   if(courseIterator != courses.end()) {
     MenuItem* menuItem = courseIterator->second->getMenuItem(item - 'a');
-    if(menuItem->getStock() == 0) {
+    if(menuItem != nullptr) {
+      if(menuItem->getStock() == 0) {
+      return 0;
+      }
+      else {
+        menuItem->reduceStock();
+        return menuItem->getPrice();
+      }
+    } else {
       return 0;
     }
-    else {
-      menuItem->reduceStock();
-      return menuItem->getPrice();
-    }
   }
-
   return 0;
 }
 

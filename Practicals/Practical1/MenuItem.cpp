@@ -26,7 +26,7 @@ int MenuItem::getStock() {
 
 void MenuItem::reduceStock() {
     if(stock > 0) {
-        this->stock--;
+        --stock;
     }
 }
 

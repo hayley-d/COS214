@@ -6,11 +6,13 @@
 #define MENU_H
 
 #include <string>
-#include <vector>
 #include <iostream>
 #include <map>
 
 #include "Course.h"
+#include "Starter.h"
+#include "MainCourse.h"
+#include "Dessert.h"
 
 class Menu {
     std::map<std::string,Course*> courses;

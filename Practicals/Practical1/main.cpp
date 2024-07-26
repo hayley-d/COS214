@@ -167,6 +167,13 @@ int main() {
     delete main;
     delete dessert;
 
+    starter = new Starter(2);
+    main = new MainCourse(3);
+    dessert = new Dessert(1);
+
+    starter->addMenuItem("Eggs",12,1);
+
+
     passed = 0;
 
     MenuItem item("item1",12,-1);
@@ -190,7 +197,49 @@ int main() {
 
     std::cout << "Passed " << passed << "/5 Tests\n" << std::endl;
 
-    
+    Menu menu;
+
+    std::cout << "Starting Empty Tests:\n" << std::endl;
+    passed = 0;
+    if(menu.isCoursesEmpty()) passed++;
+    if(menu.orderItem("Starter",'a') == static_cast<float>(0)) ++passed;
+    menu.printMenu();
+    passed++;
+    menu.inventory();
+    passed++;
+
+    std::cout << "Passed " << passed << "/4 Tests\n" << std::endl;
+
+    passed = 0;
+    if(menu.addCourse(starter))
+        ++passed;
+    if(menu.addCourse(main))
+        ++passed;
+    if(menu.addCourse(dessert))
+        ++passed;
+    if(!menu.addCourse(nullptr))
+        ++passed;
+    if(!menu.addCourse(starter))
+        ++passed;
+    std::cout << "Passed " << passed << "/5 Tests\n" << std::endl;
+
+    std::cout << "Starting add item test" << std::endl;
+    passed = 0;
+    if(menu.addMenuItem("Starter","Waffles",12,12)) ++passed;
+    if(!menu.addMenuItem("Breakfast","Waffles",12,12)) ++passed;
+    menu.printMenu();
+    if(menu.orderItem("Starter",'a') == static_cast<float>(12)) ++passed;
+    if(menu.orderItem("Starter",'a') == static_cast<float>(0)) ++passed;
+    if(menu.orderItem("Starter",'a') == static_cast<float>(0)) ++passed;
+    if(menu.addMenuItem("Main","Burger",32,4)) ++passed;
+    if(!menu.isCoursesEmpty()) ++passed;
+    std::cout << "Passed " << passed << "/7 Tests\n" << std::endl;
+
+    menu.inventory();
+
+
+
+
 
     return 0;
 }
