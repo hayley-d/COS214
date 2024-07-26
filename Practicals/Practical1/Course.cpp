@@ -4,13 +4,17 @@
 
 #include "Course.h"
 
-Course::Course(std::string description, int maxNumberOfItems) : description(description),
-                                                                maxNumberOfItems(maxNumberOfItems) {
-    this->menuItems.reserve(maxNumberOfItems);
+Course::Course(std::string description, int maxNumberOfItems) : description(description) {
+    if(maxNumberOfItems >= 0) {
+        this->maxNumberOfItems = maxNumberOfItems;
+    }else {
+        this->maxNumberOfItems = 0;
+    }
+    this->menuItems.reserve(this->maxNumberOfItems);
 }
 
 bool Course::addMenuItem(std::string description, float price, int stock) {
-    if (menuItems.size() < maxNumberOfItems) {
+    if (static_cast<int>(menuItems.size()) < maxNumberOfItems) {
         bool found = false;
 
         for (const auto &item: menuItems) {
@@ -46,7 +50,7 @@ void Course::printInventory() {
 }
 
 MenuItem *Course::getMenuItem(int index) {
-    if (index >= 0 || index < menuItems.size()) {
+    if (index >= 0 && index < static_cast<int>(menuItems.size())) {
         return menuItems[index];
     }
     return nullptr;

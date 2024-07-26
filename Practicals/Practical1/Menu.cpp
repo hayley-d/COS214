@@ -54,7 +54,7 @@ float Menu::orderItem(std::string courseDescription, char item) {
   return 0;
 }
 
-bool Menu::isCourseEmpty() {
+bool Menu::isCoursesEmpty() {
   return courses.empty();
 }
 

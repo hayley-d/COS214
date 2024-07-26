@@ -22,7 +22,7 @@ public:
     void printMenu() const;
     void inventory();
     float orderItem(std::string courseDescription, char item);
-    bool isCourseEmpty();
+    bool isCoursesEmpty();
     void closeShop();
     ~Menu();
 };
