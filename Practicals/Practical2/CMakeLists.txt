@@ -11,4 +11,18 @@ add_executable(practical_2 main.cpp
         Soldiers.cpp
         Soldiers.h
         CareTaker.cpp
-        CareTaker.h)
+        CareTaker.h
+        Infantry.cpp
+        Infantry.h
+        ShieldBearer.cpp
+        ShieldBearer.h
+        Boatman.cpp
+        Boatman.h
+        SoldiersFactory.cpp
+        SoldiersFactory.h
+        InfantryFactory.cpp
+        InfantryFactory.h
+        BoatmanFactory.cpp
+        BoatmanFactory.h
+        ShieldBearerFactory.cpp
+        ShieldBearerFactory.h)
