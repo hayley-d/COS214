@@ -9,4 +9,6 @@ add_executable(practical_2 main.cpp
         ConcreteMemento.cpp
         ConcreteMemento.h
         Soldiers.cpp
-        Soldiers.h)
+        Soldiers.h
+        CareTaker.cpp
+        CareTaker.h)

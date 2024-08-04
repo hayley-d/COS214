@@ -4,8 +4,10 @@
 #include "Soldiers.h"
 #include "Memento.h"
 
+class Soldiers;
+
 class ConcreteMemento : public Memento{
-    friend Soldiers;
+    friend class Soldiers;
 private:
     int amountOfSoldiersPerUnit;
     int damagePerUnit;
