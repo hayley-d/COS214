@@ -1,7 +1,7 @@
 
 #include "Soldiers.h"
 
-Soldiers::Soldiers() : amountOfSoldiersPerUnit(0), damagePerSoldier(0), defencePerSoldier(0), healthPerSoldier(0), unitName("") {
+Soldiers::Soldiers() : amountOfSoldiersPerUnit(20), damagePerSoldier(10), defencePerSoldier(10), healthPerSoldier(20), unitName("Soldier") {
 }
 
 Soldiers::~Soldiers() = default;

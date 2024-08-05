@@ -1,11 +1,13 @@
 #ifndef SOLDIERSFACTORY_H
 #define SOLDIERSFACTORY_H
+#include <memory>
+
 #include "Soldiers.h"
 
 class SoldiersFactory {
 protected:
     Soldiers* soldiers;
-    virtual Soldiers* createUnit();
+    virtual Soldiers* createUnit() =0;
 public:
     SoldiersFactory();
     virtual ~SoldiersFactory();

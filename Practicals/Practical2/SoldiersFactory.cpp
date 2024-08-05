@@ -1,11 +1,7 @@
 #include "SoldiersFactory.h"
 
-Soldiers * SoldiersFactory::createUnit() {
-    return new Soldiers();
-}
 
-SoldiersFactory::SoldiersFactory() {
-    this->soldiers = new Soldiers();
+SoldiersFactory::SoldiersFactory() : soldiers(new Soldiers()){
 }
 
 SoldiersFactory::~SoldiersFactory() {
@@ -22,5 +18,5 @@ int SoldiersFactory::calculateTotalDefencePerUnit() {
 }
 
 int SoldiersFactory::calculateTotalHealthPerUnit() {
-    return soldiers->getHealthPerSoldier() * soldiers->getHealthPerSoldier();
+    return soldiers->getHealthPerSoldier() * soldiers->getAmountOfSoldiersPerUnit();
 }
