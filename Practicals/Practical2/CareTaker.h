@@ -9,6 +9,7 @@ class CareTaker {
     std::stack<ConcreteMemento*> history;
 
 public:
+    CareTaker() = default;
     ConcreteMemento* undo();
     void saveState(Soldiers& soldiers);
     ~CareTaker();

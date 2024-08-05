@@ -5,6 +5,7 @@
 
 #include "ConcreteMemento.h"
 
+class ConcreteMemento;
 
 class Soldiers {
 protected:

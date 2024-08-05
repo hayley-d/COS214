@@ -10,7 +10,7 @@ public:
     virtual int getDefencePerSoldier() const =0;
     virtual int getAmountOfSoldiersPerUnit() const =0;
     virtual std::string getUnitName() const =0;
-    virtual ~Memento() = 0;
+    virtual ~Memento() =default;
 };
 
 

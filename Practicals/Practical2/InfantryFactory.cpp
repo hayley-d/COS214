@@ -1,7 +1,5 @@
 #include "InfantryFactory.h"
 
-#include "Infantry.h"
-
 InfantryFactory::~InfantryFactory() {
     delete soldiers;
 }

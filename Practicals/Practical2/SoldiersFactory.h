@@ -2,7 +2,6 @@
 #define SOLDIERSFACTORY_H
 #include "Soldiers.h"
 
-
 class SoldiersFactory {
 protected:
     Soldiers* soldiers;
