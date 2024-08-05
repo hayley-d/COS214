@@ -5,7 +5,10 @@
 
 class Infantry : public Soldiers{
 public:
+    Infantry();
+    ~Infantry() override;
 
+    ConcreteMemento * militusMemento() override;
 };
 
 

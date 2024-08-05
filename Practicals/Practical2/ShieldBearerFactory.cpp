@@ -1,5 +1,13 @@
-//
-// Created by hayley on 2024/08/04.
-//
-
 #include "ShieldBearerFactory.h"
+#include "ShieldBearer.h"
+ShieldBearerFactory::ShieldBearerFactory() {
+    this->soldiers = new ShieldBearer();
+}
+
+ShieldBearerFactory::~ShieldBearerFactory() {
+    delete soldiers;
+}
+
+Soldiers * ShieldBearerFactory::createUnit() {
+    return new ShieldBearer();
+}

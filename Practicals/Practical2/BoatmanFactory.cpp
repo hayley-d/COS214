@@ -1,6 +1,9 @@
 #include "BoatmanFactory.h"
 
+#include "Boatman.h"
+
 BoatmanFactory::BoatmanFactory() {
+    this->soldiers = new Boatman();
 }
 
 BoatmanFactory::~BoatmanFactory() {
@@ -8,5 +11,5 @@ BoatmanFactory::~BoatmanFactory() {
 }
 
 Soldiers * BoatmanFactory::createUnit() {
-    return SoldiersFactory::createUnit();
+    return new Boatman();
 }

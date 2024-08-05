@@ -4,7 +4,9 @@
 #include "Soldiers.h"
 
 class ShieldBearer : public Soldiers{
-
+public:
+    ShieldBearer();
+    ~ShieldBearer() override;
 };
 
 

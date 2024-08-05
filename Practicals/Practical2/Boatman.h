@@ -5,6 +5,7 @@
 
 class Boatman : public Soldiers{
 public:
+    Boatman();
     ~Boatman() override;
 
     void vivificaMemento(ConcreteMemento &mem) override;

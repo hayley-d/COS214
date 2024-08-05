@@ -7,6 +7,7 @@
 
 
 class Soldiers {
+protected:
     int amountOfSoldiersPerUnit;
     int damagePerSoldier;
     int defencePerSoldier;
