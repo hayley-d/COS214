@@ -1,31 +1,13 @@
 
 #include "Soldiers.h"
 
-Soldiers::Soldiers() : amountOfSoldiersPerUnit(0), damagePerUnit(0), defencePerUnit(0), healthPerUnit(0), unitName("") {
+Soldiers::Soldiers() : amountOfSoldiersPerUnit(0), damagePerSoldier(0), defencePerSoldier(0), healthPerSoldier(0), unitName("") {
 }
 
 Soldiers::~Soldiers() = default;
 
-Soldiers::Soldiers(const int amountOfSoldiersPerUnit, const int damagePerUnit, const int defencePerUnit, const int healthPerUnit,
-    const std::string &unitName) : amountOfSoldiersPerUnit(amountOfSoldiersPerUnit), damagePerUnit(damagePerUnit), defencePerUnit(defencePerUnit), healthPerUnit(healthPerUnit), unitName(unitName){
-}
-
-void Soldiers::setDamagePerUnit(int damagePerUnit) {
-    if(damagePerUnit > 0) {
-        this->damagePerUnit = damagePerUnit;
-    }
-}
-
-void Soldiers::setDefencePerUnit(int defencePerUnit) {
-    if(defencePerUnit > 0) {
-        this->defencePerUnit = defencePerUnit;
-    }
-}
-
-void Soldiers::setHealthPerUnit(int healthPerUnit) {
-    if(healthPerUnit > 0) {
-        this->healthPerUnit = healthPerUnit;
-    }
+Soldiers::Soldiers(const int amountOfSoldiersPerUnit, const int damagePerSoldier, const int defencePerSoldier, const int healthPerSoldier,
+    const std::string &unitName) : amountOfSoldiersPerUnit(amountOfSoldiersPerUnit), damagePerSoldier(damagePerSoldier), defencePerSoldier(defencePerSoldier), healthPerSoldier(healthPerSoldier), unitName(unitName){
 }
 
 void Soldiers::setUnitName(const std::string &unitName) {
@@ -34,12 +16,24 @@ void Soldiers::setUnitName(const std::string &unitName) {
 
 void Soldiers::vivificaMemento(ConcreteMemento &mem) {
     this->amountOfSoldiersPerUnit = mem.getAmountOfSoldiersPerUnit();
-    this->damagePerUnit = mem.getDamagePerUnit();
-    this->defencePerUnit = mem.getDefencePerUnit();
-    this->healthPerUnit = mem.getHealthPerUnit();
+    this->damagePerSoldier = mem.getDamagePerSoldier();
+    this->defencePerSoldier = mem.getDefencePerSoldier();
+    this->healthPerSoldier = mem.getHealthPerSoldier();
     this->unitName = mem.getUnitName();
 }
 
 ConcreteMemento * Soldiers::militusMemento() {
-    return new ConcreteMemento(amountOfSoldiersPerUnit,damagePerUnit,defencePerUnit,healthPerUnit,unitName);
+    return new ConcreteMemento(amountOfSoldiersPerUnit,damagePerSoldier,defencePerSoldier,healthPerSoldier,unitName);
+}
+
+void Soldiers::setDamagePerSoldier(const int damagePerSoldier) {
+    this->damagePerSoldier = damagePerSoldier;
+}
+
+void Soldiers::setDefencePerSoldier(const int defencePerSoldier) {
+    this->defencePerSoldier = defencePerSoldier;
+}
+
+void Soldiers::setHealthPerSoldier(const int healthPerSoldier) {
+    this->healthPerSoldier = healthPerSoldier;
 }

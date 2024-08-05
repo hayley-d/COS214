@@ -6,7 +6,8 @@
 class InfantryFactory : public SoldiersFactory{
 public:
     ~InfantryFactory() override;
-    Soldiers * factoryMethod() override;
+    Soldiers * createUnit() override;
+    InfantryFactory();
 };
 
 

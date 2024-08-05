@@ -6,9 +6,14 @@
 class SoldiersFactory {
     Soldiers* soldiers;
 protected:
-    virtual Soldiers* factoryMethod();
+    virtual Soldiers* createUnit();
 public:
+    SoldiersFactory();
     virtual ~SoldiersFactory();
+    virtual int calculateTotalDamagePerUnit();
+    virtual int calculateTotalDefencePerUnit();
+    virtual int calculateTotalHealthPerUnit();
+
 };
 
 

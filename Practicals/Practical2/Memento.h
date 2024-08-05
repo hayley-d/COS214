@@ -5,11 +5,11 @@
 
 class Memento {
 public:
-    virtual int getHealthPerUnit() =0;
-    virtual int getDamagePerUnit() =0;
-    virtual int getDefencePerUnit() =0;
-    virtual int getAmountOfSoldiersPerUnit() =0;
-    virtual std::string getUnitName() =0;
+    virtual int getHealthPerSoldier() const =0;
+    virtual int getDamagePerSoldier() const =0;
+    virtual int getDefencePerSoldier() const =0;
+    virtual int getAmountOfSoldiersPerUnit() const =0;
+    virtual std::string getUnitName() const =0;
     virtual ~Memento() = 0;
 };
 

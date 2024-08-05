@@ -8,30 +8,30 @@
 
 class Soldiers {
     int amountOfSoldiersPerUnit;
-    int damagePerUnit;
-    int defencePerUnit;
-    int healthPerUnit;
+    int damagePerSoldier;
+    int defencePerSoldier;
+    int healthPerSoldier;
     std::string unitName;
 
 public:
     Soldiers();
     virtual ~Soldiers();
-    Soldiers(int amountOfSoldiersPerUnit, int damagePerUnit, int defencePerUnit, int healthPerUnit, const std::string& unitName);
+    Soldiers(int amountOfSoldiersPerUnit, int damagePerSoldier, int defencePerSoldier, int healthPerSoldier, const std::string& unitName);
 
     int getAmountOfSoldiersPerUnit() const {
         return amountOfSoldiersPerUnit;
     }
 
-    int getDamagePerUnit() const {
-        return damagePerUnit;
+    int getDamagePerSoldier() const {
+        return damagePerSoldier;
     }
 
-    int getDefencePerUnit() const {
-        return defencePerUnit;
+    int getDefencePerSoldier() const {
+        return defencePerSoldier;
     }
 
-    int getHealthPerUnit() const {
-        return healthPerUnit;
+    int getHealthPerSoldier() const {
+        return healthPerSoldier;
     }
 
     std::string getUnitName() const {
@@ -39,9 +39,9 @@ public:
     }
 
     virtual void setAmountOfSoldiersPerUnit(int amountOfSoldiersPerUnit) {}
-    virtual void setDamagePerUnit(int damagePerUnit);
-    virtual void setDefencePerUnit(int defencePerUnit);
-    virtual void setHealthPerUnit(int healthPerUnit);
+    virtual void setDamagePerSoldier(int damagePerSoldier);
+    virtual void setDefencePerSoldier(int defencePerSoldier);
+    virtual void setHealthPerSoldier(int healthPerSoldier);
     virtual void setUnitName(const std::string& unitName);
 
     virtual void vivificaMemento(ConcreteMemento& mem);

@@ -4,7 +4,12 @@
 #include "Soldiers.h"
 
 class Boatman : public Soldiers{
+public:
+    ~Boatman() override;
 
+    void vivificaMemento(ConcreteMemento &mem) override;
+
+    ConcreteMemento * militusMemento() override;
 };
 
 

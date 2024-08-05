@@ -1,26 +1,27 @@
 #include "ConcreteMemento.h"
 
-ConcreteMemento::ConcreteMemento(const int amountOfSoldiersPerUnit, const int damagePerUnit, const int defencePerUnit, const int healthPerUnit,
-    const std::string &unitName) : amountOfSoldiersPerUnit(amountOfSoldiersPerUnit), damagePerUnit(damagePerUnit), defencePerUnit(defencePerUnit), healthPerUnit(healthPerUnit), unitName(unitName) {}
+ConcreteMemento::ConcreteMemento(const int amountOfSoldiersPerUnit, const int damagePerSoldier, const int defencePerSoldier,
+    const int healthPerSoldier, const std::string &unitName) : amountOfSoldiersPerUnit(amountOfSoldiersPerUnit), damagePerSoldier(damagePerSoldier), defencePerSoldier(defencePerSoldier),healthPerSoldier(healthPerSoldier) ,unitName(unitName){
+}
+
+int ConcreteMemento::getHealthPerSoldier() const {
+    return healthPerSoldier;
+}
+
+int ConcreteMemento::getDamagePerSoldier() const {
+    return damagePerSoldier;
+}
+
+int ConcreteMemento::getDefencePerSoldier() const {
+    return defencePerSoldier;
+}
 
 ConcreteMemento::~ConcreteMemento() = default;
 
-int ConcreteMemento::getHealthPerUnit() {
-    return this->healthPerUnit;
-}
-
-int ConcreteMemento::getDamagePerUnit() {
-    return this->damagePerUnit;
-}
-
-int ConcreteMemento::getDefencePerUnit() {
-    return this->defencePerUnit;
-}
-
-int ConcreteMemento::getAmountOfSoldiersPerUnit() {
+int ConcreteMemento::getAmountOfSoldiersPerUnit() const {
     return this->amountOfSoldiersPerUnit;
 }
 
-std::string ConcreteMemento::getUnitName() {
+std::string ConcreteMemento::getUnitName() const {
     return this->unitName;
 }

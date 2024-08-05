@@ -7,11 +7,12 @@
 
 #include "SoldiersFactory.h"
 
-class BoatmanFactory : public SoldiersFactory{
+class BoatmanFactory : protected SoldiersFactory{
 
 public:
+    BoatmanFactory();
     ~BoatmanFactory() override;
-    Soldiers * factoryMethod() override;
+    Soldiers * createUnit() override;
 };
 
 

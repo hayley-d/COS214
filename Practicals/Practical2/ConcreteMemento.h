@@ -10,25 +10,25 @@ class ConcreteMemento : public Memento{
     friend class Soldiers;
 private:
     int amountOfSoldiersPerUnit;
-    int damagePerUnit;
-    int defencePerUnit;
-    int healthPerUnit;
+    int damagePerSoldier;
+    int defencePerSoldier;
+    int healthPerSoldier;
     std::string unitName;
 
-    ConcreteMemento(int amountOfSoldiersPerUnit, int damagePerUnit, int defencePerUnit, int healthPerUnit, const std::string& unitName);
+    ConcreteMemento(int amountOfSoldiersPerUnit, int damagePerSoldier, int defencePerSoldier, int healthPerSoldier, const std::string& unitName);
 
 public:
     ~ConcreteMemento() override;
 
-    int getHealthPerUnit() override;
+    int getHealthPerSoldier() const override ;
 
-    int getDamagePerUnit() override;
+    int getDamagePerSoldier() const override ;
 
-    int getDefencePerUnit() override;
+    int getDefencePerSoldier() const override ;
 
-    int getAmountOfSoldiersPerUnit() override;
+    int getAmountOfSoldiersPerUnit() const override  ;
 
-    std::string getUnitName() override;
+    std::string getUnitName() const override;
 };
 
 

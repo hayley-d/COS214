@@ -6,8 +6,9 @@
 class ShieldBearerFactory : public SoldiersFactory{
 
 public:
+    ShieldBearerFactory();
     ~ShieldBearerFactory() override;
-    Soldiers * factoryMethod() override;
+    Soldiers * createUnit() override;
 };
 
 
