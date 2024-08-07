@@ -10,6 +10,14 @@ Soldiers::Soldiers(const int amountOfSoldiersPerUnit, const int damagePerSoldier
     const std::string &unitName) : amountOfSoldiersPerUnit(amountOfSoldiersPerUnit), damagePerSoldier(damagePerSoldier), defencePerSoldier(defencePerSoldier), healthPerSoldier(healthPerSoldier), unitName(unitName){
 }
 
+Soldiers::Soldiers(const Soldiers &other) {
+    healthPerSoldier = other.healthPerSoldier;
+    damagePerSoldier = other.damagePerSoldier;
+    defencePerSoldier = other.defencePerSoldier;
+    amountOfSoldiersPerUnit = other.amountOfSoldiersPerUnit;
+    unitName = other.unitName;
+}
+
 void Soldiers::setUnitName(const std::string &unitName) {
     this->unitName = unitName;
 }
@@ -37,3 +45,8 @@ void Soldiers::setDefencePerSoldier(const int defencePerSoldier) {
 void Soldiers::setHealthPerSoldier(const int healthPerSoldier) {
     this->healthPerSoldier = healthPerSoldier;
 }
+
+void Soldiers::setAmountOfSoldiersPerUnit(int amountOfSoldiersPerUnit) {
+    this->amountOfSoldiersPerUnit = amountOfSoldiersPerUnit;
+}
+

@@ -10,6 +10,7 @@ protected:
     virtual Soldiers* createUnit() =0;
 public:
     SoldiersFactory();
+    SoldiersFactory(Soldiers* s);
     virtual ~SoldiersFactory();
     virtual int calculateTotalDamagePerUnit();
     virtual int calculateTotalDefencePerUnit();

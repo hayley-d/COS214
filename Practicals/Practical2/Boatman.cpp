@@ -17,3 +17,8 @@ void Boatman::vivificaMemento(ConcreteMemento &mem) {
 ConcreteMemento * Boatman::militusMemento() {
     return Soldiers::militusMemento();
 }
+
+Boatman::Soldiers* clonis(){
+    Soldiers* newShieldBearer = new Boatman();
+    return newShieldBearer;
+}

@@ -3,7 +3,7 @@
 
 #include "SoldiersFactory.h"
 
-class BoatmanFactory : protected SoldiersFactory{
+class BoatmanFactory : public SoldiersFactory{
 
 public:
     BoatmanFactory();
