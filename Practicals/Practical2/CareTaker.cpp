@@ -2,6 +2,9 @@
 #include "CareTaker.h"
 
 ConcreteMemento * CareTaker::undo() {
+    if(history.empty()) {
+        return nullptr;
+    }
     ConcreteMemento* top = history.top();
     history.pop();
     return top;
@@ -18,3 +21,8 @@ CareTaker::~CareTaker() {
         delete memento;
     }
 }
+
+int CareTaker::getSize() const{
+    return static_cast<int>(history.size());
+}
+

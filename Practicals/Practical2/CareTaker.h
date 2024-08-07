@@ -12,6 +12,7 @@ public:
     CareTaker() = default;
     ConcreteMemento* undo();
     void saveState(Soldiers& soldiers);
+    int getSize() const;
     ~CareTaker();
 };
 
