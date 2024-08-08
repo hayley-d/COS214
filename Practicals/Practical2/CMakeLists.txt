@@ -25,6 +25,8 @@ add_executable(practical_2 main.cpp
         BoatmanFactory.cpp
         BoatmanFactory.h
         ShieldBearerFactory.cpp
-        ShieldBearerFactory.h)
+        ShieldBearerFactory.h
+        TestingMain.cpp
+)
 
 include(CTest)

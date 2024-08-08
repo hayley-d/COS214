@@ -15,17 +15,9 @@ public:
 
     ConcreteMemento *militusMemento() override;
 
-    Soldiers *clonis() const override {
-        return new Infantry(*this);
-    }
+    Soldiers *clonis() const override;
 
-    Infantry(const Infantry &other) : Soldiers(other) {
-        healthPerSoldier = other.healthPerSoldier;
-        damagePerSoldier = other.damagePerSoldier;
-        defencePerSoldier = other.defencePerSoldier;
-        amountOfSoldiersPerUnit = other.amountOfSoldiersPerUnit;
-        unitName = other.unitName;
-    }
+    Infantry(const Infantry &other);
 
     void prepare() const override {
         std::cout << "Infantry preparing for battle...." << std::endl;

@@ -8,8 +8,11 @@ Boatman::Boatman() {
     this->unitName = "Boatman";
 }
 
-Boatman::Boatman(const int amountOfSoldiersPerUnit, const int damagePerSoldier, const int defencePerSoldier, const int healthPerSolider,
-    const std::string &unitName) : Soldiers(amountOfSoldiersPerUnit,damagePerSoldier,defencePerSoldier,healthPerSolider,unitName){}
+Boatman::Boatman(const int amountOfSoldiersPerUnit, const int damagePerSoldier, const int defencePerSoldier,
+                 const int healthPerSolider,
+                 const std::string &unitName) : Soldiers(amountOfSoldiersPerUnit, damagePerSoldier, defencePerSoldier,
+                                                         healthPerSolider, unitName) {
+}
 
 Boatman::~Boatman() = default;
 
@@ -17,11 +20,18 @@ void Boatman::vivificaMemento(ConcreteMemento &mem) {
     Soldiers::vivificaMemento(mem);
 }
 
-ConcreteMemento * Boatman::militusMemento() {
+ConcreteMemento *Boatman::militusMemento() {
     return Soldiers::militusMemento();
 }
 
-Boatman::Soldiers* clonis(){
-    Soldiers* newShieldBearer = new Boatman();
-    return newShieldBearer;
+Soldiers *Boatman::clonis() const {
+    return new Boatman(*this);
+}
+
+Boatman::Boatman(const Boatman &other) {
+    healthPerSoldier = other.healthPerSoldier;
+    damagePerSoldier = other.damagePerSoldier;
+    defencePerSoldier = other.defencePerSoldier;
+    amountOfSoldiersPerUnit = other.amountOfSoldiersPerUnit;
+    unitName = other.unitName;
 }

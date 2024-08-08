@@ -13,17 +13,9 @@ public:
     ShieldBearer(int amountOfSoldiersPerUnit, int damagePerSoldier, int defencePerSoldier, int healthPerSolider,
                  const std::string &unitName);
 
-    Soldiers *clonis() const override {
-        return new ShieldBearer(*this);
-    }
+    Soldiers *clonis() const override;
 
-    ShieldBearer(const ShieldBearer &other) : Soldiers(other) {
-        healthPerSoldier = other.healthPerSoldier;
-        damagePerSoldier = other.damagePerSoldier;
-        defencePerSoldier = other.defencePerSoldier;
-        amountOfSoldiersPerUnit = other.amountOfSoldiersPerUnit;
-        unitName = other.unitName;
-    }
+    ShieldBearer(const ShieldBearer &other);
 
     void prepare() const override {
         std::cout << "ShieldBearer preparing for battle...." << std::endl;
