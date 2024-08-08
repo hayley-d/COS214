@@ -8,6 +8,9 @@ Boatman::Boatman() {
     this->unitName = "Boatman";
 }
 
+Boatman::Boatman(const int amountOfSoldiersPerUnit, const int damagePerSoldier, const int defencePerSoldier, const int healthPerSolider,
+    const std::string &unitName) : Soldiers(amountOfSoldiersPerUnit,damagePerSoldier,defencePerSoldier,healthPerSolider,unitName){}
+
 Boatman::~Boatman() = default;
 
 void Boatman::vivificaMemento(ConcreteMemento &mem) {

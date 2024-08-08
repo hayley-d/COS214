@@ -1,13 +1,13 @@
-
 #include "CareTaker.h"
 
-ConcreteMemento * CareTaker::undo() {
-    if(history.empty()) {
+ConcreteMemento *CareTaker::undo() {
+    if (history.empty()) {
         return nullptr;
+    } else {
+        ConcreteMemento *top = history.top();
+        history.pop();
+        return top;
     }
-    ConcreteMemento* top = history.top();
-    history.pop();
-    return top;
 }
 
 void CareTaker::saveState(Soldiers &soldiers) {
@@ -16,13 +16,13 @@ void CareTaker::saveState(Soldiers &soldiers) {
 
 CareTaker::~CareTaker() {
     while (!history.empty()) {
-        ConcreteMemento* memento = history.top();
+        if (history.top() != nullptr) {
+            delete history.top();
+        }
         history.pop();
-        delete memento;
     }
 }
 
-int CareTaker::getSize() const{
+int CareTaker::getSize() const {
     return static_cast<int>(history.size());
 }
-

@@ -7,6 +7,10 @@ Infantry::Infantry() {
     this->amountOfSoldiersPerUnit = 8;
     this->unitName = "Infantry";
 }
+
+Infantry::Infantry(const int amountOfSoldiersPerUnit, const int damagePerSoldier, const int defencePerSoldier, const int healthPerSolider,
+    const std::string &unitName) : Soldiers(amountOfSoldiersPerUnit,damagePerSoldier,defencePerSoldier,healthPerSolider,unitName){}
+
 Infantry::~Infantry() = default;
 
 ConcreteMemento * Infantry::militusMemento() {

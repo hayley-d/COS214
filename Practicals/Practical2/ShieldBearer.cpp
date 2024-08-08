@@ -7,4 +7,9 @@ ShieldBearer::ShieldBearer() {
     this->amountOfSoldiersPerUnit = 3;
     this->unitName = "Shield Bearers";
 }
+
+
+ShieldBearer::ShieldBearer(const int amountOfSoldiersPerUnit, const int damagePerSoldier, const int defencePerSoldier, const int healthPerSolider,
+    const std::string &unitName) : Soldiers(amountOfSoldiersPerUnit,damagePerSoldier,defencePerSoldier,healthPerSolider,unitName){}
+
 ShieldBearer::~ShieldBearer() = default;
