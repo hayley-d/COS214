@@ -1,13 +1,18 @@
-//
-// Created by User-PC on 11/08/2024.
-//
-
 #ifndef STATEPATTERN_PLAYER_H
 #define STATEPATTERN_PLAYER_H
-
+#include "State.h"
 
 class Player {
-
+ State* state;
+int health;
+public:
+    Player();
+    ~Player();
+    void setState(State& state);
+    void update();
+    void setHealth(int hp);
+    int getHealth();
+    void performAction(const std::string& action);
 };
 
 
