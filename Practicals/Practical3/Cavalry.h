@@ -12,9 +12,9 @@ class Cavalry : public UnitComponent{
     int y;
 
 public:
-    Cavalry() : defence(15), damage(15), health(100){}
+    Cavalry() : defence(15), damage(15), health(100), x(0), y(0){}
 
-    Cavalry(const int defence, const int damage, const int health) : defence(defence), damage(damage), health(health){}
+    Cavalry(const int defence, const int damage, const int health, const int x, const int y) : defence(defence), damage(damage), health(health), x(x), y(y){}
 
     Cavalry(const Cavalry &other);
 

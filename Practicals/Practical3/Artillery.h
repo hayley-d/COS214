@@ -12,9 +12,9 @@ class Artillery : public UnitComponent{
     int x;
     int y;
 public:
-    Artillery() : defence(10), damage(30), health(100){}
+    Artillery() : defence(10), damage(30), health(100), x(0), y(0){}
 
-    Artillery(const int defence, const int damage, const int health) : defence(defence), damage(damage), health(health){}
+    Artillery(const int defence, const int damage, const int health, const int x, const int y) : defence(defence), damage(damage), health(health), x(x), y(y){}
 
     Artillery(const Artillery &other);
 
