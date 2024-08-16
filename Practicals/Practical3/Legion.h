@@ -8,21 +8,22 @@
 #include <iostream>
 #include <list>
 
+#include "Cohort.h"
 #include "Direction.h"
 
 class Legion : public CompositeUnit{
-protected:
-    std::list<UnitComponent*> units;
-    std::string unitName;
 
-    bool isInUnit(const UnitComponent *component);
+    std::list<Cohort*> units;
+    std::string unitName;
+    int x;
+    int y;
 
 public:
-    Legion() : unitName("Legion Unit"){}
+    Legion() : unitName("Legion Unit"), x(0), y(0){}
 
-    Legion(std::string   unitName): unitName(std::move(unitName)) {}
+    explicit Legion(std::string unitName): unitName(std::move(unitName)), x(0), y(0) {}
 
-    Legion(std::string  unitName, std::list<UnitComponent*> units) :  units(std::move(units)), unitName(std::move(unitName)){}
+    Legion(std::string  unitName,const int x, const int y) :  unitName(std::move(unitName)), x(x), y(y){}
 
     Legion(const Legion& other);
 
@@ -40,11 +41,17 @@ public:
 
     bool remove(UnitComponent *component) ;
 
-    int getStrength() const override;
+    int getDamage() const override;
 
     int getDefence() const override;
 
-    const std::list<UnitComponent *>& getUnits() const override;
+    int getHealth() const override;
+
+    int getX() const override{return x;}
+
+    int getY() const override{return y;}
+
+    const std::list<UnitComponent *>& getUnits() const override{return units;}
 
     ~Legion() override;
 
