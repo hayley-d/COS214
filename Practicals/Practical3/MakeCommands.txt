@@ -1,0 +1,5 @@
+Build: make
+Build and run: make run
+Memoryleak Check: make memcheck
+Coverage Check: make coverage
+clean: make clean

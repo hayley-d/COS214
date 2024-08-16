@@ -5,13 +5,9 @@
 
 class Cavalry : public UnitComponent{
 public:
-    void move() override;
+    void move(Direction direction) override;
 
-    void fight() override;
-
-    bool add(UnitComponent &component) override;
-
-    bool remove(UnitComponent &component) override;
+    void fight(Direction direction) override;
 
     ~Cavalry() override;
 };

@@ -1,15 +1,9 @@
 #include "Infantry.h"
 
-void Infantry::move() {
+void Infantry::move(Direction direction) {
 }
 
-void Infantry::fight() {
-}
-
-bool Infantry::add(UnitComponent &component) {
-}
-
-bool Infantry::remove(UnitComponent &component) {
+void Infantry::fight(Direction direction) {
 }
 
 Infantry::~Infantry() {

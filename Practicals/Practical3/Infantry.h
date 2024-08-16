@@ -1,17 +1,29 @@
 #ifndef INFANTRY_H
 #define INFANTRY_H
 
+#include <utility>
+
 #include "UnitComponent.h"
 
 class Infantry : public UnitComponent{
+
+    int defence;
+    int attack;
+
 public:
-    void move() override;
+    Infantry() : defence(10), attack(10){}
 
-    void fight() override;
+    Infantry(const int defence, const int attack) : defence(defence), attack(attack){}
 
-    bool add(UnitComponent &component) override;
+    Infantry(const Infantry &other);
 
-    bool remove(UnitComponent &component) override;
+    Infantry & operator=(const Infantry &other);
+
+    bool operator<(const Infantry& other) const;
+
+    void move(Direction direction) override;
+
+    void fight(Direction direction) override;
 
     ~Infantry() override;
 };

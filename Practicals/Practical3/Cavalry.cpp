@@ -1,15 +1,9 @@
 #include "Cavalry.h"
 
-void Cavalry::move() {
+void Cavalry::move(Direction direction) {
 }
 
-void Cavalry::fight() {
-}
-
-bool Cavalry::add(UnitComponent &component) {
-}
-
-bool Cavalry::remove(UnitComponent &component) {
+void Cavalry::fight(Direction direction) {
 }
 
 Cavalry::~Cavalry() {

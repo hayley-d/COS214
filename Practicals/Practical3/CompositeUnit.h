@@ -1,25 +1,21 @@
 #ifndef COMPOSITEUNIT_H
 #define COMPOSITEUNIT_H
 
-#include "UnitComponent.h"
+#include <list>
 #include <vector>
 
+#include "UnitComponent.h"
+
 class CompositeUnit : public UnitComponent{
-protected:
-    std::vector<UnitComponent*> units;
-
 public:
-    void move() override;
 
-    void fight() override;
+    virtual bool add(UnitComponent *component) = 0;
 
-    bool add(UnitComponent &component) override;
+    virtual bool remove(UnitComponent *component) = 0 ;
 
-    bool remove(UnitComponent &component) override;
+    virtual const std::list<UnitComponent*>& getUnits() const =0;
 
-    ~CompositeUnit() override;
+    virtual ~CompositeUnit() = default;
 };
-
-
 
 #endif //COMPOSITEUNIT_H
