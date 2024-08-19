@@ -1,10 +1,10 @@
 
-# Practical 3
+<h1>Practical 3</h1>
 
 Tasked to make use of Memento, Abstract Factory, Strategy and Composite design patterns to implement a Roman battle.
 
 
-## Strategy Design pattern
+<h2>Strategy Design pattern</h2>
 #### Goal: 
 Implement varying military tactics that can be adapted based on enemy movements and battlefield conditions.
 
