@@ -1,0 +1,24 @@
+
+# Practical 3
+
+Tasked to make use of Memento, Abstract Factory, Strategy and Composite design patterns to implement a Roman battle.
+
+
+## Strategy Design pattern
+#### Goal: 
+Implement varying military tactics that can be adapted based on enemy movements and battlefield conditions.
+
+
+### TacticalCommand (Context Class)
+#### Attributes
+private BattleStrategy* strategy: 
+
+A reference to the current strategy object being used.
+
+
+
+
+
+
+
+
