@@ -1,19 +1,11 @@
 #include <iostream>
 
+#include "Artillery.h"
 #include "Legion.h"
 
 const std::string red = "\033[31m";
 const std::string green = "\033[32m";
 const std::string reset = "\033[0m";
-
-/*std::string printCavalry() {
-    return "        ,--,\n"
-            "  _ ___/ /\\|\n"
-            " ;( )__, )\n"
-            " ; //   '--;\n"
-            "  \\     |\n"
-            "   ^    ^";
-}*/
 
 
 int main() {
@@ -84,6 +76,7 @@ int main() {
         ++passed;
         std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
     }
+
 
 
     return 0;

@@ -1,14 +1,9 @@
 #include "Legion.h"
 
-#include "Cohort.h"
-
-Legion::Legion(const Legion &other) {
+Legion::Legion(const Legion &other) : UnitComponent(other.defence,other.damage,other.health,other.x,other.y){
     for(const auto&  unit : other.units) {
-        units.push_back(new Cohort(*unit));
+        units.push_back(unit->clone());
     }
-    this->unitName = other.unitName;
-    this->x = other.getX();
-    this->y = other.getY();
 }
 
 Legion & Legion::operator=(const Legion &other) {
@@ -26,10 +21,21 @@ void Legion::move(Direction direction) {
 void Legion::fight(Direction direction) {
 }
 
-bool Legion::add(UnitComponent *component) {
+bool Legion::add(std::shared_ptr<UnitComponent>&component) {
+    units.push_back(component);
 }
 
-bool Legion::remove(UnitComponent *component) {
+bool Legion::remove(std::shared_ptr<UnitComponent>&component) {
+    bool deletedUnit = false;
+    for(auto it = units.begin() ; it != units.end();) {
+        if(*it == component) {
+            it = units.erase(it);
+           deletedUnit = true;
+        } else {
+            ++it;
+        }
+    }
+    return deletedUnit;
 }
 
 int Legion::getDamage() const {
@@ -63,4 +69,6 @@ Legion::~Legion() {
     units.clear();
 }
 
-
+std::shared_ptr<UnitComponent> Legion::clone() {
+    return std::make_shared<UnitComponent>(*this);
+}

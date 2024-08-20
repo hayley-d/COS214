@@ -11,12 +11,16 @@ add_executable(Practical3 main.cpp
         Cavalry.h
         Artillery.cpp
         Artillery.h
-        CompositeUnit.h
         Legion.cpp
         Legion.h
         Direction.h
-        Cohort.cpp
-        Cohort.h
-        Century.cpp
-        Century.h
+        TacticalCommand.cpp
+        TacticalCommand.h
+        BattleStrategy.h
+        Flanking.cpp
+        Flanking.h
+        Ambush.cpp
+        Ambush.h
+        Fortification.cpp
+        Fortification.h
 )

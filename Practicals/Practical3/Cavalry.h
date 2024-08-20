@@ -4,19 +4,12 @@
 #include "UnitComponent.h"
 
 class Cavalry : public UnitComponent{
-    int defence;
-    int damage;
-    int health;
-
-    int x;
-    int y;
-
 public:
-    Cavalry() : defence(15), damage(15), health(100), x(0), y(0){}
+    Cavalry() : UnitComponent(15,15,100,0,0){}
 
-    Cavalry(const int defence, const int damage, const int health, const int x, const int y) : defence(defence), damage(damage), health(health), x(x), y(y){}
+    Cavalry(const int defence, const int damage, const int health, const int x, const int y) :UnitComponent(defence,damage,health,x,y) {}
 
-    Cavalry(const Cavalry &other);
+    Cavalry(const Cavalry &other) : UnitComponent(other.defence,other.damage,other.health,other.x,other.y){}
 
     Cavalry & operator=(const Cavalry &other);
 
@@ -28,15 +21,7 @@ public:
 
     ~Cavalry() override;
 
-    int getDamage() const override{return damage;}
-
-    int getDefence() const override{return defence;}
-
-    int getHealth() const override{return health;}
-
-    int getX() const override{return x;}
-
-    int getY() const override {return y;}
+    std::shared_ptr<UnitComponent> clone() override;
 };
 
 

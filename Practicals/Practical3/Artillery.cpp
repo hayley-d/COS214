@@ -1,9 +1,5 @@
 #include "Artillery.h"
 
-Artillery::Artillery(const Artillery &other) : defence(other.getDefence()), damage(other.getDamage()),
-                                               health(other.getHealth()), x(other.getX()), y(other.getY()) {
-}
-
 Artillery &Artillery::operator=(const Artillery &other) {
     this->damage = other.getDamage();
     this->defence = other.getDefence();
@@ -58,3 +54,7 @@ void Artillery::fight(Direction direction) {
 }
 
 Artillery::~Artillery() = default;
+
+std::shared_ptr<UnitComponent> Artillery::clone() {
+    return std::make_shared<UnitComponent>(*this);
+}

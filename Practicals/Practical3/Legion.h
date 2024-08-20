@@ -1,29 +1,22 @@
 #ifndef LEGION_H
 #define LEGION_H
 
-#include "CompositeUnit.h"
-#include <utility>
-#include <vector>
+#include "UnitComponent.h"
+
 #include <string>
 #include <iostream>
 #include <list>
+#include <memory>
 
-#include "Cohort.h"
+
 #include "Direction.h"
 
-class Legion : public CompositeUnit{
+class Legion : public UnitComponent{
 
-    std::list<Cohort*> units;
-    std::string unitName;
-    int x;
-    int y;
+    std::list<std::shared_ptr<UnitComponent>> units;
 
 public:
-    Legion() : unitName("Legion Unit"), x(0), y(0){}
-
-    explicit Legion(std::string unitName): unitName(std::move(unitName)), x(0), y(0) {}
-
-    Legion(std::string  unitName,const int x, const int y) :  unitName(std::move(unitName)), x(x), y(y){}
+    Legion() : UnitComponent(0,0,0,0,0){}
 
     Legion(const Legion& other);
 
@@ -37,9 +30,9 @@ public:
 
     void fight(Direction direction) override;
 
-    bool add(UnitComponent *component) ;
+    bool add(std::shared_ptr<UnitComponent>&component) ;
 
-    bool remove(UnitComponent *component) ;
+    bool remove(std::shared_ptr<UnitComponent>&component) ;
 
     int getDamage() const override;
 
@@ -51,12 +44,11 @@ public:
 
     int getY() const override{return y;}
 
-    const std::list<UnitComponent *>& getUnits() const override{return units;}
+    const std::list<std::shared_ptr<UnitComponent>>& getUnits() const {return units;}
 
     ~Legion() override;
 
-    std::string getUnitName(){return unitName;}
-
+    std::shared_ptr<UnitComponent> clone() override;
 };
 
 

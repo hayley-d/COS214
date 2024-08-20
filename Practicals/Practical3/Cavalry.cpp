@@ -1,9 +1,5 @@
 #include "Cavalry.h"
 
-Cavalry::Cavalry(const Cavalry &other) : defence(other.getDefence()), damage(other.getDamage()),
-                                         health(other.getHealth()), x(other.getX()), y(other.getY()) {
-}
-
 Cavalry &Cavalry::operator=(const Cavalry &other) {
     this->damage = other.getDamage();
     this->defence = other.getDefence();
@@ -58,3 +54,7 @@ void Cavalry::fight(Direction direction) {
 }
 
 Cavalry::~Cavalry() = default;
+
+std::shared_ptr<UnitComponent> Cavalry::clone() {
+    return std::make_shared<UnitComponent>(*this);
+}

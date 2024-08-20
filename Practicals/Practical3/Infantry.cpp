@@ -1,9 +1,5 @@
 #include "Infantry.h"
 
-Infantry::Infantry(const Infantry &other) : defence(other.getDefence()), damage(other.getDamage()),
-                                            health(other.getHealth()), x(other.getX()), y(other.getY()) {
-}
-
 Infantry &Infantry::operator=(const Infantry &other) {
     this->damage = other.getDamage();
     this->defence = other.getDefence();
@@ -58,3 +54,7 @@ void Infantry::fight(Direction direction) {
 }
 
 Infantry::~Infantry() = default;
+
+std::shared_ptr<UnitComponent> Infantry::clone() {
+    return std::make_shared<UnitComponent>(*this);
+}
