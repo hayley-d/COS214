@@ -4,17 +4,22 @@ Infantry &Infantry::operator=(const Infantry &other) {
     this->damage = other.getDamage();
     this->defence = other.getDefence();
     this->health = other.getHealth();
+    this->size = other.getSize();
     this->x = other.getX();
     this->y = other.getY();
     return *this;
 }
 
 bool Infantry::operator<(const Infantry &other) const {
-    return this->getDamage() < other.getDamage();
+    return this->getSize() < other.getSize();
+}
+
+bool Infantry::operator==(const Infantry &other) const{
+    return this->getSize() == other.getSize();
 }
 
 void Infantry::move(Direction direction) {
-    switch (direction) {
+    /*switch (direction) {
         case Direction::North:
             ++y;
             break;
@@ -30,11 +35,11 @@ void Infantry::move(Direction direction) {
         default:
             x = x;
             break;
-    }
+    }*/
 }
 
 void Infantry::fight(Direction direction) {
-    switch (direction) {
+    /*switch (direction) {
         case Direction::North:
             ++y;
             break;
@@ -50,11 +55,11 @@ void Infantry::fight(Direction direction) {
         default:
             x = x;
             break;
-    }
+    }*/
 }
 
 Infantry::~Infantry() = default;
 
 std::shared_ptr<UnitComponent> Infantry::clone() {
-    return std::make_shared<UnitComponent>(*this);
+    return std::make_shared<Infantry>(*this);
 }

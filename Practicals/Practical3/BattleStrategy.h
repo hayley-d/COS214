@@ -25,7 +25,7 @@ public:
                                                       riskLevel(riskLevel) {
     }
 
-    virtual void engage(UnitComponent& unit) =0;
+    virtual void engage(std::shared_ptr<UnitComponent>& unit) =0;
 
     virtual ~BattleStrategy() = default;
 
@@ -57,19 +57,33 @@ public:
         return riskLevel;
     }
 
-    void setSuccessRate(const float successRate) : successRate(successRate){}
+    void setSuccessRate(const float successRate){
+        this->successRate = successRate;
+    }
 
-    void setMinimumTroops(const int minimumTroops) : minimumTroops(minimumTroops) {}
+    void setMinimumTroops(const int minimumTroops){
+        this->minimumTroops = minimumTroops;
+    }
 
-    void setDamagePotential(const int damagePotential) : damagePotential(damagePotential){}
+    void setDamagePotential(const int damagePotential){
+        this->damagePotential = damagePotential;
+    }
 
-    void setDefenceBonus(const int defenceBonus) : defenceBonus(damagePotential) {}
+    void setDefenceBonus(const int defenceBonus){
+        this->defenceBonus = defenceBonus;
+    }
 
-    void setExecutionTime(const int executionTime) : executionTime(executionTime) {}
+    void setExecutionTime(const int executionTime){
+        this->executionTime = executionTime;
+    }
 
-    void setBestEnviroment(const Terrain bestEnviroment) : bestEnviroment(bestEnviroment) {}
+    void setBestEnviroment(const Terrain bestEnviroment){
+        this->bestEnviroment = bestEnviroment;
+    }
 
-    void setRiskLevel(const int riskLevel) : riskLevel(riskLevel) {}
+    void setRiskLevel(const int riskLevel){
+        this->riskLevel = riskLevel;
+    }
 };
 
 

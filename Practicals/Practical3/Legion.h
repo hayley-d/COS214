@@ -16,7 +16,7 @@ class Legion : public UnitComponent{
     std::list<std::shared_ptr<UnitComponent>> units;
 
 public:
-    Legion() : UnitComponent(0,0,0,0,0){}
+    Legion() : UnitComponent(0,0,0,0,0,0){}
 
     Legion(const Legion& other);
 
@@ -39,6 +39,8 @@ public:
     int getDefence() const override;
 
     int getHealth() const override;
+
+    int getSize() const override;
 
     int getX() const override{return x;}
 

@@ -2,6 +2,8 @@
 
 #include "Artillery.h"
 #include "Legion.h"
+#include "Infantry.h"
+#include "UnitComponent.h"
 
 const std::string red = "\033[31m";
 const std::string green = "\033[32m";
@@ -15,13 +17,6 @@ int main() {
 
     ++total;
     Legion legion1{};
-    if (legion1.getUnitName() == "Legion Unit") {
-        ++passed;
-        std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
-    }
-
-    ++total;
-
     if (legion1.getDefence() == 0) {
         ++passed;
         std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
@@ -29,14 +24,42 @@ int main() {
 
     ++total;
 
-    if (legion1.getStrength() == 0) {
+    if (legion1.getDamage() == 0) {
         ++passed;
         std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
     }
 
     ++total;
 
-    const std::list<UnitComponent *> legion1_units = legion1.getUnits();
+    if (legion1.getHealth() == 0) {
+        ++passed;
+        std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
+    }
+
+    ++total;
+
+    if (legion1.getSize() == 0) {
+        ++passed;
+        std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
+    }
+
+    ++total;
+
+    if (legion1.getX() == 0) {
+        ++passed;
+        std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
+    }
+
+    ++total;
+
+    if (legion1.getY() == 0) {
+        ++passed;
+        std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
+    }
+
+    ++total;
+
+    const std::list<std::shared_ptr<UnitComponent>> legion1_units = legion1.getUnits();
     if (legion1_units.empty()) {
         ++passed;
         std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
@@ -58,7 +81,7 @@ int main() {
     }
 
     ++total;
-    Legion legion2{"Legion Unit 2"};
+    Legion legion2;
     if(legion1==legion2) {
         ++passed;
         std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
@@ -71,8 +94,9 @@ int main() {
     }
 
     ++total;
-    legion1 = legion2;
-    if(legion1.getUnitName() == "Legion Unit 2") {
+    std::shared_ptr<UnitComponent> infantry1 = std::make_shared<Infantry>();
+    legion1.add(infantry1);
+    if(legion1.getSize() == 1) {
         ++passed;
         std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
     }

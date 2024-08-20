@@ -12,7 +12,7 @@ public:
              bestEnviroment,riskLevel){
     }
 
-    void engage(UnitComponent& unit) override;
+    void engage(std::shared_ptr<UnitComponent>& unit) override;
 
     ~Flanking() override;
 

@@ -5,7 +5,7 @@
 
 class Ambush : public BattleStrategy{
 public:
-    void engage(UnitComponent &unit) override;
+    void engage(std::shared_ptr<UnitComponent> &unit) override;
 
     ~Ambush() override;
 };

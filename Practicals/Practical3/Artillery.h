@@ -5,15 +5,17 @@
 
 class Artillery : public UnitComponent{
 public:
-    Artillery(): UnitComponent(10,30,100,0,0){}
+    Artillery(): UnitComponent(10,30,100,1,0,0){}
 
-    Artillery(const int defence, const int damage, const int health, const int x, const int y) :UnitComponent(defence,damage,health,x,y){}
+    Artillery(const int defence, const int damage, const int health, const int x, const int y) :UnitComponent(defence,damage,health,1,x,y){}
 
-    Artillery(const Artillery &other): UnitComponent(other.defence,other.damage,other.health,other.x,other.y){}
+    Artillery(const Artillery &other): UnitComponent(other.defence,other.damage,other.health,1,other.x,other.y){}
 
     Artillery & operator=(const Artillery &other);
 
     bool operator<(const Artillery& other) const;
+
+    bool operator==(const Artillery& other) const;
 
     void move(Direction direction) override;
 

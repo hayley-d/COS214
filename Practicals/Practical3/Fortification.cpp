@@ -1,6 +1,6 @@
 #include "Fortification.h"
 
-void Fortification::engage(UnitComponent &unit) {
+void Fortification::engage(std::shared_ptr<UnitComponent> &unit) {
 
 }
 
