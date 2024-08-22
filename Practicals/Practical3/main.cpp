@@ -101,7 +101,20 @@ int main() {
         std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
     }
 
+    ++total;
+    if(legion1.getSize() == 1) {
+        ++passed;
+        std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
+    }
 
+    ++total;
+    if(legion2.getSize() == 0) {
+        legion2 = legion1;
+        if(legion2.getSize() == 1) {
+         ++passed;
+        std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
+        }
+    }
 
     return 0;
 }
