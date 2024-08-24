@@ -24,5 +24,17 @@ add_executable(Practical3 main.cpp
         Fortification.cpp
         Fortification.h
         LegionFactory.h
-        LegionUnit.h
+        OpenField.cpp
+        OpenField.h
+        OpenFieldFactory.h
+        Riverbank.cpp
+        Riverbank.h
+        RiverbankFactory.h
+        TacticalMemento.h
+        TacticalPlanner.cpp
+        TacticalPlanner.h
+        WarArchives.cpp
+        WarArchives.h
+        Woodlands.cpp
+        Woodlands.h
 )

@@ -88,7 +88,7 @@ int main() {
     }
 
     ++total;
-    if(legion1<legion2 == false) {
+    if((legion1<legion2) == false) {
         ++passed;
         std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
     }
