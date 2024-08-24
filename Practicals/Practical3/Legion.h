@@ -24,8 +24,6 @@ public:
 
     bool operator<(const Legion& other) const;
 
-    //bool operator==(const Legion& other) const;
-
     bool operator==(UnitComponent& other) override;
 
     void move(Direction direction) override;

@@ -1,28 +1,36 @@
 #include "Ambush.h"
 #include <iostream>
 
-void Ambush::engage(UnitComponent& unit,UnitComponent&enemy) {
-    if (unit.getSize() < this->getMinimumTroops()) {
-        std::cout << "Ambush failed! Not enough troops to execute the strategy.\n";
-        return;
+UnitComponent * Ambush::engage() {
+    //Create fortification legion
+    Legion* legion = factory->createLegion();
+
+    // 4 cavalry in legion
+    for(int i = 0; i < 4; ++i) {
+        legion->add(*factory->createCavalry());
     }
 
-    // ambush == increased damage potential
-    int damage = this->getDamagePotential() * 1.5;
-    unit.setDamage(damage);
-    std::cout << "Ambush! The enemy is caught off guard and took heavy damage." << std::endl;
-
-    //Attempt to damage Enemy
-    if (static_cast<float>(rand()) / RAND_MAX <= this->getSuccessRate()) {
-        enemy.applyDamage(damage);
-        std::cout << "Ambush successful! Dealt " << damage << " damage.\n";
-    } else {
-        std::cout << "Ambush failed! The enemy was prepared.\n";
+    //create 3 artillery
+    for(int i = 0; i < 3; i++) {
+        legion->add(*factory->createArtillery());
     }
 
-}
+    //create 10 infantry
+    for(int i = 0; i < 10; i++) {
+        legion->add(*factory->createInfantry());
+    }
+
+    //damage high
+    legion->setDamage(70);
+
+    //defence low
+    legion->setDefence(10);
+
+    return legion;}
 
 Ambush::~Ambush() {
+    delete factory;
+    factory = nullptr;
 }
 
 BattleStrategy * Ambush::clone() const {

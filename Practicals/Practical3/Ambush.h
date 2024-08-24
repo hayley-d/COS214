@@ -5,13 +5,13 @@
 
 class Ambush : public BattleStrategy{
 public:
-    void engage( UnitComponent&unit,UnitComponent &enemy) override;
+    Ambush(LegionFactory& factory) : BattleStrategy(factory) {}
 
-    ~Ambush() override;
+    UnitComponent * engage() override;
 
     BattleStrategy * clone() const override;
 
-
+    ~Ambush() override;
 };
 
 

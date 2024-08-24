@@ -15,15 +15,13 @@ public:
 
     bool operator<(const Artillery& other) const;
 
-   // bool operator==(const Artillery& other) const;
+    virtual void move(Direction direction) ;
 
-    void move(Direction direction) override;
+    virtual void fight(Direction direction) ;
 
-    void fight(Direction direction) override;
+    virtual  ~Artillery() override{}
 
-    ~Artillery() override;
-
-    UnitComponent* clone() override;
+    virtual UnitComponent* clone() override;
 
     void applyDamage(int damage) override;
 

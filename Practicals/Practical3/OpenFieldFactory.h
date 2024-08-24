@@ -17,5 +17,11 @@ public:
     Artillery* createArtillery() override {
         return new OpenFieldArtillery();
     }
+
+    Legion * createLegion() override {
+        return new Legion();
+    }
+
+    ~OpenFieldFactory() override;
 };
 #endif //OPENFIELDFACTORY_H

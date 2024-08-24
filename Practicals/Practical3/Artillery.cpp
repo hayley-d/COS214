@@ -14,72 +14,6 @@ bool Artillery::operator<(const Artillery &other) const {
     return this->getSize() < other.getSize();
 }
 
-/*bool Artillery::operator==(const Artillery &other) const {
-    if (other.getDefence() == defence && other.getDamage() == damage && other.getHealth() == health && other.getSize()
-        == size && other.getX() == x && other.getY() == y) {
-        return true;
-    }
-    return false;
-}*/
-
-void Artillery::move(Direction direction) {
-    switch (direction) {
-        case Direction::North:
-            ++y;
-            std::cout << "Artillery moves to the north"<< std::endl;
-            break;
-        case Direction::South:
-            --y;
-            std::cout << "Artillery moves to the east"<< std::endl;
-            break;
-        case Direction::East:
-            ++x;
-            std::cout << "Artillery moves to the east"<< std::endl;
-            break;
-        case Direction::West:
-            --x;
-            std::cout << "Artillery moves to the west"<< std::endl;
-            break;
-        default:
-            x = x;
-            std::cout << "Artillery moves in all directions"<< std::endl;
-            break;
-    }
-
-}
-
-void Artillery::fight(Direction direction) {
-    switch (direction) {
-        case Direction::North:
-            ++y;
-             std::cout << "Artillery attacks to the North "<< std::endl;
-            break;
-        case Direction::South:
-            --y;
-            std::cout << "Artillery attacks to the south" << std::endl;
-            break;
-        case Direction::East:
-            ++x;
-            std::cout << "Artillery attacks to the east" << std::endl;
-            break;
-        case Direction::West:
-            --x;
-            std::cout << "Artillery attacks to the west "  << std::endl;
-            break;
-        default:
-            x = x;
-            std::cout << "Artillery attacks in all directions" << std::endl;
-            break;
-    }
-
-}
-
-Artillery::~Artillery() = default;
-
-UnitComponent* Artillery::clone() {
-    return new Artillery(*this);
-}
-
 void Artillery::applyDamage(int damage) {
      if(damage > this->health) {
         //kill
@@ -102,4 +36,48 @@ bool Artillery::operator==(UnitComponent &other) {
         return true;
     }
     return false;
+}
+
+void Artillery::move(Direction direction) {
+    switch (direction) {
+        case Direction::North:
+            ++y;
+            break;
+        case Direction::South:
+            --y;
+            break;
+        case Direction::East:
+            ++x;
+            break;
+        case Direction::West:
+            --x;
+            break;
+        default:
+            x = x;
+            break;
+    }
+}
+
+void Artillery::fight(Direction direction) {
+    switch (direction) {
+        case Direction::North:
+            ++y;
+            break;
+        case Direction::South:
+            --y;
+            break;
+        case Direction::East:
+            ++x;
+            break;
+        case Direction::West:
+            --x;
+            break;
+        default:
+            x = x;
+            break;
+    }
+}
+
+UnitComponent * Artillery::clone() {
+    return new Artillery(*this);
 }

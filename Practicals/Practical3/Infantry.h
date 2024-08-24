@@ -1,31 +1,31 @@
 #ifndef INFANTRY_H
 #define INFANTRY_H
 
-#include <utility>
-
 #include "UnitComponent.h"
 
-class Infantry : public UnitComponent{
+class Infantry : public UnitComponent {
 public:
-    Infantry() : UnitComponent(10,10,100,1,0,0){}
+    Infantry() : UnitComponent(10, 10, 100, 1, 0, 0) {
+    }
 
-    Infantry(const int defence, const int damage, const int health, const int x, const int y) :UnitComponent(defence,damage,health,1,x,y){}
+    Infantry(const int defence, const int damage, const int health, const int x, const int y) : UnitComponent(
+        defence, damage, health, 1, x, y) {
+    }
 
-    Infantry(const Infantry &other) : UnitComponent(other.defence,other.damage,other.health,1,other.x,other.y){}
+    Infantry(const Infantry &other) : UnitComponent(other.defence, other.damage, other.health, 1, other.x, other.y) {
+    }
 
-    Infantry & operator=(const Infantry &other);
+    Infantry &operator=(const Infantry &other);
 
-    bool operator<(const Infantry& other) const;
+    bool operator<(const Infantry &other) const;
 
-    //bool operator==(const Infantry& other) const;
+    virtual void move(Direction direction);
 
-    void move(Direction direction) override;
+    virtual void fight(Direction direction);
 
-    void fight(Direction direction) override;
+    virtual ~Infantry() override{}
 
-    ~Infantry() override;
-
-    UnitComponent* clone() override;
+    virtual UnitComponent *clone() override;
 
     void applyDamage(int damage) override;
 
@@ -33,7 +33,6 @@ public:
 
     bool operator==(UnitComponent &other) override;
 };
-
 
 
 #endif //INFANTRY_H

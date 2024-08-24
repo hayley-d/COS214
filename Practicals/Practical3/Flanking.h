@@ -7,12 +7,9 @@
 class Flanking : public BattleStrategy {
 
 public:
-    Flanking(const float successRate, const int minTroops, const int damagePotential, const int defenceBonus, const int executionTime,
-             const Terrain bestEnviroment, const int riskLevel) : BattleStrategy(successRate,minTroops,damagePotential,defenceBonus,executionTime,
-             bestEnviroment,riskLevel){
-    }
+    Flanking(LegionFactory& factory) : BattleStrategy(factory){}
 
-    void engage(UnitComponent& unit,UnitComponent &enemy) override;
+    UnitComponent * engage() override;
 
     ~Flanking() override;
 

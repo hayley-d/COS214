@@ -16,5 +16,11 @@ public:
     Artillery* createArtillery() override {
         return new RiverbankArtillery();
     }
+
+    Legion * createLegion() override {
+        return new Legion();
+    }
+
+    ~RiverbankFactory() override;
 };
 #endif //RIVERBANKFACTORY_H

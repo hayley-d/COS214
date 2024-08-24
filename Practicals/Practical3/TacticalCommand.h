@@ -12,7 +12,7 @@ class TacticalCommand {
 public:
     void setStrategy(BattleStrategy* strategy);
     void chooseBestStrategy();
-    void executeStrategy(UnitComponent& unit,UnitComponent& enemy);
+    void executeStrategy();
     TacticalCommand(BattleStrategy& strategy);
     TacticalCommand(BattleStrategy& strategy, WarArchives* archives);
     ~TacticalCommand();

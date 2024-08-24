@@ -1,7 +1,6 @@
 #ifndef UNITCOMPONENT_H
 #define UNITCOMPONENT_H
 #include "Direction.h"
-#include <memory>
 #include <iostream>
 class UnitComponent {
 protected:

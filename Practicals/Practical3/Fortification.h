@@ -6,13 +6,9 @@
 
 class Fortification : public BattleStrategy{
 public:
-    Fortification(float successRate, int minTroops, int damagePotential, int defenceBonus, int executionTime,
-        Terrain bestEnviroment, int riskLevel)
-        : BattleStrategy(
-            successRate, minTroops, damagePotential, defenceBonus, executionTime, bestEnviroment, riskLevel) {
-    }
+    Fortification(LegionFactory& factory) : BattleStrategy(factory){}
 
-    void engage(UnitComponent&unit,UnitComponent &enemy) override;
+    UnitComponent* engage() override;
 
     ~Fortification() override;
 

@@ -13,8 +13,8 @@ void TacticalCommand::chooseBestStrategy() {
 
 }
 
-void TacticalCommand::executeStrategy(UnitComponent& unit,UnitComponent& enemy) {
-    this->strategy->engage(unit,enemy);
+void TacticalCommand::executeStrategy() {
+    this->strategy->engage();
 }
 
 TacticalCommand::TacticalCommand(BattleStrategy &strategy) {

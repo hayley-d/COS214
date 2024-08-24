@@ -35,6 +35,8 @@ add_executable(Practical3 main.cpp
         TacticalPlanner.h
         WarArchives.cpp
         WarArchives.h
-        Woodlands.cpp
-        Woodlands.h
+        Woodland.cpp
+        Woodland.h
+        WoodlandsFactory.h
+        Direction.cpp
 )

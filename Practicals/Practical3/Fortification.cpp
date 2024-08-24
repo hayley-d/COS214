@@ -2,26 +2,32 @@
 
 #include <iostream>
 
-void Fortification::engage(UnitComponent &unit,UnitComponent&enemy) {
-    if(unit.getSize() < getMinimumTroops()){
-        std::cout << "Fortification failed! Not enough troops to execute the strategy.\n";
-        return;
-    }
-    //increase health and defence
-    int defence = unit.getDefence() * 2;
-    int health = unit.getHealth() * 1.2;
+#include "LegionFactory.h"
+#include "OpenFieldFactory.h"
+#include "RiverbankFactory.h"
+#include "WoodlandsFactory.h"
 
-    if (static_cast<float>(rand()) / RAND_MAX <= this->getSuccessRate()) {
-       unit.setDefence(defence);
-        unit.setHealth(health);
-        std::cout << "Fortification successful! Gained " << defence << " defence and " << health << " health bonus.\n";
-    } else {
-        unit.applyDamage(enemy.getDamage());
-        std::cout << "Fortification failed! The enemy breached the defenses.\n";
+UnitComponent* Fortification::engage() {
+    //Create fortification legion
+    Legion* legion = factory->createLegion();
+
+    // 6 atillery in legion
+    for(int i = 0; i < 6; ++i) {
+        legion->add(*factory->createArtillery());
     }
+
+    //high defence
+    legion->setDefence(30);
+
+    //low damage
+    legion->setDamage(10);
+
+    return legion;
 }
 
 Fortification::~Fortification() {
+    delete factory;
+    factory = nullptr;
 }
 
 BattleStrategy * Fortification::clone() const {
