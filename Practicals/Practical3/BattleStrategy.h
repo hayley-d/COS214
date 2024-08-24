@@ -26,7 +26,7 @@ public:
                                                       riskLevel(riskLevel) {}
 
 
-    virtual void engage(std::shared_ptr<UnitComponent>& unit,std::shared_ptr<UnitComponent> &enemy) =0;
+    virtual void engage(UnitComponent& unit,UnitComponent &enemy) =0;
 
     virtual BattleStrategy* clone() const = 0;
 

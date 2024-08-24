@@ -18,6 +18,8 @@ public:
     virtual void fight(Direction direction) = 0;
     virtual ~UnitComponent() = default;
 
+    virtual bool operator==(UnitComponent& other) = 0;
+
     virtual void setDamage(int damage){this->damage = damage;}
 
     virtual void setDefence(int defence){this->defence = defence;}
@@ -42,7 +44,7 @@ public:
 
     virtual int getY() const  {return y;}
 
-    virtual std::shared_ptr<UnitComponent> clone() =0;
+    virtual UnitComponent* clone() =0;
 
     UnitComponent(const UnitComponent& other): defence(other.defence), damage(other.damage), health(other.health), size(other.size), x(other.x), y(other.y){}
 

@@ -15,7 +15,11 @@ bool Artillery::operator<(const Artillery &other) const {
 }
 
 bool Artillery::operator==(const Artillery &other) const {
-    return this->getSize() == other.getSize();
+    if (other.getDefence() == defence && other.getDamage() == damage && other.getHealth() == health && other.getSize()
+        == size && other.getX() == x && other.getY() == y) {
+        return true;
+    }
+    return false;
 }
 
 void Artillery::move(Direction direction) {
@@ -72,8 +76,8 @@ void Artillery::fight(Direction direction) {
 
 Artillery::~Artillery() = default;
 
-std::shared_ptr<UnitComponent> Artillery::clone() {
-    return std::make_shared<Artillery>(*this);
+UnitComponent* Artillery::clone() {
+    return new Artillery(*this);
 }
 
 void Artillery::applyDamage(int damage) {
@@ -91,4 +95,11 @@ void Artillery::die() {
     this->setHealth(0);
     this->setDamage(0);
     this->setDefence(0);
+}
+
+bool Artillery::operator==(UnitComponent &other) {
+    if(other.getDefence() == defence && other.getDamage() == damage && other.getHealth() == health && other.getSize() == size && other.getX() == x && other.getY() == y) {
+        return true;
+    }
+    return false;
 }

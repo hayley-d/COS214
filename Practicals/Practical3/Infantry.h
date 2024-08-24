@@ -25,11 +25,13 @@ public:
 
     ~Infantry() override;
 
-    std::shared_ptr<UnitComponent> clone() override;
+    UnitComponent* clone() override;
 
     void applyDamage(int damage) override;
 
     void die() override;
+
+    bool operator==(UnitComponent &other) override;
 };
 
 

@@ -15,7 +15,11 @@ bool Cavalry::operator<(const Cavalry &other) const {
 }
 
 bool Cavalry::operator==(const Cavalry &other) const{
-    return this->getSize() == other.getSize();
+    if (other.getDefence() == defence && other.getDamage() == damage && other.getHealth() == health && other.getSize()
+        == size && other.getX() == x && other.getY() == y) {
+        return true;
+    }
+    return false;
 }
 
 void Cavalry::move(Direction direction) {
@@ -70,8 +74,8 @@ void Cavalry::fight(Direction direction) {
 
 Cavalry::~Cavalry() = default;
 
-std::shared_ptr<UnitComponent> Cavalry::clone() {
-    return std::make_shared<Cavalry>(*this);
+UnitComponent* Cavalry::clone() {
+    return new Cavalry(*this);
 }
 
 void Cavalry::applyDamage(int damage) {
@@ -89,4 +93,11 @@ void Cavalry::die() {
     this->setHealth(0);
     this->setDamage(0);
     this->setDefence(0);
+}
+
+bool Cavalry::operator==(UnitComponent &other) {
+    if(other.getDefence() == defence && other.getDamage() == damage && other.getHealth() == health && other.getSize() == size && other.getX() == x && other.getY() == y) {
+        return true;
+    }
+    return false;
 }

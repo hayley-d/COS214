@@ -13,7 +13,7 @@
 
 class Legion : public UnitComponent{
 
-    std::list<std::shared_ptr<UnitComponent>> units;
+    std::list<UnitComponent*> units;
 
 public:
     Legion() : UnitComponent(0,0,0,0,0,0){}
@@ -26,13 +26,15 @@ public:
 
     bool operator==(const Legion& other) const;
 
+    bool operator==(UnitComponent& other) override;
+
     void move(Direction direction) override;
 
     void fight(Direction direction) override;
 
-    bool add(std::shared_ptr<UnitComponent>&component) ;
+    bool add(UnitComponent&component) ;
 
-    bool remove(std::shared_ptr<UnitComponent>&component) ;
+    bool remove(UnitComponent&component) ;
 
     int getDamage() const override;
 
@@ -46,11 +48,15 @@ public:
 
     int getY() const override{return y;}
 
-    const std::list<std::shared_ptr<UnitComponent>>& getUnits() const {return units;}
+    const std::list<UnitComponent*>& getUnits() const {return units;}
 
     ~Legion() override;
 
-    std::shared_ptr<UnitComponent> clone() override;
+    UnitComponent* clone() override;
+
+    void applyDamage(int damage) override;
+
+    void die() override;
 };
 
 

@@ -1,12 +1,13 @@
 #include "Legion.h"
 
-Legion::Legion(const Legion &other) : UnitComponent(other.defence,other.damage,other.health,other.size,other.x,other.y){
-    for(const auto&  unit : other.units) {
+Legion::Legion(const Legion &other) : UnitComponent(other.defence, other.damage, other.health, other.size, other.x,
+                                                    other.y) {
+    for (const auto &unit: other.units) {
         units.push_back(unit->clone());
     }
 }
 
-Legion & Legion::operator=(const Legion &other){
+Legion &Legion::operator=(const Legion &other) {
     this->defence = other.defence;
     this->damage = other.damage;
     this->health = other.health;
@@ -17,35 +18,41 @@ Legion & Legion::operator=(const Legion &other){
 }
 
 bool Legion::operator<(const Legion &other) const {
-    return this->size < other.size; 
+    return this->size < other.size;
 }
 
 bool Legion::operator==(const Legion &other) const {
-    return this->size == other.size;
+    if (other.getDefence() == defence && other.getDamage() == damage && other.getHealth() == health && other.getSize()
+        == size && other.getX() == x && other.getY() == y) {
+        return true;
+    }
+    return false;
 }
 
 void Legion::move(Direction direction) {
-    for(auto it = units.begin(); it != units.end(); ++it){
+    for (auto it = units.begin(); it != units.end(); ++it) {
         (*it)->move(direction);
     }
 }
 
 void Legion::fight(Direction direction) {
-    for(auto it = units.begin(); it != units.end(); ++it){
+    for (auto it = units.begin(); it != units.end(); ++it) {
         (*it)->fight(direction);
     }
 }
 
-bool Legion::add(std::shared_ptr<UnitComponent>&component) {
-    units.push_back(component);
+bool Legion::add(UnitComponent &component) {
+    units.push_back(&component);
+    return true;
 }
 
-bool Legion::remove(std::shared_ptr<UnitComponent>&component) {
+bool Legion::remove(UnitComponent &component) {
     bool deletedUnit = false;
-    for(auto it = units.begin() ; it != units.end();) {
-        if(*it == component) {
+
+    for (auto it = units.begin(); it != units.end();) {
+        if (*it == &component) {
             it = units.erase(it);
-           deletedUnit = true;
+            deletedUnit = true;
         } else {
             ++it;
         }
@@ -55,49 +62,68 @@ bool Legion::remove(std::shared_ptr<UnitComponent>&component) {
 
 int Legion::getDamage() const {
     int totalDamage = 0;
-    for(auto it = units.begin(); it != units.end();++it) {
-        totalDamage +=  (*it)->getHealth();
+    for (auto it = units.begin(); it != units.end(); ++it) {
+        totalDamage += (*it)->getHealth();
     }
-    /*for(auto& unit : units) {
-        totalDamage += unit->getDamage();
-    }*/
+
     return totalDamage;
 }
 
 int Legion::getDefence() const {
     int totalDefence = 0;
-    for(auto it = units.begin(); it != units.end();++it) {
-        totalDefence +=  (*it)->getHealth();
+    for (auto it = units.begin(); it != units.end(); ++it) {
+        totalDefence += (*it)->getHealth();
     }
-    /*for(auto& unit : units) {
-        totalDefence += unit->getDefence();
-    }*/
+
     return totalDefence;
 }
 
 int Legion::getHealth() const {
     int totalHealth = 0;
-    for(auto it = units.begin(); it != units.end();++it) {
-        totalHealth +=  (*it)->getHealth();
+    for (auto it = units.begin(); it != units.end(); ++it) {
+        totalHealth += (*it)->getHealth();
     }
     return totalHealth;
 }
 
-int Legion::getSize() const{
+int Legion::getSize() const {
     int totalSize = 0;
-    for(auto it = units.begin(); it != units.end();++it) {
-        totalSize +=  (*it)->getSize();
+    for (auto it = units.begin(); it != units.end(); ++it) {
+        totalSize += (*it)->getSize();
     }
     return totalSize;
 }
 
 Legion::~Legion() {
-/*    for (auto unit : units) {
-        delete unit;
+   for (auto it = units.begin(); it != units.end(); ++it) {
+        delete *it;
+        *it = nullptr;
     }
-    units.clear();*/
+    units.clear();
 }
 
-std::shared_ptr<UnitComponent> Legion::clone() {
-    return std::make_shared<Legion>(*this);
+UnitComponent *Legion::clone() {
+    return new Legion(*this);
+}
+
+bool Legion::operator==(UnitComponent &other) {
+    if (other.getDefence() == defence && other.getDamage() == damage && other.getHealth() == health && other.getSize()
+        == size && other.getX() == x && other.getY() == y) {
+        return true;
+    }
+    return false;
+}
+
+void Legion::applyDamage(int damage) {
+    for (auto it = units.begin(); it != units.end(); ++it) {
+        (*it)->applyDamage(damage);
+    }
+}
+
+void Legion::die() {
+    for (auto it = units.begin(); it != units.end(); ++it) {
+        delete *it;
+        *it = nullptr;
+    }
+    units.clear();
 }

@@ -23,4 +23,6 @@ add_executable(Practical3 main.cpp
         Ambush.h
         Fortification.cpp
         Fortification.h
+        LegionFactory.h
+        LegionUnit.h
 )
