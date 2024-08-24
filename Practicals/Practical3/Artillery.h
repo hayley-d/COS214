@@ -24,6 +24,10 @@ public:
     ~Artillery() override;
 
     std::shared_ptr<UnitComponent> clone() override;
+
+    void applyDamage(int damage) override;
+
+    void die() override;
 };
 
 

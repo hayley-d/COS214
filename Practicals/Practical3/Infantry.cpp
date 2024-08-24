@@ -19,47 +19,74 @@ bool Infantry::operator==(const Infantry &other) const{
 }
 
 void Infantry::move(Direction direction) {
-    /*switch (direction) {
+    switch (direction) {
         case Direction::North:
             ++y;
+            std::cout << "Infantry moves to the north"<< std::endl;
             break;
         case Direction::South:
             --y;
+            std::cout << "Infantry moves to the east"<< std::endl;
             break;
         case Direction::East:
             ++x;
+            std::cout << "Infantry moves to the east"<< std::endl;
             break;
         case Direction::West:
             --x;
+            std::cout << "Infantry moves to the west"<< std::endl;
             break;
         default:
             x = x;
+            std::cout << "Infantry moves in all directions"<< std::endl;
             break;
-    }*/
+    }
 }
 
 void Infantry::fight(Direction direction) {
-    /*switch (direction) {
+    switch (direction) {
         case Direction::North:
             ++y;
+             std::cout << "Infantry attacks to the North "<< std::endl;
             break;
         case Direction::South:
             --y;
+            std::cout << "Infantry attacks to the south" << std::endl;
             break;
         case Direction::East:
             ++x;
+            std::cout << "Infantry attacks to the east" << std::endl;
             break;
         case Direction::West:
             --x;
+            std::cout << "Infantry attacks to the west "  << std::endl;
             break;
         default:
             x = x;
+            std::cout << "Infantry attacks in all directions" << std::endl;
             break;
-    }*/
+    }
 }
 
 Infantry::~Infantry() = default;
 
 std::shared_ptr<UnitComponent> Infantry::clone() {
     return std::make_shared<Infantry>(*this);
+}
+
+void Infantry::applyDamage(int damage) {
+    if(damage > this->health) {
+        //kill
+        std::cout << "Unit had died" << std::endl;
+        die();
+    }else {
+        this->setHealth(this->getHealth()-damage);
+        std::cout << "Unit has taken damage!" << std::endl;
+    }
+}
+
+void Infantry::die() {
+    this->setHealth(0);
+    this->setDamage(0);
+    this->setDefence(0);
 }
