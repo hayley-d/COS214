@@ -14,13 +14,13 @@ bool Cavalry::operator<(const Cavalry &other) const {
     return this->getSize() < other.getSize();
 }
 
-bool Cavalry::operator==(const Cavalry &other) const{
+/*bool Cavalry::operator==(const Cavalry &other) const{
     if (other.getDefence() == defence && other.getDamage() == damage && other.getHealth() == health && other.getSize()
         == size && other.getX() == x && other.getY() == y) {
         return true;
     }
     return false;
-}
+}*/
 
 void Cavalry::move(Direction direction) {
     switch (direction) {

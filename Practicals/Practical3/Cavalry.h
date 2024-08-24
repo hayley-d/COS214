@@ -13,7 +13,7 @@ public:
 
     Cavalry & operator=(const Cavalry &other);
 
-    bool operator==(const Cavalry& other) const;
+    //bool operator==(const Cavalry& other) const;
 
     bool operator<(const Cavalry& other) const;
 

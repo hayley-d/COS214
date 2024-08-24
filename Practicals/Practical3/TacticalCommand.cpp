@@ -12,8 +12,8 @@ void TacticalCommand::chooseBestStrategy() {
 
 }
 
-void TacticalCommand::executeStrategy(std::shared_ptr<UnitComponent>& unit) {
-    this->strategy->engage(unit);
+void TacticalCommand::executeStrategy(UnitComponent& unit,UnitComponent& enemy) {
+    this->strategy->engage(unit,enemy);
 }
 
 TacticalCommand::TacticalCommand(BattleStrategy &strategy) {

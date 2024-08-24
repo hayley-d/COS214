@@ -59,7 +59,7 @@ int main() {
 
     ++total;
 
-    const std::list<std::shared_ptr<UnitComponent>> legion1_units = legion1.getUnits();
+    const auto legion1_units = legion1.getUnits();
     if (legion1_units.empty()) {
         ++passed;
         std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;
@@ -94,8 +94,8 @@ int main() {
     }
 
     ++total;
-    std::shared_ptr<UnitComponent> infantry1 = std::make_shared<Infantry>();
-    legion1.add(infantry1);
+    auto infantry1 = new Infantry();
+    legion1.add(*infantry1);
     if(legion1.getSize() == 1) {
         ++passed;
         std::cout << green << "\t" << "Test " << total << " passed!" << reset << std::endl;

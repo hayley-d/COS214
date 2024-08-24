@@ -8,7 +8,7 @@ class TacticalCommand {
 public:
     void setStrategy(BattleStrategy* strategy);
     void chooseBestStrategy();
-    void executeStrategy(std::shared_ptr<UnitComponent>& unit);
+    void executeStrategy(UnitComponent& unit,UnitComponent& enemy);
     TacticalCommand(BattleStrategy& strategy);
 };
 

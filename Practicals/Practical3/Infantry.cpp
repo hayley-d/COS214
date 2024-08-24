@@ -14,13 +14,13 @@ bool Infantry::operator<(const Infantry &other) const {
     return this->getSize() < other.getSize();
 }
 
-bool Infantry::operator==(const Infantry &other) const{
+/*bool Infantry::operator==(const Infantry &other) const{
     if (other.getDefence() == defence && other.getDamage() == damage && other.getHealth() == health && other.getSize()
         == size && other.getX() == x && other.getY() == y) {
         return true;
     }
     return false;
-}
+}*/
 
 void Infantry::move(Direction direction) {
     switch (direction) {

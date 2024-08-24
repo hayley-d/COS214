@@ -17,7 +17,7 @@ public:
 
     bool operator<(const Infantry& other) const;
 
-    bool operator==(const Infantry& other) const;
+    //bool operator==(const Infantry& other) const;
 
     void move(Direction direction) override;
 

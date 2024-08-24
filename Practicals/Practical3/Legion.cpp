@@ -21,13 +21,13 @@ bool Legion::operator<(const Legion &other) const {
     return this->size < other.size;
 }
 
-bool Legion::operator==(const Legion &other) const {
+/*bool Legion::operator==(const Legion &other) const {
     if (other.getDefence() == defence && other.getDamage() == damage && other.getHealth() == health && other.getSize()
         == size && other.getX() == x && other.getY() == y) {
         return true;
     }
     return false;
-}
+}*/
 
 void Legion::move(Direction direction) {
     for (auto it = units.begin(); it != units.end(); ++it) {

@@ -14,13 +14,13 @@ bool Artillery::operator<(const Artillery &other) const {
     return this->getSize() < other.getSize();
 }
 
-bool Artillery::operator==(const Artillery &other) const {
+/*bool Artillery::operator==(const Artillery &other) const {
     if (other.getDefence() == defence && other.getDamage() == damage && other.getHealth() == health && other.getSize()
         == size && other.getX() == x && other.getY() == y) {
         return true;
     }
     return false;
-}
+}*/
 
 void Artillery::move(Direction direction) {
     switch (direction) {

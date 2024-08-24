@@ -9,7 +9,7 @@ SRCS = Infantry.cpp Cavalry.cpp Artillery.cpp Legion.cpp Ambush.cpp Flanking.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # Headers
-HEADERS = UnitComponent.h Infantry.h Cavalry.h Artillery.h CompositeUnit.h Legion.h Direction.h Cohort.h Century.h Ambush.h BattleStrategy.h Flanking.h Fortification.h TacticalCommand.h LegionFactory.h
+HEADERS = UnitComponent.h Infantry.h Cavalry.h Artillery.h CompositeUnit.h Legion.h Direction.h Cohort.h Century.h Ambush.h BattleStrategy.h Flanking.h Fortification.h TacticalCommand.h LegionFactory.h LegionUnit.h
 
 # Executable name
 TARGET = roman_battle_simulator
