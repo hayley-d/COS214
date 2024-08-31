@@ -1,28 +1,33 @@
 #include "FarmIterator.h"
-/**
- * @brief Returns the first farm for traversal.
- * @return A pointer to the first `FarmUnit` object.
- */
-FarmUnit * FarmIterator::firstFarm() {
+
+FarmIterator::FarmIterator(TraversalStrategy *strategy, FarmUnit *root) : strategy(strategy), current(nullptr) {
+    if (this->strategy != nullptr) {
+        this->strategy->initialize(root);
+        current = root;
+    } else {
+        //default traversal is BFS
+        strategy = new BFSStrategy();
+        strategy->initialize(root);
+        current = root;
+    }
 }
 
-/**
- * @brief Returns the current `FarmUnit` object.
- * @return A pointer to the current `FarmUnit`.
- */
-FarmUnit * FarmIterator::currentFarm() {
+FarmUnit *FarmIterator::firstFarm() {
+    return root;
 }
 
-/**
- * @brief Checks if the traversal of the farm collection is finished.
- * @return `true` if the traversal is finished, `false` otherwise.
- */
+
+FarmUnit *FarmIterator::currentFarm() {
+    return current;
+}
+
+
 bool FarmIterator::isDone() {
+    return strategy->isDone();
 }
 
-/**
- * @brief Moves the iterator to the next `FarmUnit` object in the traversal.
- * @return A pointer to the next `FarmUnit`.
- */
-FarmUnit * FarmIterator::next() {
+
+FarmUnit *FarmIterator::next() {
+    current = strategy->getNext();
+    return current;
 }

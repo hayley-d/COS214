@@ -1,5 +1,6 @@
 #ifndef FARMITERATOR_H
 #define FARMITERATOR_H
+#include "BFSStrategy.h"
 #include "Iterator.h"
 #include "TraversalStrategy.h"
 /**
@@ -14,8 +15,9 @@ public:
      * @brief Constructor for FarmIterator.
      *
      * @param strategy Pointer to the traversal strategy to use (BFS or DFS).
+     * @param root Root of the composite to traverse
      */
-    FarmIterator(TraversalStrategy *strategy);
+    FarmIterator(TraversalStrategy *strategy, FarmUnit *root);
 
     /**
      * @brief Initializes the iterator and returns the first FarmUnit in the traversal.
@@ -46,9 +48,9 @@ public:
     FarmUnit *next() override;
 
 private:
- TraversalStrategy* strategy; ///< Pointer to the traversal strategy (BFS or DFS).
- FarmUnit* current;           ///< Pointer to the current FarmUnit in the traversal.
- FarmUnit* root;              ///< Root FarmUnit, initialized elsewhere.
+    TraversalStrategy *strategy; ///< Pointer to the traversal strategy (BFS or DFS).
+    FarmUnit *current; ///< Pointer to the current FarmUnit in the traversal.
+    FarmUnit *root; ///< Root FarmUnit, initialized elsewhere.
 };
 
 #endif //FARMITERATOR_H

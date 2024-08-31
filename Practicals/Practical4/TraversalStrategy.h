@@ -9,6 +9,7 @@
  * BFS or DFS that can be used to traverse a collection of FarmUnit objects.
  */
 class TraversalStrategy {
+public:
     /**
     * @brief Virtual destructor for the TraversalStrategy.
     */
