@@ -28,6 +28,11 @@ public:
      */
     bool isDone() const override;
 
+    /**
+    * @brief destructor for BFS Strategy
+    */
+    ~BFSStrategy() override = default;
+
 private:
     /**
       * @brief Comparison function for the priority queue to prioritize farms by surface area.
@@ -44,6 +49,7 @@ private:
             return a->getSurfaceArea() > b->getSurfaceArea(); // Min-heap: smallest surface area first
         }
     };
+
 
     std::priority_queue<FarmUnit *> queue; ///< Queue used for BFS Traversal
 };

@@ -31,8 +31,13 @@ public:
      */
     bool isDone() const override;
 
+    /**
+     * @brief destructor for the DFS strategy
+     */
+    ~DFSStrategy() override = default;
+
 private:
- std::stack<FarmUnit*> stack; ///< Stack used for DFS traversal
+    std::stack<FarmUnit *> stack; ///< Stack used for DFS traversal
 };
 
 

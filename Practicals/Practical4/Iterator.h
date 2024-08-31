@@ -8,6 +8,7 @@ public:
     virtual FarmUnit* currentFarm() = 0;
     virtual bool isDone() = 0 ;
     virtual FarmUnit* next() = 0;
+    virtual ~Iterator() = default;
 };
 
 #endif //ITERATOR_H

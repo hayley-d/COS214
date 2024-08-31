@@ -12,4 +12,5 @@ add_executable(Practical4 main.cpp
         BFSStrategy.h
         BFSStrategy.cpp
         DFSStrategy.cpp
-        DFSStrategy.h)
+        DFSStrategy.h
+        FarmUnit.cpp)

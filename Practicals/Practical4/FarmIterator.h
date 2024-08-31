@@ -47,6 +47,11 @@ public:
      */
     FarmUnit *next() override;
 
+    /**
+    * @brief destructor for the Farm Iterator
+    */
+    virtual ~FarmIterator() = default;
+
 private:
     TraversalStrategy *strategy; ///< Pointer to the traversal strategy (BFS or DFS).
     FarmUnit *current; ///< Pointer to the current FarmUnit in the traversal.
