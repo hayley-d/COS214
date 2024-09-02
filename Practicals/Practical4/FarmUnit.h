@@ -1,6 +1,6 @@
 #ifndef FARMUNIT_H
 #define FARMUNIT_H
-#include <vector>
+#include "Iterator.h"
 #include <memory>
 /**
  * @brief Abstract base class representing the component for the composite pattern
@@ -45,22 +45,30 @@ public:
     virtual int getSurfaceArea() = 0;
 
     /**
-     * @brief Gets the list of child farm units (if any exist)
-     *
-     * This method returns a vector of pointers to the child farm units. If the
-     * current farm unit is a leaf node (i.e., has no children), this function
-     * should return an empty vector.
-     *
-     * @return A vector of pointers to the child farm units.
-     */
-    virtual std::vector<FarmUnit *> getFarms() = 0;
-
-    /**
      * @brief Virtual destructor for the `FarmUnit` class.
      *
      * Ensures proper cleanup of derived classes.
      */
     virtual ~FarmUnit() = default;
+
+    /**
+     * @brief Returns a pointer to the end of the collection.
+     *
+     * @return Pointer to the position beyond the last FarmUnit.
+     */
+    //virtual Iterator end() = 0;
+
+    /**
+      * @brief Returns a pointer to the end of the collection.
+      *
+      * @return Pointer to the position beyond the last FarmUnit.
+      */
+    //virtual Iterator begin() = 0;
+
+    /**
+     * @brief prints the current farm unit
+     */
+    virtual void printFarm() = 0;
 
 private:
     /// The PImpl idiom for managing private implementation details.

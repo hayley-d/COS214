@@ -1,6 +1,5 @@
 #ifndef FARMITERATOR_H
 #define FARMITERATOR_H
-#include "BFSStrategy.h"
 #include "Iterator.h"
 #include "TraversalStrategy.h"
 /**
@@ -19,19 +18,26 @@ public:
      */
     FarmIterator(TraversalStrategy *strategy, FarmUnit *root);
 
+   /**
+    * @brief Constructor for FarmIterator with default DFS strategy
+    *
+    * @param root Root of the composite to traverse
+    */
+   FarmIterator(FarmUnit *root);
+
     /**
      * @brief Initializes the iterator and returns the first FarmUnit in the traversal.
      *
      * @return FarmUnit* Pointer to the first FarmUnit in the traversal.
      */
-    FarmUnit *firstFarm() override;
+    FarmUnit * firstFarm() override;
 
     /**
      * @brief Returns the current FarmUnit in the traversal.
      *
      * @return FarmUnit* Pointer to the current FarmUnit.
      */
-    FarmUnit *currentFarm() override;
+    FarmUnit * currentFarm() override;
 
     /**
      * @brief Checks if the traversal is complete.
@@ -45,17 +51,64 @@ public:
      *
      * @return FarmUnit* Pointer to the next FarmUnit.
      */
-    FarmUnit *next() override;
+    FarmUnit * next() override;
+
+   /**
+    * @brief Pre-increment operator to advance the iterator.
+    *
+    * @return Reference to the current FarmIterator after advancing.
+    */
+    FarmIterator & operator++() ;
 
     /**
-    * @brief destructor for the Farm Iterator
+     * @brief Post-increment operator to advance the iterator.
+     *
+     * @return FarmIterator Copy of the iterator before advancing.
+     */
+    FarmIterator operator++(int);
+
+   /**
+    * @brief Dereference operator to access the current FarmUnit.
+    *
+    * @return Reference to the current FarmUnit.
     */
-    virtual ~FarmIterator() = default;
+    FarmUnit & operator*() ;
+
+    /**
+     * @brief Arrow operator to access members of the current FarmUnit.
+     *
+     * @return Pointer to the current FarmUnit.
+     */
+    FarmUnit * operator->() ;
+
+    /**
+     * @brief Equality comparison operator.
+     *
+     * @param other Reference to another FarmIterator.
+     * @return true if the current FarmIterator is equal to other, otherwise false.
+     */
+    bool operator==(FarmIterator &other) ;
+
+   /**
+    * @brief Inequality comparison operator.
+    *
+    * @param other Reference to another FarmIterator.
+    * @return true if the current FarmIterator is not equal to other, otherwise false.
+    */
+    bool operator!=(FarmIterator &other) ;
+
+    /**
+     * @brief Assignment operator to assign another FarmIterator to the current one.
+     *
+     * @param other Reference to another FarmIterator.
+     * @return Reference to the current FarmIterator.
+     */
+    FarmIterator & operator=(FarmIterator &other) ;
 
 private:
     TraversalStrategy *strategy; ///< Pointer to the traversal strategy (BFS or DFS).
     FarmUnit *current; ///< Pointer to the current FarmUnit in the traversal.
-    FarmUnit *root; ///< Root FarmUnit, initialized elsewhere.
+    FarmUnit *root; ///< Root FarmUnit
 };
 
 #endif //FARMITERATOR_H

@@ -1,33 +1,69 @@
 #include "FarmIterator.h"
+#include "DFSStrategy.h"
 
 FarmIterator::FarmIterator(TraversalStrategy *strategy, FarmUnit *root) : strategy(strategy), current(nullptr) {
-    if (this->strategy != nullptr) {
-        this->strategy->initialize(root);
-        current = root;
-    } else {
-        //default traversal is BFS
-        strategy = new BFSStrategy();
-        strategy->initialize(root);
-        current = root;
+    if (this->strategy == nullptr) {
+        strategy = new DFSStrategy();
     }
+    this->strategy->initialize(root);
+    current = root;
+    this->root = root;
+}
+
+FarmIterator::FarmIterator(FarmUnit *root) {
+    this->strategy = new DFSStrategy();
+    this->strategy->initialize(root);
+    current = root;
+    this->root = root;
 }
 
 FarmUnit *FarmIterator::firstFarm() {
     return root;
 }
 
-
 FarmUnit *FarmIterator::currentFarm() {
     return current;
 }
-
 
 bool FarmIterator::isDone() {
     return strategy->isDone();
 }
 
-
 FarmUnit *FarmIterator::next() {
     current = strategy->getNext();
     return current;
+}
+
+FarmIterator &FarmIterator::operator++() {
+    current = strategy->getNext();
+    return *this;
+}
+
+FarmIterator FarmIterator::operator++(int) {
+    FarmIterator temp = *this;
+    strategy->getNext();
+    return temp;
+}
+
+FarmUnit &FarmIterator::operator*() {
+    return *current;
+}
+
+FarmUnit *FarmIterator::operator->() {
+    return current;
+}
+
+bool FarmIterator::operator==(FarmIterator &other) {
+    return current == other.current;
+}
+
+bool FarmIterator::operator!=(FarmIterator &other) {
+    return current != other.current;
+}
+
+FarmIterator &FarmIterator::operator=(FarmIterator &other) {
+    if (this != &other) {
+        current = other.current;
+    }
+    return *this;
 }
