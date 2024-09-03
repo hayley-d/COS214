@@ -14,4 +14,9 @@ add_executable(Practical4 main.cpp
         DFSStrategy.cpp
         DFSStrategy.h
         FarmUnit.cpp
+        FarmComposite.h
+        CropField.cpp
+        CropField.h
+        Farm.cpp
+        Farm.h
 )

@@ -2,6 +2,8 @@
 #define FARMUNIT_H
 #include "Iterator.h"
 #include <memory>
+
+#include "FarmIterator.h"
 /**
  * @brief Abstract base class representing the component for the composite pattern
  *
@@ -52,25 +54,31 @@ public:
     virtual ~FarmUnit() = default;
 
     /**
-     * @brief Returns a pointer to the end of the collection.
+     * @brief Returns an iterator to the end of the collection.
      *
-     * @return Pointer to the position beyond the last FarmUnit.
+     * This function should be implemented by derived classes to provide an iterator
+     * representing the position beyond the last element of the collection.
+     *
+     * @return FarmIterator Iterator to the end of the collection.
      */
-    //virtual Iterator end() = 0;
+    virtual FarmIterator end() = 0;
 
-    /**
-      * @brief Returns a pointer to the end of the collection.
+     /**
+      * @brief Returns an iterator to the beginning of the collection.
       *
-      * @return Pointer to the position beyond the last FarmUnit.
+      * This function should be implemented by derived classes to provide an iterator
+      * representing the start of the collection.
+      *
+      * @return FarmIterator Iterator to the beginning of the collection.
       */
-    //virtual Iterator begin() = 0;
+    virtual FarmIterator begin() = 0;
 
     /**
      * @brief prints the current farm unit
      */
     virtual void printFarm() = 0;
 
-private:
+protected:
     /// The PImpl idiom for managing private implementation details.
     struct pImplFarmUnit;
     /// Unique pointer to the implementation details of the `FarmUnit`.
