@@ -2,8 +2,13 @@
 #define FARMUNIT_H
 #include "Iterator.h"
 #include <memory>
+#include "Crop.h"
 
 #include "FarmIterator.h"
+#include "SoilState.h"
+
+
+
 /**
  * @brief Abstract base class representing the component for the composite pattern
  *
@@ -25,8 +30,10 @@ public:
      *
      * @param totalCapacity The total capacity of the farm unit.
      * @param surfaceArea The surface area of the farm unit.
+     * @param cropType The crop type of the farm unit.
+     * @param soilState The soil state of the farm unit.
      */
-    FarmUnit(int totalCapacity, int surfaceArea);
+    FarmUnit(int totalCapacity, int surfaceArea, CropType cropType, SoilState &soilState);
 
     /**
      * @brief Gets the total capacity of the farm unit.
@@ -36,6 +43,18 @@ public:
      * @return The total capacity of the farm unit.
      */
     virtual int getTotalcapacity() = 0;
+
+    /**
+     * @brief Gets the soil state name of the Farm unit
+     * @return The soil state name
+     */
+    virtual std::string &getSoilStateName() = 0;
+
+    /**
+     * @brief Gets the crop type of the Farm unit
+     * @return The crop type
+     */
+    virtual Crop getCropType() = 0;
 
     /**
      * @brief Gets the surface area of the farm unit.
@@ -63,14 +82,26 @@ public:
      */
     virtual FarmIterator end() = 0;
 
-     /**
-      * @brief Returns an iterator to the beginning of the collection.
-      *
-      * This function should be implemented by derived classes to provide an iterator
-      * representing the start of the collection.
-      *
-      * @return FarmIterator Iterator to the beginning of the collection.
-      */
+    /**
+     * @brief Returns an iterator to the start of the collection.
+     * @return FarmIterator Iterator to the start of the collection.
+     */
+    virtual FarmIterator getIterator() = 0;
+
+    /**
+    * @brief Changes the soil state of the farm uni
+    * @param soilState A pointer to the new soil state of the farm unit
+    */
+    virtual void changeSoilState(SoilState *soilState) = 0;
+
+    /**
+     * @brief Returns an iterator to the beginning of the collection.
+     *
+     * This function should be implemented by derived classes to provide an iterator
+     * representing the start of the collection.
+     *
+     * @return FarmIterator Iterator to the beginning of the collection.
+     */
     virtual FarmIterator begin() = 0;
 
     /**
@@ -78,10 +109,14 @@ public:
      */
     virtual void printFarm() = 0;
 
+
+
 protected:
-    /// The PImpl idiom for managing private implementation details.
-    struct pImplFarmUnit;
+   /// The PImpl idiom for managing private implementation details.
+   class pImplFarmUnit;
+
     /// Unique pointer to the implementation details of the `FarmUnit`.
     std::unique_ptr<pImplFarmUnit> impl;
+
 };
 #endif //FARMUNIT_H

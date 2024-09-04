@@ -19,4 +19,12 @@ add_executable(Practical4 main.cpp
         CropField.h
         Farm.cpp
         Farm.h
+        Crop.h
+        SoilState.h
+        DrySoil.cpp
+        DrySoil.h
+        FruitfulSoil.cpp
+        FruitfulSoil.h
+        FloodedSoil.cpp
+        FloodedSoil.h
 )

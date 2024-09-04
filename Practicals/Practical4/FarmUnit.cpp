@@ -1,12 +1,19 @@
 #include "FarmUnit.h"
 
-struct FarmUnit::pImplFarmUnit{
+#include "Crop.h"
+
+struct FarmUnit::pImplFarmUnit {
     int totalCapacity;
     int surfaceArea;
+    Crop crop;
+    SoilState *soilState;
+
+    pImplFarmUnit(int totalCapacity, int surfaceArea, Crop crop,
+                  SoilState &soilState) : totalCapacity(totalCapacity), soilState(&soilState), surfaceArea(surfaceArea),
+                                          crop(crop){}
 };
 
-FarmUnit::FarmUnit(int totalCapacity, int surfaceArea) {
-    this->impl = std::make_unique<pImplFarmUnit>();
-    this->impl->surfaceArea = surfaceArea;
-    this->impl->totalCapacity = totalCapacity;
+FarmUnit::FarmUnit(int totalCapacity, int surfaceArea, CropType cropType, SoilState &soilState) {
+    Crop crop (cropType);
+    this->impl = std::make_unique<pImplFarmUnit>(totalCapacity,surfaceArea,crop,soilState);
 }
