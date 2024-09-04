@@ -27,4 +27,6 @@ add_executable(Practical4 main.cpp
         FruitfulSoil.h
         FloodedSoil.cpp
         FloodedSoil.h
+        Barn.cpp
+        Barn.h
 )

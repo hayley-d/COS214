@@ -7,6 +7,7 @@ struct FarmUnit::pImplFarmUnit {
     int surfaceArea;
     Crop crop;
     SoilState *soilState;
+    int currentCapacity = 0;
 
     pImplFarmUnit(int totalCapacity, int surfaceArea, Crop crop,
                   SoilState &soilState) : totalCapacity(totalCapacity), soilState(&soilState), surfaceArea(surfaceArea),

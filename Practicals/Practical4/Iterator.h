@@ -2,6 +2,7 @@
 #define ITERATOR_H
 
 #include "FarmUnit.h"
+#include <memory>
 
 class FarmUnit;
 
@@ -12,14 +13,14 @@ public:
     *
     * @return FarmUnit* Pointer to the first FarmUnit in the traversal.
     */
-    virtual FarmUnit *firstFarm() = 0;
+    virtual std::shared_ptr<FarmUnit> firstFarm() = 0;
 
     /**
      * @brief Returns the current FarmUnit in the traversal.
      *
      * @return FarmUnit* Pointer to the current FarmUnit.
      */
-    virtual FarmUnit *currentFarm() = 0;
+    virtual std::shared_ptr<FarmUnit> currentFarm() = 0;
 
     /**
      * @brief Checks if the traversal is complete.
@@ -33,14 +34,19 @@ public:
      *
      * @return FarmUnit* Pointer to the next FarmUnit.
      */
-    virtual FarmUnit *next() = 0;
+    virtual std::shared_ptr<FarmUnit> next() = 0;
 
     /**
      * @brief destructor for the Farm Iterator
      */
     virtual ~Iterator() = default;
 
-
+    /**
+     * @brief Checks is the traversal is finished
+     *
+     * @return Boolean value indicating false if done traversal otherwise true.
+     */
+    virtual bool hasNext() = 0;
 };
 
 #endif //ITERATOR_H

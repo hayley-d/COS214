@@ -1,5 +1,4 @@
-#include "CropField.h"
-
+#include "Barn.h"
 struct FarmUnit::pImplFarmUnit {
     int totalCapacity;
     int surfaceArea;
@@ -12,66 +11,56 @@ struct FarmUnit::pImplFarmUnit {
                                           crop(crop){}
 };
 
-int CropField::getTotalcapacity() {
+int Barn::getTotalcapacity() {
     return this->impl->totalCapacity;
 }
 
-int CropField::getSurfaceArea() {
-    return this->impl->surfaceArea;
-}
-
-std::string & CropField::getSoilStateName() {
+std::string & Barn::getSoilStateName() {
     return this->impl->soilState->getName();
 }
 
-Crop CropField::getCropType() {
+Crop Barn::getCropType() {
     return this->impl->crop;
 }
 
-FarmIterator CropField::end() {
-
+int Barn::getSurfaceArea() {
+    return this->impl->surfaceArea;
 }
 
-FarmIterator CropField::begin() {
-
+FarmIterator Barn::end() {
+    //leaf node does not have an iterator
+    return nullptr;
 }
 
-void CropField::printFarm() {
+std::unique_ptr<FarmIterator> Barn::getIterator() {
+    //leaf node does not have an iterator
+    return nullptr;
 }
 
-void CropField::changeSoilState(SoilState &soilState) {
+void Barn::changeSoilState(SoilState &soilState) {
     //delete the current state
     delete this->impl->soilState;
     //add the new state
     this->impl->soilState = &soilState;
 }
 
-void CropField::addFarmUnit(FarmUnit *unit) {
-}
-
-void CropField::removeFarmUnit(FarmUnit *unit) {
-}
-
-std::unique_ptr<FarmIterator> CropField::getIterator() {
-    return std::make_unique<FarmIterator>(farms);
-}
-
-void CropField::storeCrops(int harvestBonus) {
+void Barn::storeCrops(int harvestBonus) {
     this->impl->currentCapacity += (this->impl->crop.harvestYield*harvestBonus);
 }
 
-int CropField::getCurrentStorageCapacity() {
+int Barn::getCurrentStorageCapacity() {
     return this->impl->currentCapacity();
 }
 
-bool CropField::hasStorageSpace(int spaceNeeded) {
+bool Barn::hasStorageSpace(int spaceNeeded) {
     return (this->impl->currentCapacity()+spaceNeeded) <= this->impl->totalCapacity();
 }
 
-bool CropField::isComposite() const {
-    return true;
+FarmIterator Barn::begin() {
+    //leaf node does not have an iterator
+    return nullptr;
 }
 
-std::vector<std::shared_ptr<FarmUnit>> CropField::getChildren() const {
-    return this->farms;
+void Barn::printFarm() {
+
 }

@@ -1,7 +1,7 @@
 #ifndef SOILSTATE_H
 #define SOILSTATE_H
 #include <string>
-
+#include <iostream>
 #include "FarmUnit.h"
 
 class FarmUnit;

@@ -47,7 +47,7 @@ public:
     * @brief Gets the crop type of the Crop field
     * @return The crop type
     */
-    virtual Crop getCropType() = 0;
+    virtual Crop getCropType();
 
     /**
     * @brief Returns an iterator pointing to the end of the farm units in the crop field.
@@ -68,7 +68,7 @@ public:
 
     /**
      * @brief Changes the soil state of the farm uni
-     * @param soilState A pointer to the new soil state of the farm unit
+     * @param soilState A reference to the new soil state of the farm unit
      */
      void changeSoilState(SoilState &soilState) override;
 
@@ -85,16 +85,26 @@ public:
     void removeFarmUnit(FarmUnit *unit) override;
 
     /**
-    * @brief Returns an iterator to the start of the collection.
-    * @return FarmIterator Iterator to the start of the collection.
+    * @brief Returns an unique pointer to an iterator to the start of the collection.
+    * @return FarmIterator pointer to the start of the collection.
     */
-    FarmIterator getIterator() override;
+    std::unique_ptr<FarmIterator> getIterator() override;
 
-private:
+    void storeCrops(int harvestBonus) override;
+
+    int getCurrentStorageCapacity() override;
+
+    bool hasStorageSpace(int spaceNeeded) override;
+
+    bool isComposite() const override;
+
+    std::vector<std::shared_ptr<FarmUnit>> getChildren() const override;
+
+   private:
     /**
        * @brief A vector holding pointers to the farm units in the crop field.
        */
-    std::vector<FarmUnit *> farms;
+    std::vector<std::shared_ptr<FarmUnit>> farms;
 };
 
 

@@ -1,28 +1,32 @@
 #ifndef DFSSTRATEGY_H
 #define DFSSTRATEGY_H
-
 #include "TraversalStrategy.h"
 #include <stack>
 /**
- * @brief Implementation of the DFS (Depth-First Search) traversal strategy.
+ * @class DFSStrategy
+ * @brief Concrete implementation of the depth-first search (DFS) traversal strategy for farm units.
  *
- * This class implements the DFS traversal strategy for traversing FarmUnit objects.
+ * This class implements the DFS traversal strategy, allowing traversal of farm units in a depth-first manner.
+ * It uses a stack to manage the traversal.
  */
 class DFSStrategy : public TraversalStrategy {
+    typedef std::shared_ptr<FarmUnit> FarmUnitPtr; ///< Type alias for shared pointer to FarmUnit.
+    typedef std::vector<std::shared_ptr<FarmUnit> > FarmUnitPtrVector;
+    ///< Type alias for vector of shared pointers to FarmUnit.
 public:
     /**
      * @brief Initializes the DFS traversal starting from the root FarmUnit.
      *
-     * @param root The root FarmUnit from which DFS should start.
+     * @param farmUnits The children of the root farm unit. This vector is used to seed the traversal.
      */
-    void initialize(FarmUnit *root) override;
+    void initialize(FarmUnitPtrVector farmUnits) override;
 
     /**
      * @brief Returns the next FarmUnit in the DFS traversal.
      *
-     * @return FarmUnit* Pointer to the next FarmUnit, or nullptr if traversal is done.
+     * @return FarmUnitPtr Pointer to the next FarmUnit, or nullptr if the traversal is complete.
      */
-    FarmUnit *getNext() override;
+    FarmUnitPtr getNext() override;
 
     /**
      * @brief Checks if the DFS traversal is complete.
@@ -32,12 +36,21 @@ public:
     bool isDone() const override;
 
     /**
-     * @brief destructor for the DFS strategy
+     * @brief Destructor for DFSStrategy.
+     *
+     * Cleans up resources used by the DFSStrategy instance.
      */
     ~DFSStrategy() override = default;
 
+    /**
+     * @brief Checks if there is a next FarmUnit to be traversed.
+     *
+     * @return true if there is another FarmUnit to be visited, false otherwise.
+     */
+    bool hasNext() override;
+
 private:
-    std::stack<FarmUnit *> stack; ///< Stack used for DFS traversal
+    std::stack<FarmUnitPtr> stack; ///< Stack used for DFS traversal
 };
 
 

@@ -1,17 +1,29 @@
 #include "DFSStrategy.h"
+typedef std::shared_ptr<FarmUnit> FarmUnitPtr; ///< Type alias for shared pointer to FarmUnit.
+typedef std::vector<std::shared_ptr<FarmUnit>> FarmUnitPtrVector; ///< Type alias for vector of shared pointers to FarmUnit.
 
-void DFSStrategy::initialize(FarmUnit *root) {
+void DFSStrategy::initialize(FarmUnitPtrVector farmUnits) {
     while (!stack.empty()) stack.pop();
-    if (root) stack.push(root);
+    for (auto it = farmUnits.rbegin(); it != farmUnits.rend(); ++it) {
+        stack.push(*it);
+    }
 }
 
-FarmUnit * DFSStrategy::getNext() {
+bool DFSStrategy::hasNext() override {
+    return !stack.empty();
+}
+
+FarmUnitPtr DFSStrategy::getNext() {
     if (stack.empty()) return nullptr;
-    FarmUnit* current = stack.top();
+    FarmUnitPtr current = stack.top();
     stack.pop();
 
-    for (FarmUnit* child : current->getFarms()) {
-        stack.push(child);
+    auto childIterator = current->getIterator();
+
+    if (childIterator) {
+        while (childIterator->hasNext()) {
+            stack.push(childIterator->next());
+        }
     }
 
     return current;

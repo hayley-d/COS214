@@ -14,30 +14,30 @@ public:
      * @brief Constructor for FarmIterator.
      *
      * @param strategy Pointer to the traversal strategy to use (BFS or DFS).
-     * @param root Root of the composite to traverse
+     * @param farms The child nodes to traverse
      */
-    FarmIterator(TraversalStrategy *strategy, FarmUnit *root);
+    FarmIterator(TraversalStrategy *strategy, std::vector<std::shared_ptr<FarmUnit>> farms);
 
    /**
     * @brief Constructor for FarmIterator with default DFS strategy
     *
-    * @param root Root of the composite to traverse
+    * @param farms The child nodes to traverse
     */
-   FarmIterator(FarmUnit *root);
+   FarmIterator(std::vector<std::shared_ptr<FarmUnit>> farms);
 
     /**
      * @brief Initializes the iterator and returns the first FarmUnit in the traversal.
      *
      * @return FarmUnit* Pointer to the first FarmUnit in the traversal.
      */
-    FarmUnit * firstFarm() override;
+    std::shared_ptr<FarmUnit> firstFarm() override;
 
     /**
      * @brief Returns the current FarmUnit in the traversal.
      *
      * @return FarmUnit* Pointer to the current FarmUnit.
      */
-    FarmUnit * currentFarm() override;
+    std::shared_ptr<FarmUnit> currentFarm() override;
 
     /**
      * @brief Checks if the traversal is complete.
@@ -51,7 +51,14 @@ public:
      *
      * @return FarmUnit* Pointer to the next FarmUnit.
      */
-    FarmUnit * next() override;
+    std::shared_ptr<FarmUnit> next() override;
+
+    /**
+     * @brief Checks is the traversal is finished
+     *
+     * @return Boolean value indicating false if done traversal otherwise true.
+     */
+     bool hasNext() override;
 
    /**
     * @brief Pre-increment operator to advance the iterator.
@@ -79,7 +86,7 @@ public:
      *
      * @return Pointer to the current FarmUnit.
      */
-    FarmUnit * operator->() ;
+    std::shared_ptr<FarmUnit> operator->() ;
 
     /**
      * @brief Equality comparison operator.
@@ -107,8 +114,8 @@ public:
 
 private:
     TraversalStrategy *strategy; ///< Pointer to the traversal strategy (BFS or DFS).
-    FarmUnit *current; ///< Pointer to the current FarmUnit in the traversal.
-    FarmUnit *root; ///< Root FarmUnit
+    std::shared_ptr<FarmUnit> current; ///< Pointer to the current FarmUnit in the traversal.
+    std::shared_ptr<FarmUnit> root; ///< Root FarmUnit
 };
 
 #endif //FARMITERATOR_H

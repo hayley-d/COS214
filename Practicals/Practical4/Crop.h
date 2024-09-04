@@ -43,7 +43,7 @@ public:
             break;
         }
     }
-private:
+
     CropType crop; ///< The type of crop.
     int harvestYield;///< The harvest yield associated with the crop.
 };

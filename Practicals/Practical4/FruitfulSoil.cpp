@@ -11,5 +11,10 @@ void FruitfulSoil::rain() {
 }
 
 void FruitfulSoil::harvestCrops() {
-
+    int spaceNeeded = farmUnit->getCropType().harvestYield * 3;
+    if(farmUnit->hasStorageSpace(spaceNeeded)) {
+        this->farmUnit->storeCrops(3);
+    } else {
+        std::cout << "More space required for harvest, build a new barn." <<std::endl;
+    }
 }

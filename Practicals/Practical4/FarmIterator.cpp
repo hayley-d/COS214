@@ -17,11 +17,11 @@ FarmIterator::FarmIterator(FarmUnit *root) {
     this->root = root;
 }
 
-FarmUnit *FarmIterator::firstFarm() {
+std::shared_ptr<FarmUnit>FarmIterator::firstFarm() {
     return root;
 }
 
-FarmUnit *FarmIterator::currentFarm() {
+std::shared_ptr<FarmUnit>FarmIterator::currentFarm() {
     return current;
 }
 
@@ -29,7 +29,7 @@ bool FarmIterator::isDone() {
     return strategy->isDone();
 }
 
-FarmUnit *FarmIterator::next() {
+std::shared_ptr<FarmUnit>FarmIterator::next() {
     current = strategy->getNext();
     return current;
 }
@@ -49,7 +49,7 @@ FarmUnit &FarmIterator::operator*() {
     return *current;
 }
 
-FarmUnit *FarmIterator::operator->() {
+std::shared_ptr<FarmUnit> FarmIterator::operator->() {
     return current;
 }
 
@@ -66,4 +66,8 @@ FarmIterator &FarmIterator::operator=(FarmIterator &other) {
         current = other.current;
     }
     return *this;
+}
+
+bool FarmIterator::hasNext() {
+    return this->strategy->hasNext();
 }
