@@ -59,6 +59,11 @@ public:
      */
     virtual void harvestCrops() = 0;
 
+    /**
+     * @brief When the fertilizer is added to the dry soil it becomes fruitful
+     */
+    virtual void fertilize() = 0;
+
 protected:
     /**
      * @brief Pointer to the FarmUnit associated with this soil state.

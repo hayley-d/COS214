@@ -18,3 +18,7 @@ void DrySoil::harvestCrops() {
         std::cout << "More space required for harvest, build a new barn." <<std::endl;
     }
 }
+
+void DrySoil::fertilize() {
+    this->farmUnit->changeSoilState(new FruitfulSoil(*this->farmUnit));
+}

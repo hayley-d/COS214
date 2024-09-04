@@ -126,7 +126,30 @@ public:
      */
     bool isComposite() const override;
 
-private:
+     /**
+    * @brief Detaches a Truck (observer) from the FarmUnit.
+    * @param truck a truck to add the the observer list
+    * This method is used to remove a Truck observer from the FarmUnit, stopping it from receiving notifications.
+    */
+    void buyTruck(Truck& truck) override;
+    /**
+     * @brief Detaches a Truck (observer) from the FarmUnit.
+     * @param truck a truck to remove from observer list
+     * This method is used to remove a Truck observer from the FarmUnit, stopping it from receiving notifications.
+     */
+    void sellTruck(Truck& truck) override;
+ /**
+    * @brief Notifies all attached Truck observers about changes.
+    * @param e type of event to call correct truck type
+    * This method is used to call all Truck observers, notifying them of any updates or changes in the FarmUnit.
+    */
+    void callTruck(Event e) override;
+
+    void fertilizeCrops() override;
+
+    void collectCrops() override;
+
+   private:
     /**
     * @brief A vector holding shared pointers to the farm units within the farm.
     */

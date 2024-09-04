@@ -12,3 +12,7 @@ void FloodedSoil::rain() {
 void FloodedSoil::harvestCrops() {
     std::cout << "Soil is flooded, crops cannot be harvested at this time." << std::endl;
 }
+
+void FloodedSoil::fertilize() {
+    //does nothing
+}

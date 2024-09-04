@@ -1,5 +1,5 @@
 #include "FarmUnit.h"
-
+#include "Truck.h"
 #include "Crop.h"
 
 struct FarmUnit::pImplFarmUnit {
@@ -8,6 +8,7 @@ struct FarmUnit::pImplFarmUnit {
     Crop crop;
     SoilState *soilState;
     int currentCapacity = 0;
+    std::vector<Truck*> observers;
 
     pImplFarmUnit(int totalCapacity, int surfaceArea, Crop crop,
                   SoilState &soilState) : totalCapacity(totalCapacity), soilState(&soilState), surfaceArea(surfaceArea),

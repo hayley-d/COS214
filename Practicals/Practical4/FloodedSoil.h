@@ -51,6 +51,10 @@ public:
      * In flooded state the soil prevents crop growth, crops cannot be harvested in this state
      */
     void harvestCrops() override;
+     /**
+     * @brief When the fertilizer is added to the dry soil it becomes fruitful
+     */
+     void fertilize() override;
 };
 
 

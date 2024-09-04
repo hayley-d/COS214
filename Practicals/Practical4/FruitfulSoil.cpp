@@ -18,3 +18,7 @@ void FruitfulSoil::harvestCrops() {
         std::cout << "More space required for harvest, build a new barn." <<std::endl;
     }
 }
+
+void FruitfulSoil::fertilize() {
+    //does nothing
+}

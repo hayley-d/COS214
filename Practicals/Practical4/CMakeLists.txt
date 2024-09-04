@@ -29,4 +29,10 @@ add_executable(Practical4 main.cpp
         FloodedSoil.h
         Barn.cpp
         Barn.h
+        Truck.h
+        FertilizerTruck.cpp
+        FertilizerTruck.h
+        LogisticsTruck.cpp
+        LogisticsTruck.h
+        Event.h
 )

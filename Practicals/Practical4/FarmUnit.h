@@ -6,7 +6,9 @@
 
 #include "FarmIterator.h"
 #include "SoilState.h"
+#include "Truck.h"
 
+#include "Event.h"
 
 /**
  * @brief Abstract base class representing the component for the composite pattern
@@ -21,6 +23,7 @@
  * is managed by a unique pointer.
  */
 class FarmUnit {
+
 public:
     /**
      * @brief Constructor for the `FarmUnit` class.
@@ -71,15 +74,7 @@ public:
      */
     virtual ~FarmUnit() = default;
 
-    /**
-     * @brief Returns an iterator to the end of the collection.
-     *
-     * This function should be implemented by derived classes to provide an iterator
-     * representing the position beyond the last element of the collection.
-     *
-     * @return FarmIterator Iterator to the end of the collection.
-     */
-    virtual FarmIterator end() = 0;
+
 
     /**
      * @brief Returns an iterator to the start of the collection.
@@ -113,16 +108,6 @@ public:
     virtual bool hasStorageSpace(int spaceNeeded) = 0;
 
     /**
-     * @brief Returns an iterator to the beginning of the collection.
-     *
-     * This function should be implemented by derived classes to provide an iterator
-     * representing the start of the collection.
-     *
-     * @return FarmIterator Iterator to the beginning of the collection.
-     */
-    virtual FarmIterator begin() = 0;
-
-    /**
      * @brief prints the current farm unit
      */
     virtual void printFarm() = 0;
@@ -137,11 +122,41 @@ public:
         return {}; // Return an empty vector by default
     }
 
+     /**
+    * @brief Attaches a new Truck (observer) to the FarmUnit.
+    * @param truck a truck to add to the farm observer list
+    * This method is used to add a Truck observer to the FarmUnit, allowing it to be notified of changes.
+    */
+    virtual void buyTruck(Truck& truck) = 0;
+
+     /**
+    * @brief Detaches a Truck (observer) from the FarmUnit.
+    * @param truck a truck to sell
+    * This method is used to remove a Truck observer from the FarmUnit, stopping it from receiving notifications.
+    */
+    virtual void sellTruck(Truck& truck) = 0;
+    /**
+   * @brief Notifies all attached Truck observers about changes.
+   * @param e type of event to call correct truck type
+   * This method is used to call all Truck observers, notifying them of any updates or changes in the FarmUnit.
+   */
+    virtual void callTruck(Event e) = 0;
+
+     /**
+    * @brief When the fertilizer truck delivers fertilizer it is added to the soil to change it from dry to fruitful
+    */
+    virtual void fertilizeCrops() = 0;
+
+    virtual void collectCrops() = 0;
+
 protected:
     /// The PImpl idiom for managing private implementation details.
     struct pImplFarmUnit;
 
     /// Unique pointer to the implementation details of the `FarmUnit`.
     std::unique_ptr<pImplFarmUnit> impl;
+
+
+    friend class Truck;
 };
 #endif //FARMUNIT_H

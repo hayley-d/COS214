@@ -52,6 +52,11 @@ public:
      */
     void harvestCrops() override;
 
+    /**
+     * @brief When the fertilizer is added to the dry soil it becomes fruitful
+     */
+     void fertilize() override;
+
 
 };
 

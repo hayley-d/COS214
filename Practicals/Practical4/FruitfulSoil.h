@@ -51,6 +51,11 @@ public:
      * In fruitful state the soil yields x3 crops
      */
     void harvestCrops() override;
+
+    /**
+     * @brief When the fertilizer is added to the dry soil it becomes fruitful
+     */
+    void fertilize() override;
 };
 
 
