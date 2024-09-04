@@ -13,11 +13,19 @@ struct FarmUnit::pImplFarmUnit {
 };
 
 int CropField::getTotalcapacity() {
-    return this->impl->totalCapacity;
+    int total = this->impl->totalCapacity;
+    FarmIterator it(new BFSStrategy(),this->farms);
+    for(auto item = it.begin(); it != it.end(); ++it) {
+        //implement
+    }
 }
 
 int CropField::getSurfaceArea() {
-    return this->impl->surfaceArea;
+    int total = this->impl->surfaceArea;
+    FarmIterator it(new BFSStrategy(),this->farms);
+    for(auto item = it.begin(); it != it.end(); ++it) {
+        //implement
+    }
 }
 
 std::string & CropField::getSoilStateName() {
@@ -26,14 +34,6 @@ std::string & CropField::getSoilStateName() {
 
 Crop CropField::getCropType() {
     return this->impl->crop;
-}
-
-FarmIterator CropField::end() {
-
-}
-
-FarmIterator CropField::begin() {
-
 }
 
 void CropField::printFarm() {
@@ -46,10 +46,10 @@ void CropField::changeSoilState(SoilState &soilState) {
     this->impl->soilState = &soilState;
 }
 
-void CropField::addFarmUnit(FarmUnit *unit) {
+void CropField::addFarmUnit(FarmUnitPtr unit) {
 }
 
-void CropField::removeFarmUnit(FarmUnit *unit) {
+void CropField::removeFarmUnit(FarmUnitPtr unit) {
 }
 
 std::unique_ptr<FarmIterator> CropField::getIterator() {

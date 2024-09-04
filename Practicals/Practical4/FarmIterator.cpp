@@ -1,24 +1,24 @@
 #include "FarmIterator.h"
 #include "DFSStrategy.h"
 
-FarmIterator::FarmIterator(TraversalStrategy *strategy, FarmUnit *root) : strategy(strategy), current(nullptr) {
+FarmIterator::FarmIterator(TraversalStrategy *strategy, FarmUnitPtrVector& farms) : strategy(strategy), current(nullptr) {
     if (this->strategy == nullptr) {
-        strategy = new DFSStrategy();
+        this->strategy = new DFSStrategy();
     }
-    this->strategy->initialize(root);
-    current = root;
-    this->root = root;
+    this->strategy->initialize(farms);
+    current = farms.at(0);
+    this->farms = farms;
 }
 
-FarmIterator::FarmIterator(FarmUnit *root) {
+FarmIterator::FarmIterator(FarmUnitPtrVector& farms){
     this->strategy = new DFSStrategy();
-    this->strategy->initialize(root);
-    current = root;
-    this->root = root;
+    this->strategy->initialize(farms);
+    current = farms.at(0);
+    this->farms = farms;
 }
 
 std::shared_ptr<FarmUnit>FarmIterator::firstFarm() {
-    return root;
+    return farms.at(0);
 }
 
 std::shared_ptr<FarmUnit>FarmIterator::currentFarm() {
@@ -53,15 +53,15 @@ std::shared_ptr<FarmUnit> FarmIterator::operator->() {
     return current;
 }
 
-bool FarmIterator::operator==(FarmIterator &other) {
+bool FarmIterator::operator==(const FarmIterator &other) const {
     return current == other.current;
 }
 
-bool FarmIterator::operator!=(FarmIterator &other) {
+bool FarmIterator::operator!=(const FarmIterator &other) const{
     return current != other.current;
 }
 
-FarmIterator &FarmIterator::operator=(FarmIterator &other) {
+FarmIterator &FarmIterator::operator=(const FarmIterator &other) {
     if (this != &other) {
         current = other.current;
     }
@@ -70,4 +70,14 @@ FarmIterator &FarmIterator::operator=(FarmIterator &other) {
 
 bool FarmIterator::hasNext() {
     return this->strategy->hasNext();
+}
+
+FarmIterator FarmIterator::begin() {
+    return *this; // Assumes that the iterator is already initialized to the start
+}
+
+FarmIterator FarmIterator::end() {
+    FarmIterator endIterator = *this;
+    endIterator.current = nullptr; // End iterator points to null
+    return endIterator;
 }

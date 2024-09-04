@@ -133,7 +133,7 @@ public:
     }
 
     // Method to get children (only valid for composites)
-    virtual std::vector<std::shared_ptr<FarmUnit> > getChildren() const {
+    virtual std::vector<std::shared_ptr<FarmUnit>> getChildren() const {
         return {}; // Return an empty vector by default
     }
 
