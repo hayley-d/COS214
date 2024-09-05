@@ -4,6 +4,7 @@
 #include <queue>
 
 #include "TraversalStrategy.h"
+class FarmUnit;
 
 /**
  * @class BFSStrategy
@@ -62,15 +63,13 @@ private:
      */
     struct CompareSurfaceArea {
      /**
-      * @brief Compares the surface area of two FarmUnits.
-      *
-      * @param a Pointer to the first FarmUnit.
-      * @param b Pointer to the second FarmUnit.
-      * @return True if the surface area of the first FarmUnit is smaller than that of the second, false otherwise.
-      */
-        bool operator()(FarmUnitPtr &a, FarmUnitPtr &b) {
-            return a->getSurfaceArea() > b->getSurfaceArea(); // Min-heap: smallest surface area first
-        }
+     * @brief Compares the surface area of two FarmUnits.
+     *
+     * @param a Pointer to the first FarmUnit.
+     * @param b Pointer to the second FarmUnit.
+     * @return True if the surface area of the first FarmUnit is smaller than that of the second, false otherwise.
+     */
+     bool operator()(FarmUnitPtr &a, FarmUnitPtr &b);
     };
 
  std::priority_queue<FarmUnitPtr, std::vector<FarmUnitPtr>, CompareSurfaceArea> queue; ///< Queue used for BFS Traversal.

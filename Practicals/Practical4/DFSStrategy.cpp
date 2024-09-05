@@ -9,7 +9,7 @@ void DFSStrategy::initialize(FarmUnitPtrVector farmUnits) {
     }
 }
 
-bool DFSStrategy::hasNext() override {
+bool DFSStrategy::hasNext()  {
     return !stack.empty();
 }
 

@@ -11,8 +11,8 @@ struct FarmUnit::pImplFarmUnit {
     std::vector<Truck*> observers;
 
     pImplFarmUnit(int totalCapacity, int surfaceArea, Crop crop,
-                  SoilState &soilState) : totalCapacity(totalCapacity), soilState(&soilState), surfaceArea(surfaceArea),
-                                          crop(crop){}
+                  SoilState &soilState) : totalCapacity(totalCapacity), surfaceArea(surfaceArea),
+                                          crop(crop), soilState(&soilState){}
 };
 
 FarmUnit::FarmUnit(int totalCapacity, int surfaceArea, CropType cropType, SoilState &soilState) {

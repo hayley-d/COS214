@@ -1,7 +1,8 @@
 #ifndef CROPFIELD_H
 #define CROPFIELD_H
 #include<string>
-#include "FarmComposite.h";
+#include <vector>
+#include "FarmComposite.h"
 /**
  * @class CropField
  * @brief Represents a crop field within a farm, derived from `FarmComposite` and `FarmUnit`.

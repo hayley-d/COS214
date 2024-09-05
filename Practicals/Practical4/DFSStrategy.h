@@ -2,6 +2,10 @@
 #define DFSSTRATEGY_H
 #include "TraversalStrategy.h"
 #include <stack>
+#include <memory>
+#include <vector>
+class FarmUnit;
+
 /**
  * @class DFSStrategy
  * @brief Concrete implementation of the depth-first search (DFS) traversal strategy for farm units.
@@ -49,7 +53,9 @@ public:
      */
     bool hasNext() override;
 
-private:
+    DFSStrategy() = default;
+
+   private:
     std::stack<FarmUnitPtr> stack; ///< Stack used for DFS traversal
 };
 

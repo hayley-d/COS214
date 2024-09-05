@@ -2,6 +2,11 @@
 typedef std::shared_ptr<FarmUnit> FarmUnitPtr;
 typedef std::vector<std::shared_ptr<FarmUnit>> FarmUnitPtrVector;
 
+    bool BFSStrategy::CompareSurfaceArea::operator()(FarmUnitPtr &a, FarmUnitPtr &b) {
+        return a->getSurfaceArea() > b->getSurfaceArea(); // Min-heap: smallest surface area first
+    }
+
+
 void BFSStrategy::initialize(FarmUnitPtrVector farmUnits) {
     // Clear the queue before initializing
     while (!queue.empty()) queue.pop();

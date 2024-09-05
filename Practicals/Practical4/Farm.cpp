@@ -1,5 +1,5 @@
 #include "Farm.h"
-
+#include "SoilState.h"
 #include <algorithm>
 
 #include "Truck.h"
@@ -13,8 +13,8 @@ struct FarmUnit::pImplFarmUnit {
     std::vector<Truck *> observers;
 
     pImplFarmUnit(int totalCapacity, int surfaceArea, Crop crop,
-                  SoilState &soilState) : totalCapacity(totalCapacity), soilState(&soilState), surfaceArea(surfaceArea),
-                                          crop(crop) {
+                  SoilState &soilState) : totalCapacity(totalCapacity), surfaceArea(surfaceArea),
+                                          crop(crop) , soilState(&soilState){
     }
 };
 
@@ -24,6 +24,7 @@ int Farm::getTotalcapacity() {
     for (auto item = it.begin(); it != it.end(); ++it) {
         //implement
     }
+    return total;
 }
 
 int Farm::getSurfaceArea() {
@@ -32,6 +33,7 @@ int Farm::getSurfaceArea() {
     for (auto item = it.begin(); it != it.end(); ++it) {
         //implement
     }
+    return total;
 }
 
 std::string &Farm::getSoilStateName() {
@@ -81,11 +83,11 @@ void Farm::storeCrops(int harvestBonus) {
 }
 
 int Farm::getCurrentStorageCapacity() {
-    return this->impl->currentCapacity();
+    return this->impl->currentCapacity;
 }
 
 bool Farm::hasStorageSpace(int spaceNeeded) {
-    bool space = (this->impl->currentCapacity() + spaceNeeded) <= this->impl->totalCapacity();
+    bool space = (this->impl->currentCapacity + spaceNeeded) <= this->impl->totalCapacity;
     if (!space) {
         this->callTruck(Event::STORAGE_FULL);
     }

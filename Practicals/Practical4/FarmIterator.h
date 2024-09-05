@@ -2,6 +2,8 @@
 #define FARMITERATOR_H
 #include "Iterator.h"
 #include "TraversalStrategy.h"
+#include <vector>
+class TraversalStrategy;
 /**
  * @brief Iterator for traversing a collection of `FarmUnit` objects using a specified traversal strategy.
  *
@@ -10,7 +12,7 @@
  */
 class FarmIterator : public Iterator {
  typedef std::shared_ptr<FarmUnit> FarmUnitPtr; ///< Type alias for shared pointer to FarmUnit.
- typedef std::vector<std::shared_ptr<FarmUnit> > FarmUnitPtrVector;
+ typedef std::vector<std::shared_ptr<FarmUnit>> FarmUnitPtrVector;
  ///< Type alias for vector of shared pointers to FarmUnit.
 public:
  /**

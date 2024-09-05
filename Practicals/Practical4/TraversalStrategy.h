@@ -2,6 +2,7 @@
 #define TRAVERSALSTRATEGY_H
 #include "FarmUnit.h"
 #include <vector>
+class FarmUnit;
 
 /**
  * @brief Abstract base class for traversal strategies.

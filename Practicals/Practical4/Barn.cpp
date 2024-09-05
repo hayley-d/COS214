@@ -11,8 +11,8 @@ struct FarmUnit::pImplFarmUnit {
     std::vector<Truck *> observers;
 
     pImplFarmUnit(int totalCapacity, int surfaceArea, Crop crop,
-                  SoilState &soilState) : totalCapacity(totalCapacity), soilState(&soilState), surfaceArea(surfaceArea),
-                                          crop(crop) {
+                  SoilState &soilState) : totalCapacity(totalCapacity), surfaceArea(surfaceArea),
+                                          crop(crop) , soilState(&soilState){
     }
 };
 
@@ -53,11 +53,11 @@ void Barn::storeCrops(int harvestBonus) {
 }
 
 int Barn::getCurrentStorageCapacity() {
-    return this->impl->currentCapacity();
+    return this->impl->currentCapacity;
 }
 
 bool Barn::hasStorageSpace(int spaceNeeded) {
-    bool space = (this->impl->currentCapacity() + spaceNeeded) <= this->impl->totalCapacity();
+    bool space = (this->impl->currentCapacity + spaceNeeded) <= this->impl->totalCapacity;
     if (!space) {
         this->callTruck(Event::STORAGE_FULL);
     }
