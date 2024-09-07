@@ -21,12 +21,15 @@ public:
      * @param cropType The crop type of the farm unit.
      * @param soilState The soil state of the farm unit.
      */
-    FarmComposite(int totalCapacity, int surfaceArea, CropType cropType, SoilState &soilState) : FarmUnit(
-        totalCapacity, surfaceArea, cropType, soilState) {
-    }
+    FarmComposite(int totalCapacity, int surfaceArea, CropType cropType) : FarmUnit(
+        totalCapacity, surfaceArea, cropType) {}
+
+
 
     virtual void addFarmUnit(FarmUnitPtr unit) = 0;
 
     virtual void removeFarmUnit(FarmUnitPtr unit) = 0;
+
+
 };
 #endif //FARMCOMPOSITE_H

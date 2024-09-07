@@ -1,21 +1,33 @@
-#include "Barn.h"
+/*#include "Barn.h"
 
 #include <algorithm>
+
+#include "DrySoil.h"
+#include "FloodedSoil.h"
+#include "FruitfulSoil.h"
 
 struct FarmUnit::pImplFarmUnit {
     int totalCapacity;
     int surfaceArea;
     Crop crop;
-    SoilState *soilState;
+    std::unique_ptr<SoilState> soilState;
     int currentCapacity = 0;
     std::vector<Truck *> observers;
 
-    pImplFarmUnit(int totalCapacity, int surfaceArea, Crop crop,
-                  SoilState &soilState) : totalCapacity(totalCapacity), surfaceArea(surfaceArea),
-                                          crop(crop) , soilState(&soilState){
+    pImplFarmUnit(const int totalCapacity, const int surfaceArea, const Crop crop,
+                  std::unique_ptr<SoilState> soilState) : totalCapacity(totalCapacity), surfaceArea(surfaceArea),
+                                                          crop(crop), soilState(std::move(soilState)) {
     }
-};
 
+    ~pImplFarmUnit() {
+        for (const auto item: observers) {
+            delete item;
+        }
+        observers.clear();
+    };
+};*/
+
+/*
 int Barn::getTotalcapacity() {
     return this->impl->totalCapacity;
 }
@@ -37,11 +49,14 @@ std::unique_ptr<FarmIterator> Barn::getIterator() {
     return nullptr;
 }
 
-void Barn::changeSoilState(SoilState &soilState) {
-    //delete the current state
-    delete this->impl->soilState;
-    //add the new state
-    this->impl->soilState = &soilState;
+void Barn::changeSoilState(std::string soilState) {
+    if (soilState == "Fruitful") {
+        this->impl->soilState = std::make_unique<FruitfulSoil>(*this);
+    } else if (soilState == "Flooded") {
+        this->impl->soilState = std::make_unique<FloodedSoil>(*this);
+    } else {
+        this->impl->soilState = std::make_unique<DrySoil>(*this);  // Default case
+    }
 
     if (this->impl->soilState->getName() == "Dry Soil") {
         this->callTruck(Event::SOIL_CHANGE);
@@ -65,6 +80,8 @@ bool Barn::hasStorageSpace(int spaceNeeded) {
 }
 
 void Barn::printFarm() {
+    std::cout << "Barn:\n" << "Total Capacity: " << this->impl->totalCapacity << "\nSurface Area: " << this->impl->
+            surfaceArea << std::endl;
 }
 
 void Barn::buyTruck(Truck &truck) {
@@ -97,3 +114,4 @@ void Barn::fertilizeCrops() {
 void Barn::collectCrops() {
     this->impl->currentCapacity = 0;
 }
+*/

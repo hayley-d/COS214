@@ -23,7 +23,7 @@ public:
      *
      * @param farmUnits The children of the root farm unit. This vector is used to seed the traversal.
      */
-    void initialize(FarmUnitPtrVector farmUnits) override;
+    void initialize(FarmUnitPtrVector *farmUnits) override;
 
     /**
      * @brief Returns the next FarmUnit in the BFS traversal.

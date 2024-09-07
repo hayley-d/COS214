@@ -1,24 +1,23 @@
 #include "FarmIterator.h"
 #include "DFSStrategy.h"
 
-FarmIterator::FarmIterator(TraversalStrategy *strategy, FarmUnitPtrVector& farms) : strategy(strategy), current(nullptr) {
-    if (this->strategy == nullptr) {
-        this->strategy = new DFSStrategy();
-    }
+typedef std::shared_ptr<FarmUnit> FarmUnitPtr;
+
+FarmIterator::FarmIterator(std::shared_ptr<TraversalStrategy> strategy, FarmUnitPtrVector* farms) : strategy(std::move(strategy)), current(nullptr) {
     this->strategy->initialize(farms);
-    current = farms.at(0);
+    current = farms->at(0);
     this->farms = farms;
 }
 
-FarmIterator::FarmIterator(FarmUnitPtrVector& farms){
-    this->strategy = new DFSStrategy();
+FarmIterator::FarmIterator(FarmUnitPtrVector* farms){
+    this->strategy = std::make_shared<DFSStrategy>();
     this->strategy->initialize(farms);
-    current = farms.at(0);
+    current = farms->at(0);
     this->farms = farms;
 }
 
 std::shared_ptr<FarmUnit>FarmIterator::firstFarm() {
-    return farms.at(0);
+    return farms->at(0);
 }
 
 std::shared_ptr<FarmUnit>FarmIterator::currentFarm() {
@@ -45,8 +44,8 @@ FarmIterator FarmIterator::operator++(int) {
     return temp;
 }
 
-FarmUnit &FarmIterator::operator*() {
-    return *current;
+FarmUnitPtr& FarmIterator::operator*() {
+    return current;
 }
 
 std::shared_ptr<FarmUnit> FarmIterator::operator->() {
@@ -73,11 +72,11 @@ bool FarmIterator::hasNext() {
 }
 
 FarmIterator FarmIterator::begin() {
-    return *this; // Assumes that the iterator is already initialized to the start
+    return *this;
 }
 
 FarmIterator FarmIterator::end() {
-    FarmIterator endIterator = *this;
-    endIterator.current = nullptr; // End iterator points to null
+    FarmIterator endIterator(farms);
+    endIterator.current = nullptr;
     return endIterator;
 }

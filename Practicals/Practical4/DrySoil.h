@@ -57,7 +57,27 @@ public:
      */
      void fertilize() override;
 
+    DrySoil(const DrySoil &other)
+     : SoilState(other) {
+    }
 
+    DrySoil(DrySoil &&other) noexcept
+     : SoilState(std::move(other)) {
+    }
+
+    DrySoil & operator=(const DrySoil &other) {
+     if (this == &other)
+      return *this;
+     SoilState::operator =(other);
+     return *this;
+    }
+
+    DrySoil & operator=(DrySoil &&other) noexcept {
+     if (this == &other)
+      return *this;
+     SoilState::operator =(std::move(other));
+     return *this;
+    }
 };
 
 

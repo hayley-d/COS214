@@ -37,9 +37,9 @@ public:
      * @param totalCapacity The total capacity of the farm unit.
      * @param surfaceArea The surface area of the farm unit.
      * @param cropType The crop type of the farm unit.
-     * @param soilState The soil state of the farm unit.
+     * soilState The soil state of the farm unit by default is fruitful
      */
-    FarmUnit(int totalCapacity, int surfaceArea, CropType cropType, SoilState &soilState);
+    FarmUnit(int totalCapacity, int surfaceArea, CropType cropType);
 
     /**
      * @brief Gets the total capacity of the farm unit.
@@ -76,7 +76,7 @@ public:
      *
      * Ensures proper cleanup of derived classes.
      */
-    virtual ~FarmUnit() = default;
+    virtual ~FarmUnit() ;
 
 
 
@@ -90,7 +90,7 @@ public:
     * @brief Changes the soil state of the farm uni
     * @param soilState A reference to the new soil state of the farm unit
     */
-    virtual void changeSoilState(SoilState &soilState) = 0;
+    virtual void changeSoilState(std::string soilState) = 0;
 
     /**
      * @brief Stores the current crops
@@ -123,7 +123,7 @@ public:
 
     // Method to get children (only valid for composites)
     virtual std::vector<std::shared_ptr<FarmUnit>> getChildren() const {
-        return {}; // Return an empty vector by default
+        return  {};
     }
 
      /**
@@ -153,12 +153,16 @@ public:
 
     virtual void collectCrops() = 0;
 
+    virtual void makeItRain() = 0;
+
+    virtual void heatWave();
+
 protected:
     /// The PImpl idiom for managing private implementation details.
     struct pImplFarmUnit;
 
-    /// Unique pointer to the implementation details of the `FarmUnit`.
-    std::unique_ptr<pImplFarmUnit> impl;
+    ///  pointer to the implementation details of the `FarmUnit`.
+    pImplFarmUnit* impl;
 
 
     friend class Truck;

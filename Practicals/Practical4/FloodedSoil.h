@@ -18,7 +18,7 @@ public:
      *
      * Initializes the SoilState with a reference to the FarmUnit it belongs to and the soil state's name
      */
-    FloodedSoil(FarmUnit &farmUnit) : SoilState(farmUnit, "Fruitful Soil") {
+    FloodedSoil(FarmUnit &farmUnit) : SoilState(farmUnit, "Flooded Soil") {
     }
 
     /**
@@ -55,6 +55,28 @@ public:
      * @brief When the fertilizer is added to the dry soil it becomes fruitful
      */
      void fertilize() override;
+
+    FloodedSoil(const FloodedSoil &other)
+     : SoilState(other) {
+    }
+
+    FloodedSoil(FloodedSoil &&other) noexcept
+     : SoilState(std::move(other)) {
+    }
+
+    FloodedSoil & operator=(const FloodedSoil &other) {
+     if (this == &other)
+      return *this;
+     SoilState::operator =(other);
+     return *this;
+    }
+
+    FloodedSoil & operator=(FloodedSoil &&other) noexcept {
+     if (this == &other)
+      return *this;
+     SoilState::operator =(std::move(other));
+     return *this;
+    }
 };
 
 

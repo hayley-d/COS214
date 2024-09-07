@@ -2,9 +2,9 @@
 typedef std::shared_ptr<FarmUnit> FarmUnitPtr; ///< Type alias for shared pointer to FarmUnit.
 typedef std::vector<std::shared_ptr<FarmUnit>> FarmUnitPtrVector; ///< Type alias for vector of shared pointers to FarmUnit.
 
-void DFSStrategy::initialize(FarmUnitPtrVector farmUnits) {
+void DFSStrategy::initialize(FarmUnitPtrVector *farmUnits) {
     while (!stack.empty()) stack.pop();
-    for (auto it = farmUnits.rbegin(); it != farmUnits.rend(); ++it) {
+    for (auto it = farmUnits->rbegin(); it != farmUnits->rend(); ++it) {
         stack.push(*it);
     }
 }

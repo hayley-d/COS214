@@ -56,6 +56,28 @@ public:
      * @brief When the fertilizer is added to the dry soil it becomes fruitful
      */
     void fertilize() override;
+
+    FruitfulSoil(const FruitfulSoil &other)
+     : SoilState(other) {
+    }
+
+    FruitfulSoil(FruitfulSoil &&other) noexcept
+     : SoilState(std::move(other)) {
+    }
+
+    FruitfulSoil & operator=(const FruitfulSoil &other) {
+     if (this == &other)
+      return *this;
+     SoilState::operator =(other);
+     return *this;
+    }
+
+    FruitfulSoil & operator=(FruitfulSoil &&other) noexcept {
+     if (this == &other)
+      return *this;
+     SoilState::operator =(std::move(other));
+     return *this;
+    }
 };
 
 

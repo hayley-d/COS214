@@ -27,9 +27,8 @@ public:
      * @param cropType The type of crop grown in the field.
      * @param soilState A reference to the soil state of the crop field.
      */
-    CropField(int totalCapacity, int surfaceArea, CropType cropType, SoilState &soilState) : FarmComposite(
-        totalCapacity, surfaceArea, cropType, soilState) {
-    }
+    CropField(int totalCapacity, int surfaceArea, CropType cropType) : FarmComposite(
+        totalCapacity, surfaceArea, cropType) {}
 
     /**
      * @brief Gets the total capacity of the crop field.
@@ -79,7 +78,7 @@ public:
      *
      * @param soilState A reference to the new soil state.
      */
-    void changeSoilState(SoilState &soilState) override;
+    void changeSoilState(std::string soilState) override;
 
     /**
      * @brief Adds a farm unit to the crop field.
@@ -179,11 +178,8 @@ public:
 
     void collectCrops() override;
 
-   private:
-    /**
-     * @brief A vector holding shared pointers to the farm units within the crop field.
-     */
-    FarmUnitPtrVector farms;
+ void makeItRain() override;
+
 };
 
 

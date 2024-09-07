@@ -7,8 +7,7 @@ std::string & FruitfulSoil::getName() {
 }
 
 void FruitfulSoil::rain() {
-    FloodedSoil* state = new FloodedSoil(*this->farmUnit);
-    this->farmUnit->changeSoilState(*state);
+    this->farmUnit->changeSoilState("Flooded");
 }
 
 void FruitfulSoil::harvestCrops() {

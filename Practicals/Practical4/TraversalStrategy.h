@@ -29,7 +29,7 @@ public:
      *
      * @param farmUnits A vector of shared pointers to the children of the root `FarmUnit`.
      */
-    virtual void initialize(FarmUnitPtrVector farmUnits) = 0;
+    virtual void initialize(FarmUnitPtrVector* farmUnits) = 0;
 
     /**
      * @brief Returns the next `FarmUnit` in the traversal.

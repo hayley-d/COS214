@@ -14,15 +14,17 @@ class Farm : public FarmComposite {
     typedef std::vector<std::shared_ptr<FarmUnit> > FarmUnitPtrVector;
     ///< Type alias for vector of shared pointers to `FarmUnit`.
 public:
+
+
     /**
      * @brief Constructor for the `Farm` class.
      *
      * Initializes a `Farm` with the given soil state, and default values for capacity, surface area, and crop type.
-     * @param soilState A reference to the soil state for the farm.
+     *  soilState A reference to the soil state for the farm by default is fruitful
      * @param cropType A crop type for the farm.
      */
-    Farm(SoilState &soilState, CropType cropType) : FarmComposite(
-        0, 0, cropType, soilState) {
+    Farm(CropType cropType) : FarmComposite(
+        0, 0, cropType) {
     }
 
     /**
@@ -64,7 +66,7 @@ public:
      * Updates the soil state of the farm to the specified new value.
      * @param soilState A reference to the new soil state.
      */
-    void changeSoilState(SoilState &soilState) override;
+    void changeSoilState(std::string soilState) override;
 
     /**
      * @brief Adds a farm unit to the farm.
@@ -126,34 +128,35 @@ public:
      */
     bool isComposite() const override;
 
-     /**
-    * @brief Detaches a Truck (observer) from the FarmUnit.
-    * @param truck a truck to add the the observer list
-    * This method is used to remove a Truck observer from the FarmUnit, stopping it from receiving notifications.
-    */
-    void buyTruck(Truck& truck) override;
+    /**
+   * @brief Detaches a Truck (observer) from the FarmUnit.
+   * @param truck a truck to add the the observer list
+   * This method is used to remove a Truck observer from the FarmUnit, stopping it from receiving notifications.
+   */
+    void buyTruck(Truck &truck) override;
+
     /**
      * @brief Detaches a Truck (observer) from the FarmUnit.
      * @param truck a truck to remove from observer list
      * This method is used to remove a Truck observer from the FarmUnit, stopping it from receiving notifications.
      */
-    void sellTruck(Truck& truck) override;
- /**
-    * @brief Notifies all attached Truck observers about changes.
-    * @param e type of event to call correct truck type
-    * This method is used to call all Truck observers, notifying them of any updates or changes in the FarmUnit.
-    */
+    void sellTruck(Truck &truck) override;
+
+    /**
+       * @brief Notifies all attached Truck observers about changes.
+       * @param e type of event to call correct truck type
+       * This method is used to call all Truck observers, notifying them of any updates or changes in the FarmUnit.
+       */
     void callTruck(Event e) override;
 
     void fertilizeCrops() override;
 
     void collectCrops() override;
 
-   private:
-    /**
-    * @brief A vector holding shared pointers to the farm units within the farm.
-    */
-    FarmUnitPtrVector farms;
+    std::vector<std::shared_ptr<FarmUnit>> getChildren() const override;
+
+  void makeItRain() override;
+
 };
 
 

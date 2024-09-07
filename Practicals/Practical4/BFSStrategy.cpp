@@ -1,18 +1,18 @@
 #include "BFSStrategy.h"
 typedef std::shared_ptr<FarmUnit> FarmUnitPtr;
-typedef std::vector<std::shared_ptr<FarmUnit>> FarmUnitPtrVector;
+typedef std::vector<std::shared_ptr<FarmUnit> > FarmUnitPtrVector;
 
-    bool BFSStrategy::CompareSurfaceArea::operator()(FarmUnitPtr &a, FarmUnitPtr &b) {
-        return a->getSurfaceArea() > b->getSurfaceArea(); // Min-heap: smallest surface area first
-    }
+bool BFSStrategy::CompareSurfaceArea::operator()(FarmUnitPtr &a, FarmUnitPtr &b) {
+    return a->getSurfaceArea() > b->getSurfaceArea(); // Min-heap: smallest surface area first
+}
 
 
-void BFSStrategy::initialize(FarmUnitPtrVector farmUnits) {
+void BFSStrategy::initialize(FarmUnitPtrVector *farmUnits) {
     // Clear the queue before initializing
     while (!queue.empty()) queue.pop();
 
     // Add all the initial farm units to the queue
-    for (const auto &unit : farmUnits) {
+    for (const auto &unit: *farmUnits) {
         queue.push(unit);
     }
 }
@@ -27,7 +27,8 @@ FarmUnitPtr BFSStrategy::getNext() {
     // Check if the current FarmUnit is a composite
     if (current->isComposite()) {
         // Add all children of the current unit to the queue
-        for (const auto &child : current->getChildren()) {
+
+        for (const auto& child: (current->getChildren())) {
             queue.push(child);
         }
     }

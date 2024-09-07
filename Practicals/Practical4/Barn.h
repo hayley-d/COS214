@@ -3,8 +3,11 @@
 #include "FarmUnit.h"
 
 
-class Barn : FarmUnit{
+class Barn : public FarmUnit{
 public:
+    Barn(int totalCapacity, int surfaceArea, CropType cropType) : FarmUnit(
+        totalCapacity, surfaceArea, cropType) {}
+
     int getTotalcapacity() override;
 
     std::string & getSoilStateName() override;
@@ -15,7 +18,7 @@ public:
 
     std::unique_ptr<FarmIterator> getIterator() override;
 
-    void changeSoilState(SoilState &soilState) override;
+    void changeSoilState(std::string soilState) override;
 
     void storeCrops(int harvestBonus) override;
 
@@ -49,6 +52,8 @@ public:
     void fertilizeCrops() override;
 
     void collectCrops() override;
+
+    void makeItRain() override;
 };
 
 

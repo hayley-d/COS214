@@ -7,8 +7,7 @@ std::string & DrySoil::getName() {
 }
 
 void DrySoil::rain() {
-    FruitfulSoil* state = new FruitfulSoil(*this->farmUnit);
-    this->farmUnit->changeSoilState(*state);
+    this->farmUnit->changeSoilState("Fruitful");
 }
 
 void DrySoil::harvestCrops() {
@@ -21,6 +20,5 @@ void DrySoil::harvestCrops() {
 }
 
 void DrySoil::fertilize() {
-    FruitfulSoil* state = new FruitfulSoil(*this->farmUnit);
-    this->farmUnit->changeSoilState(*state);
+    this->farmUnit->changeSoilState("Fruitful");
 }
