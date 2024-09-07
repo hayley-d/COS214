@@ -4,6 +4,10 @@
 
 class FertilizerDecorator : public FarmDecorator {
 public:
+     FertilizerDecorator(FarmComposite &wrapee)
+        : FarmDecorator(wrapee) {
+    }
+
     void applyEnhancement() override;
 
     ~FertilizerDecorator() override = default;

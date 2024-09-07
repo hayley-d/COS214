@@ -164,5 +164,6 @@ protected:
 
 
     friend class Truck;
+   friend class FarmDecorator;
 };
 #endif //FARMUNIT_H

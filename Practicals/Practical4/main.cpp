@@ -4,8 +4,10 @@
 #include "CropField.h"
 #include "DrySoil.h"
 #include "Farm.h"
+#include "FertilizerDecorator.h"
 #include "FertilizerTruck.h"
 #include "LogisticsTruck.h"
+#include "StorageDecorator.h"
 
 int main() {
     //no problems with construction
@@ -92,6 +94,22 @@ int main() {
 
     farm1.callTruck(Event::STORAGE_FULL);
     field1.callTruck(Event::STORAGE_FULL);
+
+    farm1.removeFarmUnit(farm_unit1);
+    field1.removeFarmUnit(farm_unit1);
+
+    CropField* myField = new CropField(200,200,Sugarcane);
+    myField->heatWave();
+    FertilizerDecorator sd(*myField);
+    std::cout << "Soil State: " << myField->getSoilStateName() <<std::endl;
+    sd.applyEnhancement();
+
+    CropField* myField2 = new CropField(200,200,Sugarcane);
+
+    StorageDecorator sdd(*myField2);
+    sdd.applyEnhancement();
+
+
 
 
 

@@ -4,6 +4,10 @@
 
 class StorageDecorator : public FarmDecorator {
 public:
+    explicit StorageDecorator(FarmComposite &wrapee)
+        : FarmDecorator(wrapee) {
+    }
+
     void applyEnhancement() override;
 
     ~StorageDecorator() override = default;

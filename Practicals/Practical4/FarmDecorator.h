@@ -4,6 +4,8 @@
 #include "FarmUnit.h"
 
 class FarmDecorator : public FarmComposite {
+    typedef std::shared_ptr<FarmUnit> FarmUnitPtr; ///< Type alias for shared pointer to FarmUnit.
+    typedef std::vector<std::shared_ptr<FarmUnit> > FarmUnitPtrVector;
 public:
     FarmDecorator(FarmComposite& wrapee) :  FarmComposite(wrapee.getTotalcapacity(),wrapee.getSurfaceArea(),wrapee.getCropType().crop),wrapee(&wrapee) {}
 
@@ -17,6 +19,14 @@ public:
     ~FarmDecorator() override {
         delete wrapee;
     };
+
+    void addFarmUnit(FarmUnitPtr unit)  {
+        wrapee->addFarmUnit(unit);
+    }
+
+    void removeFarmUnit(FarmUnitPtr unit) {
+        wrapee->removeFarmUnit(unit);
+    }
 
 protected:
     FarmComposite* wrapee;

@@ -136,27 +136,11 @@ void Farm::removeFarmUnit(const FarmUnitPtr unit) {
     //if empty do nothing
     if (this->impl->getFarms()->empty()) return;
 
-    //check if in the vector by using iterator
-    bool found = false;
-
-    //create iterator
-    FarmIterator it(this->impl->getFarms());
-
-    for (auto item = it.begin(); it != it.end(); ++it) {
-        if (*it == unit) {
-            found = true;
-            break;
-        }
+    auto it = std::find(this->impl->getFarms()->begin(), this->impl->getFarms()->end(), unit);
+    if (it != this->impl->getFarms()->end()) {
+        this->impl->getFarms()->erase(it);
     }
 
-    if (!found) return;
-
-    std::cout << "Removing unit...." << std::endl;
-
-    //remove from vector and if success minus attributes
-    this->impl->totalCapacity -= unit->getTotalcapacity();
-    this->impl->surfaceArea -= unit->getSurfaceArea();
-    this->impl->currentCapacity -= unit->getCurrentStorageCapacity();
 }
 
 std::unique_ptr<FarmIterator> Farm::getIterator() {
@@ -233,6 +217,10 @@ void CropField::addFarmUnit(const FarmUnitPtr unit) {
 
 void CropField::removeFarmUnit(FarmUnitPtr unit) {
     if (this->impl->getFarms()->empty()) return;
+    auto it = std::find(this->impl->getFarms()->begin(), this->impl->getFarms()->end(), unit);
+    if (it != this->impl->getFarms()->end()) {
+        this->impl->getFarms()->erase(it);
+    }
 }
 
 std::unique_ptr<FarmIterator> CropField::getIterator() {
@@ -373,7 +361,8 @@ void StorageDecorator::applyEnhancement() {
 
 void FertilizerDecorator::increaseProduction() {
     //notify fertilizer trucks
-    wrapee->callTruck(Event::SOIL_CHANGE);
+    wrapee->fertilizeCrops();
+    std::cout << "Soil changed to " << wrapee->getSoilStateName() << std::endl;
 }
 void FertilizerDecorator::harvest() {
     wrapee->storeCrops();
@@ -383,3 +372,4 @@ void FertilizerDecorator::applyEnhancement() {
     increaseProduction();
     harvest();
 }
+
