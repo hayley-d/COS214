@@ -5,11 +5,13 @@
 #include "FruitfulSoil.h"
 #include "SoilState.h"
 #include <algorithm>
-
+#include "FarmDecorator.h"
 #include "Barn.h"
 #include "CropField.h"
 #include "DrySoil.h"
+#include "FertilizerDecorator.h"
 #include "FloodedSoil.h"
+#include "StorageDecorator.h"
 
 
 struct FarmUnit::pImplFarmUnit {
@@ -93,12 +95,8 @@ int Farm::getSurfaceArea() {
     return total;
 }
 
-std::string &Farm::getSoilStateName() {
+std::string &FarmUnit::getSoilStateName() {
     return this->impl->soilState->getName();
-}
-
-Crop Farm::getCropType() {
-    return this->impl->crop;
 }
 
 void Farm::printFarm() {
@@ -165,53 +163,14 @@ std::unique_ptr<FarmIterator> Farm::getIterator() {
     return std::make_unique<FarmIterator>(this->impl->getFarms());
 }
 
-void Farm::storeCrops(int harvestBonus) {
-    this->impl->currentCapacity += (this->impl->crop.harvestYield * harvestBonus);
-}
-
 int Farm::getCurrentStorageCapacity() {
     if (this->impl->getFarms()->empty()) return 0;
     return this->impl->currentCapacity;
 }
 
-bool Farm::hasStorageSpace(int spaceNeeded) {
-    if (this->impl->getFarms()->empty()) return true;
-    bool space = (this->impl->currentCapacity + spaceNeeded) <= this->impl->totalCapacity;
-    if (!space) {
-        this->callTruck(Event::STORAGE_FULL);
-    }
-    return space;
-}
 
 bool Farm::isComposite() const {
     return true;
-}
-
-void Farm::buyTruck(Truck &truck) {
-    this->impl->observers.push_back(&truck);
-}
-
-void Farm::sellTruck(Truck &truck) {
-    // Use an iterator to find the truck in the trucks vector
-    auto it = std::find_if(this->impl->observers.begin(), this->impl->observers.end(),
-                           [&truck](Truck *t) {
-                               return t == &truck;
-                           });
-
-    // If the truck is found, remove it from the vector
-    if (it != this->impl->observers.end()) {
-        this->impl->observers.erase(it);
-    }
-}
-
-void Farm::callTruck(Event e) {
-    for (auto ob: this->impl->observers) {
-        ob->startEngine(e);
-    }
-}
-
-void Farm::fertilizeCrops() {
-    this->impl->soilState->fertilize();
 }
 
 void Farm::collectCrops() {
@@ -256,14 +215,6 @@ int CropField::getSurfaceArea() {
     return total;
 }
 
-std::string &CropField::getSoilStateName() {
-    return this->impl->soilState->getName();
-}
-
-Crop CropField::getCropType() {
-    return this->impl->crop;
-}
-
 void CropField::printFarm() {
     if (this->impl->getFarms()->empty()) return;
     FarmIterator it(std::make_shared<BFSStrategy>(), this->impl->getFarms());
@@ -273,20 +224,6 @@ void CropField::printFarm() {
     while (!it.isDone()) {
         it->printFarm();
         ++it;
-    }
-}
-
-void CropField::changeSoilState(std::string soilState) {
-    if (soilState == "Fruitful") {
-        this->impl->soilState = std::make_unique<FruitfulSoil>(*this);
-    } else if (soilState == "Flooded") {
-        this->impl->soilState = std::make_unique<FloodedSoil>(*this);
-    } else {
-        this->impl->soilState = std::make_unique<DrySoil>(*this); // Default case
-    }
-
-    if (this->impl->soilState->getName() == "Dry Soil") {
-        this->callTruck(Event::SOIL_CHANGE);
     }
 }
 
@@ -302,22 +239,10 @@ std::unique_ptr<FarmIterator> CropField::getIterator() {
     return std::make_unique<FarmIterator>(this->impl->getFarms());
 }
 
-void CropField::storeCrops(const int harvestBonus) {
-    this->impl->currentCapacity += (this->impl->crop.harvestYield * harvestBonus);
-}
-
 int CropField::getCurrentStorageCapacity() {
     return this->impl->currentCapacity;
 }
 
-bool CropField::hasStorageSpace(int spaceNeeded) {
-    if (this->impl->getFarms()->empty()) return true;
-    bool space = (this->impl->currentCapacity + spaceNeeded) <= this->impl->totalCapacity;
-    if (!space) {
-        this->callTruck(Event::STORAGE_FULL);
-    }
-    return space;
-}
 //healper function
 bool CropField::isComposite() const {
     return true;
@@ -325,34 +250,6 @@ bool CropField::isComposite() const {
 
 std::vector<std::shared_ptr<FarmUnit> > CropField::getChildren() const {
     return this->impl->getFarm();
-}
-
-void CropField::buyTruck(Truck &truck) {
-    this->impl->observers.push_back(&truck);
-}
-
-void CropField::sellTruck(Truck &truck) {
-    // Use an iterator to find the truck in the trucks vector
-    auto it = std::find_if(this->impl->observers.begin(), this->impl->observers.end(),
-                           [&truck](Truck *t) {
-                               return t == &truck;
-                           });
-
-    // If the truck is found, remove it from the vector
-    if (it != this->impl->observers.end()) {
-        this->impl->observers.erase(it);
-    }
-}
-
-void CropField::callTruck(Event e) {
-    for (auto ob: this->impl->observers) {
-        ob->startEngine(e);
-    }
-}
-
-//helper function
-void CropField::fertilizeCrops() {
-    this->impl->soilState->fertilize();
 }
 
 //healper function
@@ -367,28 +264,24 @@ void CropField::collectCrops() {
     this->impl->currentCapacity = 0;
 }
 
-int Barn::getTotalcapacity() {
+int FarmUnit::getTotalcapacity() {
     return this->impl->totalCapacity;
 }
 
-std::string &Barn::getSoilStateName() {
-    return this->impl->soilState->getName();
-}
-
-Crop Barn::getCropType() {
+Crop FarmUnit::getCropType() {
     return this->impl->crop;
 }
 
-int Barn::getSurfaceArea() {
+int FarmUnit::getSurfaceArea() {
     return this->impl->surfaceArea;
 }
 
-std::unique_ptr<FarmIterator> Barn::getIterator() {
+std::unique_ptr<FarmIterator> FarmUnit::getIterator() {
     //leaf node does not have an iterator
     return nullptr;
 }
 
-void Barn::changeSoilState(std::string soilState) {
+void FarmUnit::changeSoilState(std::string soilState) {
     if (soilState == "Fruitful") {
         this->impl->soilState = std::make_unique<FruitfulSoil>(*this);
     } else if (soilState == "Flooded") {
@@ -402,15 +295,15 @@ void Barn::changeSoilState(std::string soilState) {
     }
 }
 
-void Barn::storeCrops(int harvestBonus) {
+void FarmUnit::storeCrops(int harvestBonus) {
     this->impl->currentCapacity += (this->impl->crop.harvestYield * harvestBonus);
 }
 
-int Barn::getCurrentStorageCapacity() {
+int FarmUnit::getCurrentStorageCapacity() {
     return this->impl->currentCapacity;
 }
 
-bool Barn::hasStorageSpace(int spaceNeeded) {
+bool FarmUnit::hasStorageSpace(int spaceNeeded) {
     bool space = (this->impl->currentCapacity + spaceNeeded) <= this->impl->totalCapacity;
     if (!space) {
         this->callTruck(Event::STORAGE_FULL);
@@ -421,14 +314,13 @@ bool Barn::hasStorageSpace(int spaceNeeded) {
 void Barn::printFarm() {
     std::cout << "Barn:\n" << "\tTotal Capacity: " << this->impl->totalCapacity << "\n\tSurface Area: " << this->impl->
             surfaceArea << std::endl;
-    return;
 }
 
-void Barn::buyTruck(Truck &truck) {
+void FarmUnit::buyTruck(Truck &truck) {
     this->impl->observers.push_back(&truck);
 }
 
-void Barn::sellTruck(Truck &truck) {
+void FarmUnit::sellTruck(Truck &truck) {
     // Use an iterator to find the truck in the trucks vector
     auto it = std::find_if(this->impl->observers.begin(), this->impl->observers.end(),
                            [&truck](Truck *t) {
@@ -441,36 +333,53 @@ void Barn::sellTruck(Truck &truck) {
     }
 }
 
-void Barn::callTruck(Event e) {
+void FarmUnit::callTruck(Event e) {
     for (auto ob: this->impl->observers) {
         ob->startEngine(e);
     }
 }
 
-void Barn::fertilizeCrops() {
+void FarmUnit::fertilizeCrops() {
     this->impl->soilState->fertilize();
 }
 
-void Barn::collectCrops() {
+void FarmUnit::collectCrops() {
     this->impl->currentCapacity = 0;
 }
 
-void Farm::makeItRain() {
-    this->impl->soilState->rain();
-    std::cout << "Making it rain" << std::endl;
-}
-
-void CropField::makeItRain() {
-    this->impl->soilState->rain();
-    std::cout << "Making it rain" << std::endl;
-}
-
-void Barn::makeItRain() {
-    this->impl->soilState->rain();
-    std::cout << "Making it rain" << std::endl;
-}
 
 void FarmUnit::heatWave() {
     this->changeSoilState("Dry");
     std::cout << "Soil dried out" << std::endl;
+}
+
+void FarmUnit::makeItRain() {
+    this->impl->soilState->rain();
+    std::cout << "Making it rain" << std::endl;
+}
+
+void StorageDecorator::addExtraBarn() {
+    //add a new barn
+    wrapee->addFarmUnit(std::make_shared<Barn>(100,100,wrapee->getCropType().crop));
+}
+
+int StorageDecorator::getLeftoverCapacity() {
+    return wrapee->getTotalcapacity() - wrapee->getCurrentStorageCapacity();
+}
+void StorageDecorator::applyEnhancement() {
+    addExtraBarn();
+    std::cout << "Storage increased to " << getLeftoverCapacity() << std::endl;
+}
+
+void FertilizerDecorator::increaseProduction() {
+    //notify fertilizer trucks
+    wrapee->callTruck(Event::SOIL_CHANGE);
+}
+void FertilizerDecorator::harvest() {
+    wrapee->storeCrops();
+
+}
+void FertilizerDecorator::applyEnhancement() {
+    increaseProduction();
+    harvest();
 }

@@ -15,9 +15,7 @@ add_executable(Practical4 main.cpp
         DFSStrategy.h
         FarmUnit.cpp
         FarmComposite.h
-        CropField.cpp
         CropField.h
-        Farm.cpp
         Farm.h
         Crop.h
         SoilState.h
@@ -27,7 +25,6 @@ add_executable(Practical4 main.cpp
         FruitfulSoil.h
         FloodedSoil.cpp
         FloodedSoil.h
-        Barn.cpp
         Barn.h
         Truck.h
         FertilizerTruck.cpp
@@ -35,4 +32,7 @@ add_executable(Practical4 main.cpp
         LogisticsTruck.cpp
         LogisticsTruck.h
         Event.h
+        FarmDecorator.h
+        FertilizerDecorator.h
+        StorageDecorator.h
 )

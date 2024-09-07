@@ -48,19 +48,19 @@ public:
      *
      * @return The total capacity of the farm unit.
      */
-    virtual int getTotalcapacity() = 0;
+    virtual int getTotalcapacity();
 
     /**
      * @brief Gets the soil state name of the Farm unit
      * @return The soil state name
      */
-    virtual std::string &getSoilStateName() = 0;
+    virtual std::string &getSoilStateName();
 
     /**
      * @brief Gets the crop type of the Farm unit
      * @return The crop type
      */
-    virtual Crop getCropType() = 0;
+    virtual Crop getCropType();
 
     /**
      * @brief Gets the surface area of the farm unit.
@@ -69,7 +69,7 @@ public:
      *
      * @return The surface area of the farm unit.
      */
-    virtual int getSurfaceArea() = 0;
+    virtual int getSurfaceArea();
 
     /**
      * @brief Virtual destructor for the `FarmUnit` class.
@@ -78,38 +78,36 @@ public:
      */
     virtual ~FarmUnit() ;
 
-
-
     /**
      * @brief Returns an iterator to the start of the collection.
      * @return FarmIterator Iterator to the start of the collection.
      */
-    virtual std::unique_ptr<FarmIterator> getIterator() = 0;
+    virtual std::unique_ptr<FarmIterator> getIterator();
 
     /**
     * @brief Changes the soil state of the farm uni
     * @param soilState A reference to the new soil state of the farm unit
     */
-    virtual void changeSoilState(std::string soilState) = 0;
+    virtual void changeSoilState(std::string soilState);
 
     /**
      * @brief Stores the current crops
      * @param harvestBonus An int value for the harvest bonus if any
      */
-    virtual void storeCrops(int harvestBonus = 1) = 0;
+     void storeCrops(int harvestBonus = 1);
 
     /**
      * @brief Returns the current storage capacity of the farm unit
      * @return An int value of the current storage capacity
      */
-    virtual int getCurrentStorageCapacity() = 0;
+    virtual int getCurrentStorageCapacity();
 
     /**
      * @brief Returns a boolean value depending on if the farm unit has storage space
      * @param spaceNeeded An int value for how much storage space is required
      * @return An bool value indicating if the required space is available
      */
-    virtual bool hasStorageSpace(int spaceNeeded) = 0;
+    virtual bool hasStorageSpace(int spaceNeeded);
 
     /**
      * @brief prints the current farm unit
@@ -131,29 +129,29 @@ public:
     * @param truck a truck to add to the farm observer list
     * This method is used to add a Truck observer to the FarmUnit, allowing it to be notified of changes.
     */
-    virtual void buyTruck(Truck& truck) = 0;
+    virtual void buyTruck(Truck& truck);
 
      /**
     * @brief Detaches a Truck (observer) from the FarmUnit.
     * @param truck a truck to sell
     * This method is used to remove a Truck observer from the FarmUnit, stopping it from receiving notifications.
     */
-    virtual void sellTruck(Truck& truck) = 0;
+    virtual void sellTruck(Truck& truck);
     /**
    * @brief Notifies all attached Truck observers about changes.
    * @param e type of event to call correct truck type
    * This method is used to call all Truck observers, notifying them of any updates or changes in the FarmUnit.
    */
-    virtual void callTruck(Event e) = 0;
+    virtual void callTruck(Event e);
 
      /**
     * @brief When the fertilizer truck delivers fertilizer it is added to the soil to change it from dry to fruitful
     */
-    virtual void fertilizeCrops() = 0;
+    virtual void fertilizeCrops();
 
-    virtual void collectCrops() = 0;
+    virtual void collectCrops();
 
-    virtual void makeItRain() = 0;
+    virtual void makeItRain();
 
     virtual void heatWave();
 

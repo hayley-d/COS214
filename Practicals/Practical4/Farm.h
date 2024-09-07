@@ -42,20 +42,6 @@ public:
     int getSurfaceArea() override;
 
     /**
-     * @brief Gets the name of the soil state for the farm.
-     * Returns the name of the soil state associated with the farm.
-     * @return The name of the soil state as a string.
-     */
-    std::string &getSoilStateName() override;
-
-    /**
-     * @brief Gets the crop type of the farm.
-     * Returns the crop type associated with the farm.
-     * @return The crop type as a `Crop` enum value.
-     */
-    virtual Crop getCropType();
-
-    /**
      * @brief Prints the details of the farm and its farm units.
      * Displays information about the farm, including its child units.
      */
@@ -94,13 +80,6 @@ public:
     std::unique_ptr<FarmIterator> getIterator() override;
 
     /**
-     * @brief Stores crops with an optional harvest bonus.
-     * Updates the farm's storage capacity based on the harvest bonus.
-     * @param harvestBonus An integer representing the bonus to be added to the storage capacity.
-     */
-    void storeCrops(int harvestBonus) override;
-
-    /**
      * @brief Gets the current storage capacity of the farm.
      *
      * Returns the amount of storage capacity currently available in the farm.
@@ -108,16 +87,6 @@ public:
      * @return The current storage capacity as an integer.
      */
     int getCurrentStorageCapacity() override;
-
-    /**
-     * @brief Checks if there is sufficient storage space available.
-     *
-     * Determines if there is enough storage space to accommodate the specified amount.
-     *
-     * @param spaceNeeded The amount of storage space required.
-     * @return `true` if there is sufficient storage space, `false` otherwise.
-     */
-    bool hasStorageSpace(int spaceNeeded) override;
 
     /**
      * @brief Checks if the farm is a composite of multiple units.
@@ -128,34 +97,10 @@ public:
      */
     bool isComposite() const override;
 
-    /**
-   * @brief Detaches a Truck (observer) from the FarmUnit.
-   * @param truck a truck to add the the observer list
-   * This method is used to remove a Truck observer from the FarmUnit, stopping it from receiving notifications.
-   */
-    void buyTruck(Truck &truck) override;
-
-    /**
-     * @brief Detaches a Truck (observer) from the FarmUnit.
-     * @param truck a truck to remove from observer list
-     * This method is used to remove a Truck observer from the FarmUnit, stopping it from receiving notifications.
-     */
-    void sellTruck(Truck &truck) override;
-
-    /**
-       * @brief Notifies all attached Truck observers about changes.
-       * @param e type of event to call correct truck type
-       * This method is used to call all Truck observers, notifying them of any updates or changes in the FarmUnit.
-       */
-    void callTruck(Event e) override;
-
-    void fertilizeCrops() override;
-
     void collectCrops() override;
 
     std::vector<std::shared_ptr<FarmUnit>> getChildren() const override;
 
-  void makeItRain() override;
 
 };
 
