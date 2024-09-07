@@ -6,6 +6,9 @@
 class LogisticsTruck : public Truck{
 public:
     void startEngine(Event e) override;
+    LogisticsTruck(FarmUnit& farmUnit){
+        this->subject = &farmUnit;
+    }
 };
 
 #endif //LOGISTICSTRUCK_H

@@ -107,8 +107,9 @@ void Farm::printFarm() {
     //create iterator
     FarmIterator it(std::make_shared<BFSStrategy>(), this->impl->getFarms());
     //iterate through
-    for (auto item = it.begin(); it != it.end(); ++it) {
-        item->printFarm();
+    while (!it.isDone()) {
+        it->printFarm();
+        ++it;
     }
 }
 
@@ -214,10 +215,14 @@ void Farm::fertilizeCrops() {
 }
 
 void Farm::collectCrops() {
+    std::cout << "Truck has come to pick up crops" << std::endl;
     if (this->impl->getFarms()->empty()) return;
     FarmIterator it(std::make_shared<BFSStrategy>(), this->impl->getFarms());
-    for (auto item = it.begin(); it != it.end(); ++it) {
+
+    //iterator through adding to the total
+    while (!it.isDone()) {
         it->collectCrops();
+        ++it;
     }
     this->impl->currentCapacity = 0;
 }
@@ -261,10 +266,17 @@ Crop CropField::getCropType() {
 
 void CropField::printFarm() {
     if (this->impl->getFarms()->empty()) return;
+    FarmIterator it(std::make_shared<BFSStrategy>(), this->impl->getFarms());
+    std::cout << "Crop Field:\n" << "\tTotal Capacity: " << this->impl->totalCapacity << "\n\tSurface Area: " << this->impl
+            ->
+            surfaceArea << std::endl;
+    while (!it.isDone()) {
+        it->printFarm();
+        ++it;
+    }
 }
 
 void CropField::changeSoilState(std::string soilState) {
-
     if (soilState == "Fruitful") {
         this->impl->soilState = std::make_unique<FruitfulSoil>(*this);
     } else if (soilState == "Flooded") {
@@ -306,7 +318,7 @@ bool CropField::hasStorageSpace(int spaceNeeded) {
     }
     return space;
 }
-
+//healper function
 bool CropField::isComposite() const {
     return true;
 }
@@ -338,15 +350,19 @@ void CropField::callTruck(Event e) {
     }
 }
 
+//helper function
 void CropField::fertilizeCrops() {
     this->impl->soilState->fertilize();
 }
 
+//healper function
 void CropField::collectCrops() {
+    std::cout << "Truck has come to pick up crops" << std::endl;
     if (this->impl->getFarms()->empty()) return;
     FarmIterator it(std::make_shared<BFSStrategy>(), this->impl->getFarms());
-    for (auto item = it.begin(); it != it.end(); ++it) {
+    while (!it.isDone()) {
         it->collectCrops();
+        ++it;
     }
     this->impl->currentCapacity = 0;
 }
@@ -403,8 +419,9 @@ bool Barn::hasStorageSpace(int spaceNeeded) {
 }
 
 void Barn::printFarm() {
-    std::cout << "Barn:\n" << "Total Capacity: " << this->impl->totalCapacity << "\nSurface Area: " << this->impl->
+    std::cout << "Barn:\n" << "\tTotal Capacity: " << this->impl->totalCapacity << "\n\tSurface Area: " << this->impl->
             surfaceArea << std::endl;
+    return;
 }
 
 void Barn::buyTruck(Truck &truck) {

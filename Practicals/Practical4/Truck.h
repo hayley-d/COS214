@@ -19,7 +19,7 @@ public:
      * @brief Constructs a Truck object with the specified FarmUnit.
      * @param farmUnit A shared pointer to a FarmUnit that the truck will observe.
      */
-    Truck(std::shared_ptr<FarmUnit>& farmUnit) : subject(farmUnit){}
+    Truck(FarmUnit& farmUnit) : subject(&farmUnit){}
     /**
      * @brief Pure virtual function to start the truck's engine.
      *
@@ -35,6 +35,6 @@ public:
     virtual ~Truck() = default;
 
 protected:
-    std::shared_ptr<FarmUnit> subject;///< Shared pointer to the observed FarmUnit.
+    FarmUnit* subject;///< Shared pointer to the observed FarmUnit.
 };
 #endif //TRUCK_H

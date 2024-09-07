@@ -16,11 +16,11 @@ public:
      */
     void startEngine(Event e) override;
 
-    FertilizerTruck(std::shared_ptr<FarmUnit> &farmUnit){
-        this->subject = farmUnit;
+    FertilizerTruck(FarmUnit& farmUnit){
+        this->subject = &farmUnit;
     }
 protected:
-    std::shared_ptr<FarmUnit> subject;///< Shared pointer to the observed FarmUnit.
+    FarmUnit* subject;///< Shared pointer to the observed FarmUnit.
 };
 
 
