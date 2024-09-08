@@ -66,7 +66,7 @@ int Farm::getTotalcapacity() {
     int total = this->impl->totalCapacity;
 
     //create iterator
-    FarmIterator it(std::make_shared<BFSStrategy>(), this->impl->getFarms());
+    FarmIterator it(this->impl->getFarms());
 
     //iterate through the children summing the total
     while (!it.isDone()) {
@@ -85,7 +85,7 @@ int Farm::getSurfaceArea() {
     //add onto the current value
     int total = this->impl->surfaceArea;
     //create iterator
-    FarmIterator it(std::make_shared<BFSStrategy>(), this->impl->getFarms());
+    FarmIterator it(std::make_shared<DFSStrategy>(), this->impl->getFarms());
     //iterator through adding to the total
     while (!it.isDone()) {
         total += it->getSurfaceArea();
@@ -108,22 +108,6 @@ void Farm::printFarm() {
     while (!it.isDone()) {
         it->printFarm();
         ++it;
-    }
-}
-
-void Farm::changeSoilState(std::string soilState) {
-    if (soilState == "Fruitful") {
-        this->impl->soilState = std::make_unique<FruitfulSoil>(*this);
-    } else if (soilState == "Flooded") {
-        this->impl->soilState = std::make_unique<FloodedSoil>(*this);
-    } else {
-        this->impl->soilState = std::make_unique<DrySoil>(*this); // Default case
-    }
-
-    //if the new state is dry notify the observers
-    if (this->impl->soilState->getName() == "Dry Soil") {
-        //call the notify() method to notify observers
-        this->callTruck(Event::SOIL_CHANGE);
     }
 }
 
@@ -191,9 +175,9 @@ int CropField::getTotalcapacity() {
 int CropField::getSurfaceArea() {
     if (this->impl->getFarms()->empty()) return this->impl->surfaceArea;
     int total = this->impl->surfaceArea;
-    FarmIterator it(std::make_shared<BFSStrategy>(), this->impl->getFarms());
+    FarmIterator it(this->impl->getFarms());
     while (!it.isDone()) {
-        total += it->getSurfaceArea();
+        total += it.currentFarm()->getSurfaceArea();
         ++it;
     }
     return total;
@@ -205,6 +189,9 @@ void CropField::printFarm() {
     std::cout << "Crop Field:\n" << "\tTotal Capacity: " << this->impl->totalCapacity << "\n\tSurface Area: " << this->impl
             ->
             surfaceArea << std::endl;
+    it.firstFarm()->printFarm();
+    it.next();
+    it.currentFarm()->printFarm();
     while (!it.isDone()) {
         it->printFarm();
         ++it;
@@ -244,7 +231,7 @@ std::vector<std::shared_ptr<FarmUnit> > CropField::getChildren() const {
 void CropField::collectCrops() {
     std::cout << "Truck has come to pick up crops" << std::endl;
     if (this->impl->getFarms()->empty()) return;
-    FarmIterator it(std::make_shared<BFSStrategy>(), this->impl->getFarms());
+    FarmIterator it(std::make_shared<DFSStrategy>(), this->impl->getFarms());
     while (!it.isDone()) {
         it->collectCrops();
         ++it;
@@ -270,6 +257,7 @@ std::unique_ptr<FarmIterator> FarmUnit::getIterator() {
 }
 
 void FarmUnit::changeSoilState(std::string soilState) {
+    std::cout << "Soil state has changed from " << getSoilStateName() ;
     if (soilState == "Fruitful") {
         this->impl->soilState = std::make_unique<FruitfulSoil>(*this);
     } else if (soilState == "Flooded") {
@@ -281,6 +269,8 @@ void FarmUnit::changeSoilState(std::string soilState) {
     if (this->impl->soilState->getName() == "Dry Soil") {
         this->callTruck(Event::SOIL_CHANGE);
     }
+
+    std::cout << " to " << getSoilStateName() << std::endl;
 }
 
 void FarmUnit::storeCrops(int harvestBonus) {
@@ -346,9 +336,15 @@ void FarmUnit::makeItRain() {
     std::cout << "Making it rain" << std::endl;
 }
 
+void FarmUnit::harvestWithBonus() {
+    this->impl->soilState->harvestCrops();
+    std::cout << "Harvesting Crops" << std::endl;
+}
+
 void StorageDecorator::addExtraBarn() {
     //add a new barn
-    wrapee->addFarmUnit(std::make_shared<Barn>(100,100,wrapee->getCropType().crop));
+    this->addFarmUnit(std::make_shared<Barn>(100,100,wrapee->getCropType().crop));
+    //wrapee->addFarmUnit();
 }
 
 int StorageDecorator::getLeftoverCapacity() {
@@ -365,8 +361,7 @@ void FertilizerDecorator::increaseProduction() {
     std::cout << "Soil changed to " << wrapee->getSoilStateName() << std::endl;
 }
 void FertilizerDecorator::harvest() {
-    wrapee->storeCrops();
-
+    wrapee->harvestWithBonus();
 }
 void FertilizerDecorator::applyEnhancement() {
     increaseProduction();

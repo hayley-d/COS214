@@ -20,5 +20,6 @@ void DrySoil::harvestCrops() {
 }
 
 void DrySoil::fertilize() {
+    std::cout << "Applying fertilizer to dry crops!" << std::endl;
     this->farmUnit->changeSoilState("Fruitful");
 }

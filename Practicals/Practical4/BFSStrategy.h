@@ -18,7 +18,9 @@ class BFSStrategy : public TraversalStrategy {
  typedef std::vector<std::shared_ptr<FarmUnit>> FarmUnitPtrVector; ///< Type alias for vector of shared pointers to FarmUnit.
 
 public:
-    /**
+ BFSStrategy() = default;
+
+ /**
      * @brief Initializes the BFS traversal starting from the root FarmUnit.
      *
      * @param farmUnits The children of the root farm unit. This vector is used to seed the traversal.

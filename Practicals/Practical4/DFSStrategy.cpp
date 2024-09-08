@@ -14,15 +14,15 @@ bool DFSStrategy::hasNext()  {
 }
 
 FarmUnitPtr DFSStrategy::getNext() {
-    if (stack.empty()) return nullptr;
+    if (!hasNext()) return nullptr;
+
     FarmUnitPtr current = stack.top();
     stack.pop();
 
-    auto childIterator = current->getIterator();
-
-    if (childIterator) {
-        while (childIterator->hasNext()) {
-            stack.push(childIterator->next());
+    if(current->isComposite()) {
+        std::vector<std::shared_ptr<FarmUnit>> children = current->getChildren();
+        for (auto it = children.rbegin(); it != children.rend(); ++it) {
+            stack.push(*it);
         }
     }
 

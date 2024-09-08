@@ -14,5 +14,6 @@ void FloodedSoil::harvestCrops() {
 }
 
 void FloodedSoil::fertilize() {
+    std::cout << "Applyting fertilizer to flooded crops...there is no saving these crops" << std::endl;
     //does nothing
 }

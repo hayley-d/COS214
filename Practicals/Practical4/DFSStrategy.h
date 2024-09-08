@@ -18,6 +18,8 @@ class DFSStrategy : public TraversalStrategy {
     typedef std::vector<std::shared_ptr<FarmUnit> > FarmUnitPtrVector;
     ///< Type alias for vector of shared pointers to FarmUnit.
 public:
+    DFSStrategy() = default;
+
     /**
      * @brief Initializes the DFS traversal starting from the root FarmUnit.
      *
@@ -53,7 +55,6 @@ public:
      */
     bool hasNext() override;
 
-    DFSStrategy() = default;
 
    private:
     std::stack<FarmUnitPtr> stack; ///< Stack used for DFS traversal

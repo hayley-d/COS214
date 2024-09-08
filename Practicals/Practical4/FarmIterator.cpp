@@ -38,11 +38,6 @@ FarmIterator &FarmIterator::operator++() {
     return *this;
 }
 
-FarmIterator FarmIterator::operator++(int) {
-    FarmIterator temp = *this;
-    strategy->getNext();
-    return temp;
-}
 
 FarmUnitPtr& FarmIterator::operator*() {
     return current;
@@ -52,31 +47,7 @@ std::shared_ptr<FarmUnit> FarmIterator::operator->() {
     return current;
 }
 
-bool FarmIterator::operator==(const FarmIterator &other) const {
-    return current == other.current;
-}
-
-bool FarmIterator::operator!=(const FarmIterator &other) const{
-    return current != other.current;
-}
-
-FarmIterator &FarmIterator::operator=(const FarmIterator &other) {
-    if (this != &other) {
-        current = other.current;
-    }
-    return *this;
-}
-
 bool FarmIterator::hasNext() {
     return this->strategy->hasNext();
 }
 
-FarmIterator FarmIterator::begin() {
-    return *this;
-}
-
-FarmIterator FarmIterator::end() {
-    FarmIterator endIterator(farms);
-    endIterator.current = nullptr;
-    return endIterator;
-}

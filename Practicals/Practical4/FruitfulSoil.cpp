@@ -20,5 +20,6 @@ void FruitfulSoil::harvestCrops() {
 }
 
 void FruitfulSoil::fertilize() {
+    std::cout << "Applying fertilizer to fruitful crops..nothing happend" << std::endl;
     //does nothing
 }

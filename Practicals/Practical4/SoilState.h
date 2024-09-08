@@ -27,31 +27,7 @@ public:
         this->name = name;
     }
 
-    SoilState(const SoilState &other)
-     : farmUnit(other.farmUnit),
-       name(other.name) {
-    }
 
-    SoilState(SoilState &&other) noexcept
-     : farmUnit(other.farmUnit),
-       name(std::move(other.name)) {
-    }
-
-    SoilState & operator=(const SoilState &other) {
-     if (this == &other)
-      return *this;
-     farmUnit = other.farmUnit;
-     name = other.name;
-     return *this;
-    }
-
-    SoilState & operator=(SoilState &&other) noexcept {
-     if (this == &other)
-      return *this;
-     farmUnit = other.farmUnit;
-     name = std::move(other.name);
-     return *this;
-    }
 
     /**
      * @brief Virtual destructor for SoilState.

@@ -1,57 +1,48 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall -g -O2 -fprofile-arcs -ftest-coverage
-LDFLAGS = -lgcov
+CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic -g
+LDFLAGS = --coverage
+LDLIBS = -lgcov
 
-# Directories and files
-SRCDIR = .
-OBJDIR = obj
-BINDIR = bin
+# Source files
+SRCS = $(wildcard *.cpp)
+OBJS = $(SRCS:.cpp=.o)
 
-SOURCES := $(wildcard $(SRCDIR)/*.cpp)
-OBJECTS := $(SOURCES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
-EXEC = $(BINDIR)/main
+# Headers
+HEADERS = $(wildcard *.h)
 
-# Valgrind tool for memory checking
+# Executable name
+TARGET = roman_battle_simulator
+
+# Valgrind settings
 VALGRIND = valgrind --leak-check=full --show-leak-kinds=all
 
-# Create necessary directories
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
+# Default rule: compile the program
+all: $(TARGET)
 
-$(BINDIR):
-	mkdir -p $(BINDIR)
+# Link the object files into the final executable
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $(TARGET) $(OBJS) $(LDLIBS)
 
-# Compile all the .cpp files to .o
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-# Link the objects and create the executable
-$(EXEC): $(OBJECTS) | $(BINDIR)
-	$(CXX) $(OBJECTS) -o $(EXEC) $(LDFLAGS)
-
-# Default target: compile and link
-.PHONY: all
-all: $(EXEC)
+# Compile each .cpp file into .o file
+%.o: %.cpp $(HEADERS)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -c $< -o $@
 
 # Run the program
-.PHONY: run
-run: $(EXEC)
-	./$(EXEC)
+run: $(TARGET)
+	./$(TARGET)
 
-# Memory check using Valgrind
-.PHONY: memcheck
-memcheck: $(EXEC)
-	$(VALGRIND) ./$(EXEC)
+# Check for memory leaks with Valgrind
+memcheck: $(TARGET)
+	$(VALGRIND) ./$(TARGET)
 
-# Code coverage
-.PHONY: coverage
-coverage: $(EXEC)
-	./$(EXEC)
-	gcov $(SOURCES)
+# Run code coverage
+coverage: $(TARGET)
+	./$(TARGET)
+	gcov $(SRCS)
 
-# Clean up the compiled objects, binary, and gcov coverage files
-.PHONY: clean
+# Clean up generated files
 clean:
-	rm -rf $(OBJDIR) $(BINDIR) *.gcda *.gcno *.gcov
+	rm -f $(TARGET) $(OBJS) *.gcno *.gcda *.gcov
 
+.PHONY: all run memcheck coverage clean

@@ -155,6 +155,8 @@ public:
 
     virtual void heatWave();
 
+ virtual void harvestWithBonus();
+
 protected:
     /// The PImpl idiom for managing private implementation details.
     struct pImplFarmUnit;

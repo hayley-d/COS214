@@ -71,13 +71,6 @@ public:
       */
     FarmIterator &operator++();
 
-    /**
-     * @brief Post-increment operator to advance the iterator.
-     *
-     * @param int Unused parameter (int to differentiate from pre-increment).
-     * @return FarmIterator Copy of the iterator before advancing.
-     */
-    FarmIterator operator++(int);
 
     /**
       * @brief Dereference operator to access the current `FarmUnit`.
@@ -93,43 +86,8 @@ public:
      */
     FarmUnitPtr operator->();
 
-    /**
-     * @brief Equality comparison operator.
-     *
-     * @param other Reference to another `FarmIterator`.
-     * @return `true` if the current `FarmIterator` is equal to `other`, `false` otherwise.
-     */
-    bool operator==(const FarmIterator &other) const;
 
-    /**
-      * @brief Inequality comparison operator.
-      *
-      * @param other Reference to another `FarmIterator`.
-      * @return `true` if the current `FarmIterator` is not equal to `other`, `false` otherwise.
-      */
-    bool operator!=(const FarmIterator &other) const;
 
-    /**
-     * @brief Assignment operator to assign another `FarmIterator` to the current one.
-     *
-     * @param other Reference to another `FarmIterator`.
-     * @return Reference to the current `FarmIterator`.
-     */
-    FarmIterator &operator=(const FarmIterator &other);
-
-    /**
-     * @brief Returns an iterator to the beginning of the traversal.
-     *
-     * @return FarmIterator iterator to the beginning.
-     */
-    FarmIterator begin();
-
-    /**
-     * @brief Returns an iterator to the end of the traversal.
-     *
-     * @return FarmIterator iterator to the end.
-     */
-    FarmIterator end();
 
     ~FarmIterator() override = default;
 

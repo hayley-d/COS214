@@ -47,12 +47,6 @@ public:
      */
     void printFarm() override;
 
-    /**
-     * @brief Changes the soil state of the farm.
-     * Updates the soil state of the farm to the specified new value.
-     * @param soilState A reference to the new soil state.
-     */
-    void changeSoilState(std::string soilState) override;
 
     /**
      * @brief Adds a farm unit to the farm.
