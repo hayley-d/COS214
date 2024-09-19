@@ -1,4 +1,4 @@
-#indef EVENT_H
+#ifndef EVENT_H
 #define EVENT_H
 
 /**
@@ -9,3 +9,4 @@ enum Event {
     Movement,
     Temperature,
 };
+#endif //EVENT_H

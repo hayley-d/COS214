@@ -1,4 +1,4 @@
-#indef DEVICETYPE_H
+#ifndef DEVICETYPE_H
 #define DEVICETYPE_H
 #include <ostream>
 
