@@ -1,4 +1,6 @@
 #include "SmartDevice.h"
+#include "LegacyThermostat.h"
+#include "SmartThermostatIntegrator.h"
 #include "SmartThermostat.h"
 #include "SmartDoor.h"
 #include <iostream>
@@ -165,5 +167,57 @@ int main() {
         std::cout << "Test 9 Passed" <<std::endl;
     }
 
+    std::shared_ptr<LegacyThermostat> legacyDevice = std::make_shared<LegacyThermostat>();
+    std::shared_ptr<SmartThermostat> device7 = std::make_shared<SmartThermostatIntegrator>(legacyDevice,7);
+
+    if(device7->getId() == 7) {
+        std::cout << "Test 1 Passed" << std::endl;
+    }
+
+    if(device7->getTemperature() == 0) {
+        std::cout << "Test 2 Passed" << std::endl;
+    }
+
+    device7->setTemperature(45);
+    if(device7->getTemperature() == 45) {
+        std::cout << "Test 3 Passed" << std::endl;
+    }
+
+    device7->setTemperature(0);
+    if(device7->getTemperature() == 0) {
+        std::cout << "Test 4 Passed" << std::endl;
+    }
+
+    device7->toggleOn();
+    if(device7->isOn()) {
+        std::cout << "Test 5 Passed" << std::endl;
+    }
+
+    device7->toggleOff();
+    if(!device7->isOn()) {
+        std::cout << "Test 6 Passed" << std::endl;
+    }
+
+    device7->toggle();
+    if(device7->isOn()) {
+        std::cout << "Test 7 Passed" << std::endl;
+    }
+
+    if(device7->getStatus() == "Thermostat is on") {
+        std::cout << "Test 8 Passed" << std::endl;
+    }
+
+    device7->toggle();
+    if(!device7->isOn()) {
+        std::cout << "Test 9 Passed" << std::endl;
+    }
+
+    if(device7->getStatus() == "Thermostat is off") {
+        std::cout << "Test 10 Passed" << std::endl;
+    }
+
+    if(device7->getDeviceType() == DeviceType::Thermostat) {
+        std::cout << "Test 11 Passed" << std::endl;
+    }
     return 0;
 }
