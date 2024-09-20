@@ -1,4 +1,5 @@
 #include "SmartDevice.h"
+#include "SmartRoom.h"
 #include "LegacyThermostat.h"
 #include "SmartThermostatIntegrator.h"
 #include "SmartThermostat.h"
@@ -184,7 +185,7 @@ int main() {
     }
 
     device7->setTemperature(0);
-    if(device7->getTemperature() == 0) {
+    if(device7->getTemperature() == 0.0) {
         std::cout << "Test 4 Passed" << std::endl;
     }
 
@@ -219,5 +220,13 @@ int main() {
     if(device7->getDeviceType() == DeviceType::Thermostat) {
         std::cout << "Test 11 Passed" << std::endl;
     }
+
+    std::shared_ptr<SmartRoom> room1 = std::make_shared<SmartRoom>();
+
+    room1->addSmartDevice(device1);
+    room1->addSmartDevice(device2);
+    room1->addSmartDevice(device3);
+    room1->addSmartDevice(device4);
+    room1->addSmartDevice(device5);
     return 0;
 }
