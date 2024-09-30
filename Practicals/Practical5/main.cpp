@@ -8,6 +8,9 @@
 #include "SmartLight.h"
 #include "Event.h"
 #include "DeviceType.h"
+#include "Sensor.h"
+#include "LightSensor.h"
+#include "TemperatureSensor.h"
 #include <memory>
 int main() {
     // Test SmartLight
@@ -228,5 +231,25 @@ int main() {
     room1->addSmartDevice(device3);
     room1->addSmartDevice(device4);
     room1->addSmartDevice(device5);
+
+    room1->setRoomLightIntensity(50);
+    room1->setRoomTemperature(19.5);
+
+    room1->lockRoomDoors();
+    room1->unlockRoomDoors();
+    room1->turnOnLights();
+    room1->turnOffLights();
+
+    room1->addSensor(Event::Movement); 
+    room1->addSensor(Event::Temperature);
+
+    room1->notify(Event::Movement);
+    room1->notify(Event::Temperature);
+
+    room1->removeSensor(1);
+    room1->removeSmartDevice(1, DeviceType::Light);
+    room1->removeSmartDevice(2, DeviceType::Door);
+    room1->removeSmartDevice(4, DeviceType::Thermostat);
+
     return 0;
 }
