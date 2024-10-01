@@ -11,6 +11,14 @@
 #include "Sensor.h"
 #include "LightSensor.h"
 #include "TemperatureSensor.h"
+#include "Command.h"
+#include "TurnOffLightsCommand.h"
+#include "TurnOnLightsCommand.h"
+#include "SetLightIntensityCommand.h"
+#include "LockDoorsCommand.h"
+#include "UnlockDoorsCommand.h"
+#include "SetTemperatureCommand.h"
+#include "MacroCommand.h"
 #include <memory>
 int main() {
     // Test SmartLight
@@ -251,5 +259,32 @@ int main() {
     room1->removeSmartDevice(2, DeviceType::Door);
     room1->removeSmartDevice(4, DeviceType::Thermostat);
 
+    TurnOffLightsCommand c1(room1);
+    c1.execute();
+
+    TurnOnLightsCommand c2(room1);
+    c2.execute();
+
+    SetLightIntensityCommand c3(room1);
+    c3.execute(20.0);
+
+    LockDoorsCommand c4(room1);
+    c4.execute();
+
+    UnlockDoorsCommand c5(room1);
+    c5.execute();
+
+    SetTemperatureCommand c6(room1);
+    c6.execute(25.7);
+
+    MacroCommand macro;
+    std::shared_ptr<Command> cs1 = std::make_shared<TurnOffLightsCommand>(room1);
+    std::shared_ptr<Command> cs2 = std::make_shared<TurnOnLightsCommand>(room1);
+    macro.addProcedure(cs1);
+    macro.addProcedure(cs2);
+
+    macro.execute();
+
+    macro.removeProcedure(0);
     return 0;
 }
