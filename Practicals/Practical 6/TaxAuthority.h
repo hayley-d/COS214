@@ -6,6 +6,9 @@
 #include "BuildingCollection.h"
 #include "Building.h"
 #include "TaxStrategy.h"
+#include "FlatTaxStrategy.h"
+#include "ProgressiveTaxStrategy.h"
+#include "Citizen.h"
 
 /**
  * @brief Manages tax collection and taxation strategies in the city.
@@ -28,7 +31,7 @@ public:
     /**
      * @brief Construct a new TaxAuthority object.
      *
-     * Initializes the TaxAuthority with default values and prepares necessary components.
+     * Initializes the TaxAuthority with default strategy and values.
      */
     TaxAuthority();
 
@@ -44,7 +47,14 @@ public:
      *
      * @param building Pointer to the Building object to be registered.
      */
-    void registerBuilding(Building* building);
+    void registerBuilding(std::shared_ptr<Building> building);
+
+    /**
+     * @brief Registers a citizen with the tax authority.
+     *
+     * @param citizen A shared_ptr to a citizen object.
+     */
+    void registerCitizen(std::shared_ptr<Citizen> citizen);
 
     /**
      * @brief Notifies citizens about tax obligations.
@@ -65,7 +75,7 @@ public:
      *
      * @param taxStrategy Pointer to the TaxStrategy object to be set as the current strategy.
      */
-    void setStrategy(TaxStrategy* taxStrategy);
+    void setStrategy(std::unique_ptr<TaxStrategy> taxStrategy);
 
     /**
      * @brief Calculates the tax for a building based on its value.
