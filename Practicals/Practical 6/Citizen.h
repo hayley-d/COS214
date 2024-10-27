@@ -96,6 +96,15 @@ public:
      * This function updates the employment status of the citizen.
      */
     void quitJob();
+
+    /**
+    * @brief Getter for the funds to the citizen.
+    *
+    * @return The funds of the citizen.
+    */
+    int getFunds() {
+        return this->funds;
+    }
 };
 
 #endif // CITIZEN_H

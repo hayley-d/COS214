@@ -11,6 +11,7 @@ TaxAuthority::~TaxAuthority(){
 }
 
 void TaxAuthority::registerBuilding(std::shared_ptr<Building> building) {
+    this->buildings->addBuilding(building);
 }
 
 void TaxAuthority::registerCitizen(std::shared_ptr<Citizen> citizen) {
@@ -19,12 +20,14 @@ void TaxAuthority::registerCitizen(std::shared_ptr<Citizen> citizen) {
 
 void TaxAuthority::notifyCitizens(int amount) {
     for(auto c : this->citizens) {
-        c->payTax(current_citizen_tax);
+        c->payTax(calculateCitizenTax(c->getFunds()));
     }
 }
 
 void TaxAuthority::notifyBuildings(int amount) {
-
+    while(this->buildings->hasNext()) {
+        this->buildings->getBuilding()->
+    }
 }
 
 void TaxAuthority::setStrategy(std::unique_ptr<TaxStrategy> taxStrategy) {
@@ -36,8 +39,9 @@ int TaxAuthority::calculateBuildingTax(int value) {
 }
 
 int TaxAuthority::calculateCitizenTax(int earnings) {
-    return this->strategy->calculateCitizenTac(earnings);
+    return this->strategy->calculateCitizenTax(earnings);
 }
 
 void TaxAuthority::changeRate(int percentage) {
+    // Do not think this is needed?
 }
