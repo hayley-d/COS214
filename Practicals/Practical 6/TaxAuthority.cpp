@@ -25,8 +25,9 @@ void TaxAuthority::notifyCitizens(int amount) {
 }
 
 void TaxAuthority::notifyBuildings(int amount) {
-    while(this->buildings->hasNext()) {
-        this->buildings->getBuilding()->
+    for(auto it = buildings->begin(); it != buildings->end(); ++it) {
+        auto building = *it;
+        building->payTax(calculateBuildingTax(building->getCost()));
     }
 }
 
@@ -42,6 +43,3 @@ int TaxAuthority::calculateCitizenTax(int earnings) {
     return this->strategy->calculateCitizenTax(earnings);
 }
 
-void TaxAuthority::changeRate(int percentage) {
-    // Do not think this is needed?
-}

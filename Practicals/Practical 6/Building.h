@@ -47,6 +47,8 @@ public:
      * @param owner Pointer to the building's owner.
      */
     virtual void payTax(int amount, Citizen* owner);
+
+    
 };
 
 #endif // BUILDING_H

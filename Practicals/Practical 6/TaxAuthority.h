@@ -24,8 +24,6 @@ private:
     std::unique_ptr<BuildingCollection> buildings;  ///< Pointer to the collection of registered buildings.
     std::vector<std::shared_ptr<Citizen>> citizens; ///< vector of shared_pointers to citizen objects.
     std::unique_ptr<TaxStrategy> strategy;          ///< Pointer to the current tax strategy being used.
-    int current_citizen_tax;                        ///< Integer that reflects the current tax applied to citizens
-    int current_building_tax;                       ///< Integer that refelctst the current tax applied to buildings.
 
 public:
     /**
@@ -93,12 +91,6 @@ public:
      */
     int calculateCitizenTax(int earnings);
 
-    /**
-     * @brief Changes the current tax rate by a specified percentage.
-     *
-     * @param percentage The percentage by which to change the current tax rate.
-     */
-    void changeRate(int percentage);
 };
 
 #endif // TAXAUTHORITY_H
