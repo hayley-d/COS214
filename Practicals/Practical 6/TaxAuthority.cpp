@@ -1,13 +1,9 @@
 #include "TaxAuthority.h"
 
 TaxAuthority::TaxAuthority(){
+    this->buildings = std::make_unique<BuildingCollection>();
     this->strategy = std::make_unique<FlatTaxStrategy>();
-    this->current_citizen_tax = 0;
-    this->current_building_tax = 0;
-}
-
-TaxAuthority::~TaxAuthority(){
-    //Nothing yet unless I have to change from smart pointers :)
+    this->collectedTax = 0;
 }
 
 void TaxAuthority::registerBuilding(std::shared_ptr<Building> building) {
@@ -18,14 +14,24 @@ void TaxAuthority::registerCitizen(std::shared_ptr<Citizen> citizen) {
     this->citizens.push_back(citizen);
 }
 
-void TaxAuthority::notifyCitizens(int amount) {
+void TaxAuthority::collectTaxes() {
+    this->collectedTax = 0; // Reset the collected tax for the new cycle
+    
+    // Collect Taxes
+    this->notifyBuildings();
+    this->notifyCitizens();
+}
+
+void TaxAuthority::notifyCitizens() {
     for(auto c : this->citizens) {
-        c->payTax(calculateCitizenTax(c->getFunds()));
+        c->payTaxes(calculateCitizenTax(c->getFunds()));
     }
 }
 
-void TaxAuthority::notifyBuildings(int amount) {
+void TaxAuthority::notifyBuildings() {
+    int counter = 0;
     for(auto it = buildings->begin(); it != buildings->end(); ++it) {
+        counter++;
         auto building = *it;
         building->payTax(calculateBuildingTax(building->getCost()));
     }
@@ -41,5 +47,9 @@ int TaxAuthority::calculateBuildingTax(int value) {
 
 int TaxAuthority::calculateCitizenTax(int earnings) {
     return this->strategy->calculateCitizenTax(earnings);
+}
+
+void TaxAuthority::sendTax(int amount) {
+    this->collectedTax += amount;
 }
 

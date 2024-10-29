@@ -2,13 +2,17 @@
 #define TAXAUTHORITY_H
 #include <memory>
 #include <vector>
+#include <iostream>
 
 #include "BuildingCollection.h"
-#include "Building.h"
 #include "TaxStrategy.h"
 #include "FlatTaxStrategy.h"
 #include "ProgressiveTaxStrategy.h"
 #include "Citizen.h"
+
+class Citizen;
+class Building;
+class BuildingCollection;
 
 /**
  * @brief Manages tax collection and taxation strategies in the city.
@@ -24,6 +28,7 @@ private:
     std::unique_ptr<BuildingCollection> buildings;  ///< Pointer to the collection of registered buildings.
     std::vector<std::shared_ptr<Citizen>> citizens; ///< vector of shared_pointers to citizen objects.
     std::unique_ptr<TaxStrategy> strategy;          ///< Pointer to the current tax strategy being used.
+    int collectedTax;
 
 public:
     /**
@@ -38,7 +43,7 @@ public:
      *
      * Cleans up resources and deletes any dynamically allocated components.
      */
-    virtual ~TaxAuthority();
+     ~TaxAuthority() = default;
 
     /**
      * @brief Registers a building with the tax authority.
@@ -53,20 +58,11 @@ public:
      * @param citizen A shared_ptr to a citizen object.
      */
     void registerCitizen(std::shared_ptr<Citizen> citizen);
-
+  
     /**
-     * @brief Notifies citizens about tax obligations.
-     *
-     * @param amount The amount of tax that citizens need to be notified about.
+     * @brief Notifies all registered members to pay taxes.
      */
-    void notifyCitizens(int amount);
-
-    /**
-     * @brief Notifies buildings about their tax obligations.
-     *
-     * @param amount The amount of tax that buildings need to be notified about.
-     */
-    void notifyBuildings(int amount);
+    void collectTaxes();
 
     /**
      * @brief Sets the tax strategy for the tax authority.
@@ -74,6 +70,27 @@ public:
      * @param taxStrategy Pointer to the TaxStrategy object to be set as the current strategy.
      */
     void setStrategy(std::unique_ptr<TaxStrategy> taxStrategy);
+
+    /**
+    * @brief Recieves the tax from buildings and citizens.
+    *
+    * @param amount The amout being sent to the tax authority.
+    */
+    void sendTax(int amount);
+
+
+private:
+    /**
+     * @brief Notifies citizens about tax obligations.
+     * Iterates through a vector of registered citizens and notifies them to make payment.
+     */
+    void notifyCitizens();
+
+    /**
+     * @brief Notifies buildings about their tax obligations.
+     * Iterates through the building collection and notifies them to make payment.
+     */
+    void notifyBuildings();
 
     /**
      * @brief Calculates the tax for a building based on its value.
@@ -90,7 +107,6 @@ public:
      * @return The calculated tax amount for the citizen.
      */
     int calculateCitizenTax(int earnings);
-
 };
 
 #endif // TAXAUTHORITY_H
