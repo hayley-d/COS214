@@ -1,15 +1,13 @@
-#include "HealthService.h"
-#include "HighFundingState.h"
+#include "EducationService.h"
+#include "HighFundingEducationState.h"
 
-HealthService::HealthService(int cost, std::string location, Resources *resources, int size, Citizen& owner, int id, std::string name) : Service(cost, location, resources, size, owner, name,id){
+EducationService::EducationService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id, BuildingType name) : Service(cost, location, resources, size, owner,name,id){
     this->responseTime = 10;
-    HealthState* highFunding = new HighFundingState();
+    educationState = new HighFundingEducationState();
 }
 
-std::string HealthService::getDetails() const {
+std::string EducationService::getDetails() const {
     std::string details =  "Health service: \n";
-    details += "Hospital state: " + this->healthState->getName() + "\n";
-    details += "Response time: " + std::to_string(responseTime) + " minutes\n";
     details += "Owner: " + owner.getName() + "\n";
     details += "Location: " + location + "\n";
     details += "Capacity: " + std::to_string(employees.size()) + "/" + std::to_string(maxEmployees) + "\n";
@@ -18,15 +16,15 @@ std::string HealthService::getDetails() const {
     return details;
 }
 
-int HealthService::pay() {
-    return 223000;
+int EducationService::pay() {
+   return 223000;
 }
 
-int HealthService::getResponseTime() {
+int EducationService::getResponseTime() {
     return responseTime;
 }
 
-void HealthService::setState(HealthState *state) {
+void EducationService::setState(HealthState *state) {
     healthState = state;
     if(state->getName() == "HighFundingState") {
         benefits += 0.2;

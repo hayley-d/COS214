@@ -2,16 +2,11 @@
 #include "NameGenerator.h"
 #include <iostream>
 
-Citizen::Citizen(int id,std::string type, int satisfactionLevel, int funds,std::weak_ptr<TaxAuthority> taxAuthority){
-    this->id = id;
-    this->type = type;
-    this->satisfactionLevel = satisfactionLevel;
-    this->funds = funds;
-    this->employmentStatus = false;
-    this->retired = false;
+Citizen::Citizen(int id,std::string& type, int satisfactionLevel, int funds,TaxAuthority& taxAuthority)
+: taxAuthority(taxAuthority),id(id),type(type), satisfactionLevel(satisfactionLevel), funds(funds),employmentStatus(false),retired(false){
+
     this->home = nullptr;
     this->placeOfWork = nullptr;
-    this->taxAuthority = taxAuthority;
     this->currentVehicle = nullptr;
     this->name = NameGenerator::getInstance().getRandomName();
     this->id = NameGenerator::getInstance().getRandomID();
@@ -42,9 +37,8 @@ void Citizen::workDay(){
 
 void Citizen::collectSalary(Building* placeOfWork){
     if (placeOfWork) {
-        int salary = placeOfWork->pay(this);
-        funds += salary;
-        // satisfactionLevel += 1;
+        int salary = placeOfWork->pay();
+        this->funds += salary;
     }
 }
 
@@ -52,9 +46,7 @@ void Citizen::payTaxes(int amount){
     if (employmentStatus) {
         if (funds >= amount) {
             funds -= amount;
-            if(auto taxAuth = taxAuthority.lock()) {
-                taxAuth->sendTax(amount);
-            }
+            taxAuthority.sendTax(amount);
         } 
     }
 }
@@ -87,26 +79,6 @@ void Citizen::fired(){
     employmentStatus = false;
     placeOfWork = nullptr;
     satisfactionLevel -= 5;
-}
-
-bool Citizen::getEmploymentStatus() {
-    if(employmentStatus == true || retired == true) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-int Citizen::getFunds() {
-    return funds;
-}
-
-std::string Citizen::getName() const {
-    return name;
-}
-
-int Citizen::getId() const {
-    return id;
 }
 
 void Citizen::callTransport(TransportDepartment& department, const std::string& type) {
@@ -142,6 +114,4 @@ bool Citizen::isInVehicle() const {
     return currentVehicle != nullptr;
 }
 
-std::string Citizen::getType() {
-    return this->type;
-}
+
