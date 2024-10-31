@@ -1,7 +1,7 @@
 #include "BudgetDepartment.h"
 #include "TaxAuthority.h"
 
-BudgetDepartment::BudgetDepartment(TaxAuthority& taxAuthority) : taxAuthority(taxAuthority) {
+BudgetDepartment::BudgetDepartment(std::shared_ptr<TaxAuthority> taxAuthority) : taxAuthority(taxAuthority) {
     this->totalAvailable = 0;
     this->broke = false;
 }
@@ -43,7 +43,7 @@ void BudgetDepartment::inflation(int percentage) {
 }
 
 void BudgetDepartment::receiveTaxes() {
-    int taxesCollected = taxAuthority.collectTaxes();
+    int taxesCollected = taxAuthority->collectTaxes();
     gain(taxesCollected);
 }
 

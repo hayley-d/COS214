@@ -2,7 +2,7 @@
 #include "NameGenerator.h"
 #include <iostream>
 
-Citizen::Citizen(int id,std::string& type, int satisfactionLevel, int funds,TaxAuthority& taxAuthority)
+Citizen::Citizen(int id,std::string& type, int satisfactionLevel, int funds,std::weak_ptr<TaxAuthority> taxAuthority)
 : taxAuthority(taxAuthority),id(id),type(type), satisfactionLevel(satisfactionLevel), funds(funds),employmentStatus(false),retired(false){
 
     this->home = nullptr;
@@ -46,7 +46,9 @@ void Citizen::payTaxes(int amount){
     if (employmentStatus) {
         if (funds >= amount) {
             funds -= amount;
-            taxAuthority.sendTax(amount);
+            if(auto taxAuth = taxAuthority.lock()) {
+                taxAuth->sendTax(amount);
+            }
         } 
     }
 }

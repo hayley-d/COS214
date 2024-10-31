@@ -2,8 +2,8 @@
 #include "HighFundingEducationState.h"
 
 EducationService::EducationService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id, BuildingType name) : Service(cost, location, resources, size, owner,name,id){
-    this->responseTime = 10;
-    educationState = new HighFundingEducationState();
+    this->prestige = 0;
+    educationState = new HighFundingEducationState(*this);
 }
 
 std::string EducationService::getDetails() const {
@@ -20,24 +20,28 @@ int EducationService::pay() {
    return 223000;
 }
 
-int EducationService::getResponseTime() {
-    return responseTime;
-}
-
-void EducationService::setState(HealthState *state) {
-    healthState = state;
+void EducationService::setState() {
+/*    educationState = state;
     if(state->getName() == "HighFundingState") {
         benefits += 0.2;
     } else if(state->getName() == "LowFundingState") {
         benefits -= 0.2;
-    }
+    }*/
 }
 
-void HealthService::responseTimeDec(int by) {
-    responseTime -= by;
+
+void EducationService::checkOperation() {
+
 }
 
-void HealthService::responseTimeInc(int by) {
-    responseTime += by;
+void EducationService::prestigeDec(int by) {
+    prestige -= by;
 }
 
+void EducationService::prestigeInc(int by) {
+    prestige += by;
+}
+
+int EducationService::getPrestige() {
+    return prestige;
+}

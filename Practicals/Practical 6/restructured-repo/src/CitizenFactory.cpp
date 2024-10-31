@@ -9,7 +9,7 @@ Citizen* CitizenFactory::createCitizen(std::string& type, int startingSatisfacti
 
     Citizen * newCitizen = new Citizen(id,type, startingSatisfaction, startingFunds, taxAuthority);
 
-    taxAuthority.registerCitizen(*newCitizen);
+    taxAuthority->registerCitizen(*newCitizen);
 
     return newCitizen;
 }

@@ -51,13 +51,6 @@ void PoliceService::checkOperation() {
 
 void PoliceService::setState(PoliceState& state) {
     delete policeState;
-
     policeState = &state;
-
-/*    if(state->getName() == "UnrestState") {
-        benefits -= 0.2;
-    } else if(state->getName() == "PeaceState") {
-        benefits += 0.2;
-    }*/
 }
 

@@ -12,8 +12,8 @@ std::string BrickFactory::getDetails() const {
     return details;
 }
 
-void BrickFactory::produceResource() {
-    //impliment
+int BrickFactory::produceResource() {
+    return 100;
 }
 
 int BrickFactory::pay() {

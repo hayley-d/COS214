@@ -20,7 +20,7 @@ Building *FactoryFactory::createBuilding(BuildingType type, Citizen& owner) {
         productionRate = 4;
 
         Building* b = new WoodFactory(cost, location,resources, 1000, owner, type,productionRate, maxEmployees);
-        taxAuthority.registerBuilding(*b);
+        taxAuthority->registerBuilding(*b);
         return b; 
     } else if(type == BuildingType::SteelFactory) {
         maxEmployees = 100;
@@ -28,7 +28,7 @@ Building *FactoryFactory::createBuilding(BuildingType type, Citizen& owner) {
         productionRate = 6;
 
         Building* b = new SteelFactory(cost, location,resources, 1000, owner,type,productionRate, maxEmployees);
-        taxAuthority.registerBuilding(*b);
+        taxAuthority->registerBuilding(*b);
         return b; 
 
     } else {
@@ -37,7 +37,7 @@ Building *FactoryFactory::createBuilding(BuildingType type, Citizen& owner) {
         productionRate = 12;
 
         Building* b = new BrickFactory(cost, location,resources, 1000, owner, type,productionRate, maxEmployees);
-        taxAuthority.registerBuilding(*b);
+        taxAuthority->registerBuilding(*b);
         return b; 
 
     }
