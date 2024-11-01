@@ -17,30 +17,30 @@
 
 class building_test : public ::testing::Test {
     protected:
-        
-        std::shared_ptr<TaxAuthority> taxAuth = std::make_shared<TaxAuthority>();
+        std::shared_ptr<TaxAuthority> taxAuth;
         BuildingFactory* factory;
         Building* b1;
-        Building* b2;
-        Building* b3;
-        Citizen* citizen = new Citizen(0,CitizenType::Citizen,100,10000,taxAuth);
+        //Building* b2;
+        //Building* b3;
+        Citizen* citizen;
 
         void SetUp() override {
-            std::cout << "Running SetUp" << std::endl;
-
+            taxAuth = std::make_shared<TaxAuthority>();
+            citizen = new Citizen(0,CitizenType::Citizen,100,10000,taxAuth);
+            factory = new CommercialFactory(taxAuth);
             b1 = factory->createBuilding(BuildingType::Bank, *citizen);
         }
 
         void TearDown() override {
-            delete b1;
+            // Buildings are deleted in the building collection so do not need to be deleted manually
+            //delete b1;
             delete factory;
+            delete citizen;
         }
 };
 
 // Test Constructor
-TEST_F(building_test, commercial_test) {
-    // Construction 
-     std::cout << "Running commercial_test..." << std::endl;
+TEST_F(building_test, commercial_test_construction) {
     Commercial* commercialPtr = dynamic_cast<Commercial*>(b1);
     if (commercialPtr) {
         EXPECT_EQ(commercialPtr->getMaxEmployees(), 30);
@@ -51,9 +51,10 @@ TEST_F(building_test, commercial_test) {
     }
 
     EXPECT_EQ(b1->getCost(),200);
-    EXPECT_EQ(b1->getLocation(),"Buisiness district");
+    EXPECT_EQ(b1->getLocation(),"Business district");
     EXPECT_EQ(b1->getSize(),1000);
     EXPECT_EQ(b1->getName(),BuildingType::Bank);
+    EXPECT_EQ(taxAuth->getSize(),1);
 
 
 }
@@ -64,6 +65,5 @@ TEST(SimpleTest, AlwaysPass) {
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
-    std::cout << "Running all tests..." << std::endl;
     return RUN_ALL_TESTS();
 }
