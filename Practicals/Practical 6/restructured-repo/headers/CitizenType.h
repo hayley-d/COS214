@@ -1,22 +1,13 @@
-#ifndef BUILDINGTYPE_H
-#define BUILDINGTYPE_H
+#ifndef CITIZENTYPE_H
+#define CITIZENTYPE_H
 #include <iostream>
 #include <string>
 #include <ostream>
 
-enum class BuildingType {
-    Residential,
-    Shop,
-    BrickFactory,
-    SteelFactory,
-    WoodFactory,
-    Office,
-    Bank,
-    Flat,
-    Estate,
-    House,
-    Statue,
-    Park
+enum class CitizenType {
+    Citizen,
+    Worker,
+    Retired,
 };
 
 // Overload operator<< to allow printing of BuildingType
@@ -37,4 +28,4 @@ enum class BuildingType {
     return os;
 }*/
 
-#endif // BUILDINGTYPE_H
+#endif // CITIZENTYPE_H
