@@ -12,40 +12,28 @@
 
 #include <memory>
 
-class citizen_test : public ::testing::Test {
+class government_test : public ::testing::Test {
     protected:
         std::shared_ptr<TaxAuthority> taxAuth;
-        Citizen* c;
-        Building* work;
-        Building* home;
-        FactoryFactory* factory;
-        ResidentialFactory* homeFactory;
-
+        
         void SetUp() override {
             taxAuth = std::make_shared<TaxAuthority>();
-            factory = new FactoryFactory(taxAuth);
-            homeFactory = new ResidentialFactory(taxAuth);
-            c = new Citizen(0,CitizenType::Citizen,100,300,taxAuth);
-            work = factory->createBuilding(BuildingType::BrickFactory,*c);
-            home = homeFactory->createBuilding(BuildingType::House,*c);     
         }
         
         void TearDown() override {
-            delete factory;
-            delete homeFactory;
-            delete c;
-
         }
 };
 
 // Test Constructor
-TEST_F(citizen_test, citizen_construction_test) {
+/*TEST_F(government_test, construction_test) {
     EXPECT_EQ(c->getId(),0);
     EXPECT_EQ(c->getType(),CitizenType::Citizen);
     EXPECT_EQ(c->getSatisfactionLevel(),100);
     EXPECT_EQ(c->getFunds(),300);
     EXPECT_EQ(c->hasHome(),false);
     EXPECT_EQ(c->getEmploymentStatus(),false);
+    EXPECT_EQ(c->isInVehicle(),false);
+
 }
 
 TEST_F(citizen_test, citizen_tax_test) {
@@ -92,4 +80,4 @@ TEST_F(citizen_test, citizen_Retire_test) {
     EXPECT_EQ(c->getEmploymentStatus(),false);
     EXPECT_EQ(c->getType(),CitizenType::Retired);
     EXPECT_EQ(c->hasHome(),false);
-}
+}*/
